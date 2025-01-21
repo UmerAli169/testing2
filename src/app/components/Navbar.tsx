@@ -9,10 +9,12 @@ const Navbar = () => {
  
 
   return (
-    
-     <> <Header />
+  <div>
+      
+      <Header />
+     <div className='mycontainer'>
        <nav className="bg-white py-4 border-b relative">
-        <div className="max-w-5xl mx-auto px-4">
+        <div className=" mx-auto px-4">
           <div className="flex items-center justify-between">
             {/* Mobile menu button */}
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden">
@@ -23,8 +25,8 @@ const Navbar = () => {
             
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex space-x-6">
-              <a href="#" className="hover:text-gray-600">Shop</a>
-              <a href="#" className="hover:text-gray-600">On Sale</a>
+              <a href="pages/productPage" className="hover:text-gray-600">Shop</a>
+              <a href="pages/catergiesPage" className="hover:text-gray-600">On Sale</a>
               <a href="#" className="hover:text-gray-600">New Arrivals</a>
               <a href="#" className="hover:text-gray-600">Brands</a>
             </div>
@@ -56,7 +58,9 @@ const Navbar = () => {
             </div>
           )}
         </div>
-      </nav></>
+      </nav></div>
+  </div>
+  
     
 
       

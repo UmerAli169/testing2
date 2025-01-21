@@ -2,3 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.mycontainer{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+@media screen and (max-width: 768px) {
+  
+.mycontainer{
+    padding-left: 10px;
+    padding-right: 10px;}
+  }
+
+
+  @media screen and (max-width: 1068px) {
+  
+    .mycontainer{
+        padding-left: 30px;
+        padding-right: 30px;}
+      }
