@@ -12,8 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        abeezee: ['ABeeZee', 'sans-serif'], // Adding the ABeeZee font
+      },
     },
   },
   plugins: [],
 } satisfies Config;
-
