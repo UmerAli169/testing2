@@ -2,69 +2,14 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Star, MoreHorizontal,ChevronUp, Filter } from 'lucide-react';
-  
+import { Star, MoreHorizontal, ChevronUp, Filter } from 'lucide-react';
+import { sizes, colors, reviews, relatedProducts } from './data';
 const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState('Large');
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('Rating & Reviews');
 
-  const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
-  const colors = ['#000000', '#333333', '#0000AA'];
-
-  const reviews = [
-    {
-      name: 'Samantha D.',
-      rating: 4.5,
-      date: 'Posted on August 14, 2023',
-      text: "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
-      verified: true,
-    },
-    {
-      name: 'Alex M.',
-      rating: 4,
-      date: 'Posted on August 15, 2023',
-      text: "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
-      verified: true,
-    },
-  ];
-
-  const relatedProducts = [
-    {
-      name: 'Graphic T-Shirt',
-      image: '/ProductDetails/details/1.png',
-      price: 25.99,
-      oldPrice: 35.99,
-      discount: 25,
-      rating: 4.5,
-    },
-    {
-      name: 'Summer Shorts',
-      image: '/ProductDetails/details/2.png',
-      price: 15.99,
-      oldPrice: 20.99,
-
-      rating: 4.2,
-    },
-    {
-      name: 'Sports Shoes',
-      image: '/ProductDetails/details/3.png',
-      price: 55.99,
-      oldPrice: 70.99,
-
-      rating: 4.7,
-    },
-    {
-      name: 'Backpack',
-      image: '/ProductDetails/details/4.png',
-      price: 39.99,
-      oldPrice: 49.99,
-      discount: 20,
-      rating: 4.3,
-    },
-  ];
-
-  const renderStars = (rating) => {
+  const renderStars = (rating: any) => {
     return (
       <div className='flex gap-0.5'>
         {[...Array(5)].map((_, i) => (
@@ -138,7 +83,7 @@ const ProductDetails = () => {
           <div className='mb-6'>
             <h3 className='font-medium mb-2'>Select Colors</h3>
             <div className='flex gap-2'>
-              {colors.map((color, index) => (
+              {colors.map((color: any, index: any) => (
                 <button
                   key={index}
                   className='w-8 h-8 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -152,7 +97,7 @@ const ProductDetails = () => {
           <div className='mb-6'>
             <h3 className='font-medium mb-2'>Choose Size</h3>
             <div className='flex gap-2'>
-              {sizes.map((size) => (
+              {sizes.map((size: any) => (
                 <button
                   key={size}
                   className={`px-4 py-2 rounded-lg border ${
@@ -196,61 +141,52 @@ const ProductDetails = () => {
           </div>
 
           {/* Reviews Section */}
-          <div className="mt-12">
- 
+          <div className='mt-12'>
+            {/* Reviews Section */}
+            <div className='space-y-6 mt-8'>
+              <div className='flex justify-between items-center'>
+                <h3 className='font-medium'>ALL Reviews (451)</h3>
+                <div className='flex gap-4'>
+                  {/* Filter Reviews Button with Filter icon */}
+                  <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
+                    <Filter className='w-5 h-5 text-gray-600 mr-2' />
+                  </button>
+                  {/* Latest Reviews Button with ^ icon */}
+                  <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
+                    <span className='mr-2'>Latest</span>
+                    <ChevronUp className='w-4 h-4 text-gray-600' />
+                  </button>
 
-  {/* Reviews Section */}
-  <div className="space-y-6 mt-8">
-  <div className="flex justify-between items-center">
-    <h3 className="font-medium">ALL Reviews (451)</h3>
-    <div className="flex gap-4">
-      {/* Filter Reviews Button with Filter icon */}
-      <button className="flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm">
-        <Filter className="w-5 h-5 text-gray-600 mr-2" />
-       
-      </button> 
-      {/* Latest Reviews Button with ^ icon */}
-      <button className="flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm">
-        <span className="mr-2">Latest</span>
-        <ChevronUp className="w-4 h-4 text-gray-600" />
-      </button>
-     
-      <button className="text-sm bg-black text-white px-4 py-2 rounded-full">
-        Write a Review
-      </button>
-    </div>
-  </div>
+                  <button className='text-sm bg-black text-white px-4 py-2 rounded-full'>Write a Review</button>
+                </div>
+              </div>
 
-  {/* Review List */}
-  {reviews.slice(0, 5).map((review, index) => (
-    <div key={index} className="border rounded-lg p-4">
-      <div className="flex justify-between items-start mb-2">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="font-medium">{review.name}</span>
-            {review.verified && <span className="bg-green-500 w-2 h-2 rounded-full" />}
+              {/* Review List */}
+              {reviews.slice(0, 5).map((review: any, index: any) => (
+                <div key={index} className='border rounded-lg p-4'>
+                  <div className='flex justify-between items-start mb-2'>
+                    <div>
+                      <div className='flex items-center gap-2'>
+                        <span className='font-medium'>{review.name}</span>
+                        {review.verified && <span className='bg-green-500 w-2 h-2 rounded-full' />}
+                      </div>
+                      {renderStars(review.rating)}
+                    </div>
+                    <button>
+                      <MoreHorizontal className='w-6 h-6 text-gray-500' />
+                    </button>
+                  </div>
+                  <p className='text-gray-600 mb-2'>{review.text}</p>
+                  <p className='text-sm text-gray-500'>{review.date}</p>
+                </div>
+              ))}
+
+              {/* Read More Reviews Button */}
+              <div className='text-center mt-4'>
+                <button className='border bg-white text-black py-2 px-4 rounded-full'>Read More Reviews</button>
+              </div>
+            </div>
           </div>
-          {renderStars(review.rating)}
-        </div>
-        <button>
-          <MoreHorizontal className="w-6 h-6 text-gray-500" />
-        </button>
-      </div>
-      <p className="text-gray-600 mb-2">{review.text}</p>
-      <p className="text-sm text-gray-500">{review.date}</p>
-    </div>
-  ))}
-
-  {/* Read More Reviews Button */}
-  <div className="text-center mt-4">
-    <button className="border bg-white text-black py-2 px-4 rounded-full">
-      Read More Reviews
-    </button>
-  </div>
-</div>
-
-</div>
-
         </div>
       </div>
 
@@ -258,7 +194,7 @@ const ProductDetails = () => {
       <div className='mt-12'>
         <h2 className='text-xl font-semibold mb-6 text-center'>You might also like</h2>
         <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-          {relatedProducts.map((product, index) => (
+          {relatedProducts.map((product: any, index: any) => (
             <div key={index} className='bg-gray-100 rounded-lg p-4'>
               <div className='aspect-square relative mb-2'>
                 <img src={product.image} alt={product.name} className='object-cover' />

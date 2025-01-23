@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ecommerceumar-dev-34293-authRole",
+      "UnauthRoleArn": "arn:aws:iam::812096089383:role/amplify-ecommerceumar-dev-34293-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::812096089383:role/amplify-ecommerceumar-dev-34293-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-ecommerceumar-dev-34293-deployment",
+      "UnauthRoleName": "amplify-ecommerceumar-dev-34293-unauthRole",
+      "StackName": "amplify-ecommerceumar-dev-34293",
+      "StackId": "arn:aws:cloudformation:ap-south-1:812096089383:stack/amplify-ecommerceumar-dev-34293/4742a3b0-d952-11ef-9f8b-02cd8a7acae1",
+      "AmplifyAppId": "dtczig81pyro6"
+    },
+    "categories": {
+      "auth": {
+        "ecommerceumarad6d6833": {}
+      },
+      "function": {
+        "EcommerceUmerPostSignUpTrigger": {
+          "deploymentBucketName": "amplify-ecommerceumar-dev-34293-deployment",
+          "s3Key": "amplify-builds/EcommerceUmerPostSignUpTrigger-584641766c6e30435975-build.zip"
+        }
+      }
+    }
+  }
+}
