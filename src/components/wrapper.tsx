@@ -1,11 +1,9 @@
 "use client";
 import React, { ReactNode } from "react";
-// import { Amplify } from "aws-amplify";
-// import awsConfig from "../aws-exports";
+import { Amplify } from "aws-amplify";
+import awsConfig from "../amplifyconfiguration.json";
 
-// Amplify.configure({
-//   ...awsConfig,
-// });
+Amplify.configure(awsConfig);
 
 interface CustomProviderProps {
   children: ReactNode;

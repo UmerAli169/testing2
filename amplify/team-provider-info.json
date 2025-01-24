@@ -18,8 +18,11 @@
       "function": {
         "EcommerceUmerPostSignUpTrigger": {
           "deploymentBucketName": "amplify-ecommerceumar-dev-34293-deployment",
-          "s3Key": "amplify-builds/EcommerceUmerPostSignUpTrigger-584641766c6e30435975-build.zip"
+          "s3Key": "amplify-builds/EcommerceUmerPostSignUpTrigger-656f3769467854377831-build.zip"
         }
+      },
+      "api": {
+        "ecommerceumar": {}
       }
     }
   }

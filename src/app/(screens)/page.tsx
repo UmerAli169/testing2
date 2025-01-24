@@ -7,11 +7,12 @@ import DressStyle from './homeComponents//DressStyle';
 
 const HomePage = () => {
   return (
-    <div className='flex bg-[#801a4d] justify-center flex-col items-center'>
+    <div className='bg-[#F2F0F1]
+ justify-center flex-col items-center'>
       <FrontPage />
-      {/* <BrandsLine /> */}
-      {/* <NewArrivals /> */}
-      {/* <DressStyle /> */}
+      <BrandsLine />
+      <NewArrivals />
+      <DressStyle />
     </div>
   );
 };
