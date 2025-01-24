@@ -1,6 +1,6 @@
 {
   "api": {
-    "ecommerceumar": {
+    "umereommmerce": {
       "dependsOn": [],
       "output": {
         "authConfig": {
@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "ecommerceumarad6d6833": {
+    "umereommmerce76ed7580": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -44,28 +44,35 @@
     }
   },
   "function": {
-    "EcommerceUmerPostSignUpTrigger": {
+    "umereommercePostSignUpTrigger": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_EcommerceUmerPostSignUpTrigger_deploymentBucketName": {
+    "AMPLIFY_function_umereommercePostSignUpTrigger_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "EcommerceUmerPostSignUpTrigger"
+          "resourceName": "umereommercePostSignUpTrigger"
         }
       ]
     },
-    "AMPLIFY_function_EcommerceUmerPostSignUpTrigger_s3Key": {
+    "AMPLIFY_function_umereommercePostSignUpTrigger_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "EcommerceUmerPostSignUpTrigger"
+          "resourceName": "umereommercePostSignUpTrigger"
         }
       ]
+    }
+  },
+  "storage": {
+    "ecommmerceUmer": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

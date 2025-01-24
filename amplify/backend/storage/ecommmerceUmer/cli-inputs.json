@@ -1,0 +1,14 @@
+{
+  "resourceName": "ecommmerceUmer",
+  "policyUUID": "d78c4d2e",
+  "bucketName": "umereommmerceb8a1e11479cc488d8ab2fab7313cb3a3",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

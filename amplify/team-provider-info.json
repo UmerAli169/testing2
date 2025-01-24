@@ -1,28 +1,31 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ecommerceumar-dev-34293-authRole",
-      "UnauthRoleArn": "arn:aws:iam::812096089383:role/amplify-ecommerceumar-dev-34293-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::812096089383:role/amplify-ecommerceumar-dev-34293-authRole",
+      "AuthRoleName": "amplify-umereommmerce-dev-d382e-authRole",
+      "UnauthRoleArn": "arn:aws:iam::812096089383:role/amplify-umereommmerce-dev-d382e-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::812096089383:role/amplify-umereommmerce-dev-d382e-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-ecommerceumar-dev-34293-deployment",
-      "UnauthRoleName": "amplify-ecommerceumar-dev-34293-unauthRole",
-      "StackName": "amplify-ecommerceumar-dev-34293",
-      "StackId": "arn:aws:cloudformation:ap-south-1:812096089383:stack/amplify-ecommerceumar-dev-34293/4742a3b0-d952-11ef-9f8b-02cd8a7acae1",
-      "AmplifyAppId": "dtczig81pyro6"
+      "DeploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
+      "UnauthRoleName": "amplify-umereommmerce-dev-d382e-unauthRole",
+      "StackName": "amplify-umereommmerce-dev-d382e",
+      "StackId": "arn:aws:cloudformation:ap-south-1:812096089383:stack/amplify-umereommmerce-dev-d382e/b46d6370-da3e-11ef-aa74-06267724e215",
+      "AmplifyAppId": "dktcvhwwnh6aw"
     },
     "categories": {
       "auth": {
-        "ecommerceumarad6d6833": {}
-      },
-      "function": {
-        "EcommerceUmerPostSignUpTrigger": {
-          "deploymentBucketName": "amplify-ecommerceumar-dev-34293-deployment",
-          "s3Key": "amplify-builds/EcommerceUmerPostSignUpTrigger-656f3769467854377831-build.zip"
-        }
+        "umereommmerce76ed7580": {}
       },
       "api": {
-        "ecommerceumar": {}
+        "umereommmerce": {}
+      },
+      "function": {
+        "umereommercePostSignUpTrigger": {
+          "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
+          "s3Key": "amplify-builds/umereommercePostSignUpTrigger-41435469553834355672-build.zip"
+        }
+      },
+      "storage": {
+        "ecommmerceUmer": {}
       }
     }
   }

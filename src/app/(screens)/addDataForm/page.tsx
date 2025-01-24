@@ -1,159 +1,248 @@
 'use client';
+import { generateClient } from 'aws-amplify/api';
+import { createAddProduct } from '../../../graphql/mutations';
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { uploadData } from 'aws-amplify/storage';
+import { listAddProducts } from '@/graphql/queries';
 
-import React, { useState } from 'react';
+const ProductFormModal = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const client = generateClient();
 
-const ProductForm = () => {
-  const [productData, setProductData] = useState({
-    category: 'newArrivals', // Default category
-    name: '',
+  const initialValues = {
+    category: 'newArrivals',
+    productName: '',
     price: '',
-    rating: '',
-    sizes: '',
-    colors: '',
-    image: null
+    description: '',
+    size: 'Small',
+    color: 'Red',
+    imageKey: null,
+  };
+
+  const validationSchema = Yup.object({
+    productName: Yup.string().required('Product name is required'),
+    price: Yup.number().required('Price is required').positive('Price must be a positive number'),
+    description: Yup.string().required('Description is required'),
+    size: Yup.string().required('Please select a size'),
+    color: Yup.string().required('Please select a color'),
+    imageKey: Yup.mixed().required('Please upload an image'),
   });
 
-  const handleChange = (e:any) => {
-    const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value });
+  useEffect(() => {
+    const fetchingAllProduct = async() => {
+     
+      const result = await client.graphql({ query: listAddProducts });
+console.log(result,'listed products');
+    }
+    fetchingAllProduct()
+  },
+  
+  [])
+  const handleImageUpload = async () => {
+    if (file) {
+      const uniqueFileName = `${Date.now()}_${file.name}`;
+      try {
+        await uploadData({
+          key: uniqueFileName,
+          data: file,
+          options: {
+            accessLevel: 'guest',
+            onProgress: (progress: any) => {
+              const progressPercent = Math.round((progress?.loaded / progress.total) * 100);
+              setUploadProgress(progressPercent);
+            },
+          },
+        });
+        return uniqueFileName;
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        throw new Error('Image upload failed.');
+      }
+    }
+    throw new Error('No file selected.');
   };
 
-  const handleImageUpload = (e:any) => {
-    const file = e.target.files[0];
-    setProductData({ ...productData, image: file });
+  const handleSubmit = async (values: any) => {
+    try {
+      const imageKey = await handleImageUpload();
+      const newProduct = {
+        ...values,
+        imageKey,
+      };
+
+      const result = await client.graphql({
+        query: createAddProduct,
+        variables: { input: newProduct },
+      });
+
+      console.log('Product created:', result);
+      alert('Product added successfully!');
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error creating product:', error);
+      alert('Failed to add product.');
+    }
   };
 
-  const handleSubmit = async (e:any) => {
-    e.preventDefault();
-
-    // Prepare the product data
-    const newProduct = {
-      id: Date.now(), // Unique ID
-      name: productData.name,
-      image: '/placeholder.png', // Placeholder for now (you'll replace this with actual image upload logic)
-      rating: parseFloat(productData.rating),
-      price: parseFloat(productData.price),
-      sizes: productData.sizes.split(',').map((size) => size.trim()),
-      colors: productData.colors.split(',').map((color) => color.trim())
-    };
-
- 
-
+  
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6">Add New Product</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Category */}
-        <div className="flex flex-col">
-          <label htmlFor="category" className="text-sm font-medium text-gray-700">Category</label>
-          <select
-            id="category"
-            name="category"
-            value={productData.category}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
+    <div>
+      {/* Button to open the modal */}
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+      >
+        Add Product
+      </button>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={() => setIsModalOpen(false)} // Close modal on background click
+        >
+          <div
+            className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl relative"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
           >
-            <option value="newArrivals">New Arrivals</option>
-            <option value="topSelling">Top Selling</option>
-          </select>
-        </div>
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold"
+            >
+              &times;
+            </button>
 
-        {/* Product Name */}
-        <div className="flex flex-col">
-          <label htmlFor="name" className="text-sm font-medium text-gray-700">Product Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={productData.name}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
-            required
-          />
-        </div>
+            {/* Form Content */}
+            <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+              {({ setFieldValue }) => (
+                <Form className="space-y-6">
+                  {/* Category */}
+                  <div className="flex flex-col">
+                    <label htmlFor="category" className="text-sm font-medium text-gray-700 mb-2">
+                      Category
+                    </label>
+                    <Field as="select" id="category" name="category" className="p-3 border rounded-md">
+                      <option value="newArrivals">New Arrivals</option>
+                      <option value="topSelling">Top Selling</option>
+                    </Field>
+                  </div>
 
-        {/* Price */}
-        <div className="flex flex-col">
-          <label htmlFor="price" className="text-sm font-medium text-gray-700">Price ($)</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={productData.price}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
-            required
-          />
-        </div>
+                  {/* Product Name */}
+                  <div className="flex flex-col">
+                    <label htmlFor="productName" className="text-sm font-medium text-gray-700 mb-2">
+                      Product Name
+                    </label>
+                    <Field
+                      type="text"
+                      id="productName"
+                      name="productName"
+                      className="p-3 border rounded-md"
+                      placeholder="Enter product name"
+                    />
+                    <ErrorMessage name="productName" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-        {/* Rating */}
-        <div className="flex flex-col">
-          <label htmlFor="rating" className="text-sm font-medium text-gray-700">Rating</label>
-          <input
-            type="number"
-            id="rating"
-            name="rating"
-            value={productData.rating}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
-            required
-            step="0.1"
-            max="5"
-          />
-        </div>
+                  {/* Price */}
+                  <div className="flex flex-col">
+                    <label htmlFor="price" className="text-sm font-medium text-gray-700 mb-2">
+                      Price ($)
+                    </label>
+                    <Field
+                      type="number"
+                      id="price"
+                      name="price"
+                      className="p-3 border rounded-md"
+                      placeholder="Enter product price"
+                    />
+                    <ErrorMessage name="price" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-        {/* Sizes */}
-        <div className="flex flex-col">
-          <label htmlFor="sizes" className="text-sm font-medium text-gray-700">Sizes (comma-separated)</label>
-          <input
-            type="text"
-            id="sizes"
-            name="sizes"
-            value={productData.sizes}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
-            placeholder="e.g., Small, Medium, Large"
-            required
-          />
-        </div>
+                  {/* Description */}
+                  <div className="flex flex-col">
+                    <label htmlFor="description" className="text-sm font-medium text-gray-700 mb-2">
+                      Description
+                    </label>
+                    <Field
+                      as="textarea"
+                      id="description"
+                      name="description"
+                      rows={4}
+                      className="p-3 border rounded-md"
+                      placeholder="Write a detailed description of the product"
+                    />
+                    <ErrorMessage name="description" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-        {/* Colors */}
-        <div className="flex flex-col">
-          <label htmlFor="colors" className="text-sm font-medium text-gray-700">Colors (comma-separated)</label>
-          <input
-            type="text"
-            id="colors"
-            name="colors"
-            value={productData.colors}
-            onChange={handleChange}
-            className="p-3 border rounded-md mt-2"
-            placeholder="e.g., Red, Blue, Green"
-            required
-          />
-        </div>
+                  {/* Sizes Dropdown */}
+                  <div className="flex flex-col">
+                    <label htmlFor="size" className="text-sm font-medium text-gray-700 mb-2">
+                      Size
+                    </label>
+                    <Field as="select" id="size" name="size" className="p-3 border rounded-md">
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                      <option value="Extra Large">Extra Large</option>
+                    </Field>
+                    <ErrorMessage name="size" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-        {/* Image Upload */}
-        <div className="flex flex-col">
-          <label htmlFor="image" className="text-sm font-medium text-gray-700">Upload Image</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleImageUpload}
-            className="p-3 border rounded-md mt-2"
-            accept="image/*"
-          />
-        </div>
+                  {/* Colors Dropdown */}
+                  <div className="flex flex-col">
+                    <label htmlFor="color" className="text-sm font-medium text-gray-700 mb-2">
+                      Color
+                    </label>
+                    <Field as="select" id="color" name="color" className="p-3 border rounded-md">
+                      <option value="Red">Red</option>
+                      <option value="Blue">Blue</option>
+                      <option value="Green">Green</option>
+                    </Field>
+                    <ErrorMessage name="color" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-        {/* Submit Button */}
-        <div>
-          <button type="submit" className="w-full bg-black text-white py-3 rounded-lg">
-            Save Product
-          </button>
+                  {/* Image Upload */}
+                  <div className="flex flex-col">
+                    <label htmlFor="imageKey" className="text-sm font-medium text-gray-700 mb-2">
+                      Upload Image
+                    </label>
+                    <input
+                      type="file"
+                      id="imageKey"
+                      name="imageKey"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const selectedFile = e.target.files?.[0];
+                        setFieldValue('imageKey', selectedFile);
+                        setFile(selectedFile);
+                      }}
+                      className="p-3 border rounded-md"
+                    />
+                    <ErrorMessage name="imageKey" component="div" className="text-red-500 text-sm mt-1" />
+                  </div>
+
+                  {/* Submit Button */}
+                  <div>
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-3 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl"
+                    >
+                      Save Product
+                    </button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
-      </form>
+      )}
     </div>
   );
 };
 
-export default ProductForm;
+export default ProductFormModal;

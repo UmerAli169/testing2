@@ -8,22 +8,26 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getUser1 = /* GraphQL */ `query GetUser1($id: ID!) {
-  getUser1(id: $id) {
+export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
+  getUser(id: $id) {
     id
     email
     createdAt
     updatedAt
+    AddedProduct {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetUser1QueryVariables, APITypes.GetUser1Query>;
-export const listUser1s = /* GraphQL */ `query ListUser1s(
-  $filter: ModelUser1FilterInput
+` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+export const listUsers = /* GraphQL */ `query ListUsers(
+  $filter: ModelUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listUser1s(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       email
@@ -35,7 +39,61 @@ export const listUser1s = /* GraphQL */ `query ListUser1s(
     __typename
   }
 }
+` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
+export const getAddProduct = /* GraphQL */ `query GetAddProduct($id: ID!) {
+  getAddProduct(id: $id) {
+    id
+    category
+    productName
+    price
+    description
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userAddedProductId
+    __typename
+  }
+}
 ` as GeneratedQuery<
-  APITypes.ListUser1sQueryVariables,
-  APITypes.ListUser1sQuery
+  APITypes.GetAddProductQueryVariables,
+  APITypes.GetAddProductQuery
+>;
+export const listAddProducts = /* GraphQL */ `query ListAddProducts(
+  $filter: ModelAddProductFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAddProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListAddProductsQueryVariables,
+  APITypes.ListAddProductsQuery
 >;

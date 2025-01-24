@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "EcommerceUmerPostSignUpTrigger",
+            "umereommercePostSignUpTrigger",
             {
               "Fn::Join": [
                 "",
                 [
-                  "EcommerceUmerPostSignUpTrigger",
+                  "umereommercePostSignUpTrigger",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ecommerceumarLambdaRole3823bf84",
+            "umereommmerceLambdaRole36d86a5d",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ecommerceumarLambdaRole3823bf84",
+                  "umereommmerceLambdaRole36d86a5d",
                   "-",
                   {
                     "Ref": "env"

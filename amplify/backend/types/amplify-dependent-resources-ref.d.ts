@@ -1,13 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "ecommerceumar": {
+    "umereommmerce": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "ecommerceumarad6d6833": {
+    "umereommmerce76ed7580": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -18,11 +18,17 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "EcommerceUmerPostSignUpTrigger": {
+    "umereommercePostSignUpTrigger": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "ecommmerceUmer": {
+      "BucketName": "string",
       "Region": "string"
     }
   }

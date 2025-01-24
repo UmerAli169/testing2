@@ -48,7 +48,7 @@ function NewArrivals() {
   );
   return (
     <>
-      <h2 className='flex justify-center text-2xl font-normal mb-4 w-[337px] h-[57px]  top-[992px] left-[551px] ABeeZee text-[48px] leading-[56.74px] py-[44px]'>
+      <h2 className='flex justify-center text-2xl w-full font-normal mb-4 w-[337px] h-[57px]  top-[992px] left-[551px] ABeeZee text-[48px] leading-[56.74px] py-[44px]'>
         New Arrivals
       </h2>
 
@@ -57,11 +57,11 @@ function NewArrivals() {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <button className=' w-[210px] h-[52px] bg-[#F2F0F1]    text-black text-center px-[54px] py-[16px] rounded-[62px] gap-[2px]'>
+      <button className='h-[52px] bg-[#F2F0F1] w-full   text-black text-center px-[54px] py-[16px] rounded-[62px] gap-[2px]'>
         View All
       </button>
 
-      <h2 className='flex justify-center text-2xl font-normal mb-4 w-[337px] h-[57px]  top-[992px] left-[551px] ABeeZee text-[48px] leading-[56.74px] py-[44px]'>
+      <h2 className='flex justify-center text-2xl w-full font-normal mb-4 w-[337px] h-[57px]  top-[992px] left-[551px] ABeeZee text-[48px] leading-[56.74px] py-[44px]'>
         top Selling
       </h2>
       <div className='grid grid-cols-2 md:grid-cols-4 py-[48px] gap-6'>

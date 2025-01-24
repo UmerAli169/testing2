@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <div>
       <Header />
-      <nav className='bg-white max-[1240px] py-4 border-b relative mx-[100px] gap-[40] bg-[#F2F0F1]'>
+      <nav className='bg-white  py-4 border-b relative  gap-[40] bg-[#F2F0F1]'>
         <div className=' mx-auto px-4'>
           <div className='flex items-center justify-between'>
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='lg:hidden'>
@@ -71,8 +71,11 @@ const Navbar = () => {
               <a href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 New Arrivals
               </a>
-              <a href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              <a href='#' className='abeezee text-[16px] leading-[18.91px]  text-black decoration-black'>
                 Brands
+              </a>
+              <a onClick={() => handleNavigate('/addDataForm')} className='abeezee text-[16px] leading-[18.91px]  cursor-pointer text-black decoration-black'>
+             Add Product
               </a>
             </div>
 

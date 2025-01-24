@@ -8,51 +8,156 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createUser1 = /* GraphQL */ `mutation CreateUser1(
-  $input: CreateUser1Input!
-  $condition: ModelUser1ConditionInput
+export const createUser = /* GraphQL */ `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
 ) {
-  createUser1(input: $input, condition: $condition) {
+  createUser(input: $input, condition: $condition) {
     id
     email
     createdAt
     updatedAt
+    AddedProduct {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateUser1MutationVariables,
-  APITypes.CreateUser1Mutation
+  APITypes.CreateUserMutationVariables,
+  APITypes.CreateUserMutation
 >;
-export const updateUser1 = /* GraphQL */ `mutation UpdateUser1(
-  $input: UpdateUser1Input!
-  $condition: ModelUser1ConditionInput
+export const updateUser = /* GraphQL */ `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
 ) {
-  updateUser1(input: $input, condition: $condition) {
+  updateUser(input: $input, condition: $condition) {
     id
     email
     createdAt
     updatedAt
+    AddedProduct {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateUser1MutationVariables,
-  APITypes.UpdateUser1Mutation
+  APITypes.UpdateUserMutationVariables,
+  APITypes.UpdateUserMutation
 >;
-export const deleteUser1 = /* GraphQL */ `mutation DeleteUser1(
-  $input: DeleteUser1Input!
-  $condition: ModelUser1ConditionInput
+export const deleteUser = /* GraphQL */ `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
 ) {
-  deleteUser1(input: $input, condition: $condition) {
+  deleteUser(input: $input, condition: $condition) {
     id
     email
     createdAt
     updatedAt
+    AddedProduct {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteUser1MutationVariables,
-  APITypes.DeleteUser1Mutation
+  APITypes.DeleteUserMutationVariables,
+  APITypes.DeleteUserMutation
+>;
+export const createAddProduct = /* GraphQL */ `mutation CreateAddProduct(
+  $input: CreateAddProductInput!
+  $condition: ModelAddProductConditionInput
+) {
+  createAddProduct(input: $input, condition: $condition) {
+    id
+    category
+    productName
+    price
+    description
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userAddedProductId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateAddProductMutationVariables,
+  APITypes.CreateAddProductMutation
+>;
+export const updateAddProduct = /* GraphQL */ `mutation UpdateAddProduct(
+  $input: UpdateAddProductInput!
+  $condition: ModelAddProductConditionInput
+) {
+  updateAddProduct(input: $input, condition: $condition) {
+    id
+    category
+    productName
+    price
+    description
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userAddedProductId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateAddProductMutationVariables,
+  APITypes.UpdateAddProductMutation
+>;
+export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
+  $input: DeleteAddProductInput!
+  $condition: ModelAddProductConditionInput
+) {
+  deleteAddProduct(input: $input, condition: $condition) {
+    id
+    category
+    productName
+    price
+    description
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userAddedProductId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteAddProductMutationVariables,
+  APITypes.DeleteAddProductMutation
 >;
