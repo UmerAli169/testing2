@@ -1,27 +1,57 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+
+
 type User @model {
   id: ID!
   email: String
   createdAt: String
   updatedAt: String
-  AddedProduct:[AddProduct] @hasMany
-  
+  AddedProduct: [AddProduct] @hasMany
+  CartItems: [CartItem] @hasMany
+  Reviews: [Review] @hasMany
 }
 
-
-type AddProduct @model { 
-  id:ID!
-  category:String
-  productName:String
-  price:Float
-  description:String
-  size:String
-  color:String
-  imageKey:String
+type AddProduct @model {
+  id: ID!
+  category: String
+  productName: String
+  price: Float
+  description: String
+  size: String
+  color: String
+  imageKey: String
   createdAt: String
   updatedAt: String
-  user:User @belongsTo( fields:["userId"])
-  userId:ID
+  user: User @belongsTo(fields: ["userId"])
+  userId: ID
+  CartItems: [CartItem] @hasMany
+  Reviews: [Review] @hasMany
+}
+
+type CartItem @model {
+  id: ID!
+  productName: String
+  quantity: Int
+  price: Float
+  size: String
+  color: String
+  imageKey: String
+  createdAt: String
+  updatedAt: String
+  product: AddProduct @belongsTo(fields: ["productId"])
+  productId: ID
+  user: User @belongsTo(fields: ["userId"])
+  userId: ID
+}
+type Review @model {
+  id: ID!
+  rating: Int!
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+  productId: ID!
+  product: AddProduct @belongsTo(fields: ["productId"])
+  userId: ID!
+  user: User @belongsTo(fields: ["userId"])
 }

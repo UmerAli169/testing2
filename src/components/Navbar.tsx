@@ -4,11 +4,11 @@ import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import Header from './Header';
 import { useRouter } from 'next/navigation';
 import { getCurrentUser, signOut } from 'aws-amplify/auth';
-
+import Link from 'next/link';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const router = useRouter();
 
@@ -16,14 +16,14 @@ const Navbar = () => {
     try {
       const user = await getCurrentUser();
       if (user) {
-        setUserInfo(user); 
-        setIsLoggedIn(true); 
+        setUserInfo(user);
+        setIsLoggedIn(true);
       } else {
-        setIsLoggedIn(false); 
+        setIsLoggedIn(false);
       }
     } catch (error) {
       console.log(error);
-      setIsLoggedIn(false); 
+      setIsLoggedIn(false);
     }
   };
 
@@ -36,17 +36,16 @@ const Navbar = () => {
     router.push(path);
   };
 
-  const handleLogout = async() => {
-  
+  const handleLogout = async () => {
     try {
       await signOut({ global: true });
     } catch (error) {
       console.log('error signing out: ', error);
     }
-  
-  setIsLoggedIn(false); 
-  setUserInfo(null);
-};
+
+    setIsLoggedIn(false);
+    setUserInfo(null);
+  };
 
   return (
     <div>
@@ -62,21 +61,24 @@ const Navbar = () => {
             </div>
 
             <div className='hidden lg:flex gap-[24px]'>
-              <a href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 Shop
-              </a>
-              <a href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              </Link>
+              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 On Sale
-              </a>
-              <a href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              </Link>
+              <Link href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 New Arrivals
-              </a>
-              <a href='#' className='abeezee text-[16px] leading-[18.91px]  text-black decoration-black'>
+              </Link>
+              <Link href='#' className='abeezee text-[16px] leading-[18.91px]  text-black decoration-black'>
                 Brands
-              </a>
-              <a onClick={() => handleNavigate('/addDataForm')} className='abeezee text-[16px] leading-[18.91px]  cursor-pointer text-black decoration-black'>
-             Add Product
-              </a>
+              </Link>
+              <button
+                onClick={() => handleNavigate('/addDataForm')}
+                className='abeezee text-[16px] leading-[18.91px] cursor-pointer text-black decoration-black'
+              >
+                Add Product
+              </button>
             </div>
 
             <div className='hidden lg:flex items-center rounded-lg px-1 py-1 w-[258px] h-[48px] '>
@@ -146,18 +148,18 @@ const Navbar = () => {
           {isMenuOpen && (
             <div className='lg:hidden absolute top-full left-0 right-0 bg-white border-b z-50'>
               <div className='flex flex-col py-4'>
-                <a href='#' className='px-4 py-2 hover:bg-gray-100'>
+                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
                   Shop
-                </a>
-                <a href='#' className='px-4 py-2 hover:bg-gray-100'>
+                </Link>
+                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
                   On Sale
-                </a>
-                <a href='#' className='px-4 py-2 hover:bg-gray-100'>
+                </Link>
+                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
                   New Arrivals
-                </a>
-                <a href='#' className='px-4 py-2 hover:bg-gray-100'>
+                </Link>
+                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
                   Brands
-                </a>
+                </Link>
               </div>
             </div>
           )}

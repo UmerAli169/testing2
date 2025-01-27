@@ -6,11 +6,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { uploadData } from 'aws-amplify/storage';
 import { listAddProducts } from '@/graphql/queries';
+import { getCurrentUser } from 'aws-amplify/auth'; // Use getCurrentUser() as you requested
 
 const ProductFormModal = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null); // To store user ID
   const client = generateClient();
 
   const initialValues = {
@@ -32,16 +34,27 @@ const ProductFormModal = () => {
     imageKey: Yup.mixed().required('Please upload an image'),
   });
 
+  // Fetch userId when the component mounts using getCurrentUser
   useEffect(() => {
-    const fetchingAllProduct = async() => {
-     
+    const fetchUserId = async () => {
+      try {
+        const user = await getCurrentUser(); // Fetch user data using getCurrentUser()
+        if (user) {
+          setUserId(user.id); // Assuming 'id' is the user ID
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    fetchUserId();
+
+    const fetchingAllProduct = async () => {
       const result = await client.graphql({ query: listAddProducts });
-console.log(result,'listed products');
-    }
-    fetchingAllProduct()
-  },
-  
-  [])
+      console.log(result, 'listed products');
+    };
+    fetchingAllProduct();
+  }, []);
+
   const handleImageUpload = async () => {
     if (file) {
       const uniqueFileName = `${Date.now()}_${file.name}`;
@@ -72,6 +85,7 @@ console.log(result,'listed products');
       const newProduct = {
         ...values,
         imageKey,
+        userId, // Include userId in the product data
       };
 
       const result = await client.graphql({
@@ -88,7 +102,6 @@ console.log(result,'listed products');
     }
   };
 
-  
   return (
     <div>
       {/* Button to open the modal */}

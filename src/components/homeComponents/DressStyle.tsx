@@ -1,5 +1,5 @@
 import React from 'react';
-import { categories } from '../data';
+import { categories } from './data';
 
 function DressStyle() {
   return (

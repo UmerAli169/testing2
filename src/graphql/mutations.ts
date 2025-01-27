@@ -21,6 +21,14 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
       nextToken
       __typename
     }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
@@ -41,6 +49,14 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
       nextToken
       __typename
     }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
@@ -58,6 +74,14 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
     createdAt
     updatedAt
     AddedProduct {
+      nextToken
+      __typename
+    }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
       nextToken
       __typename
     }
@@ -91,6 +115,14 @@ export const createAddProduct = /* GraphQL */ `mutation CreateAddProduct(
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -122,6 +154,14 @@ export const updateAddProduct = /* GraphQL */ `mutation UpdateAddProduct(
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -153,6 +193,14 @@ export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -160,4 +208,274 @@ export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
 ` as GeneratedMutation<
   APITypes.DeleteAddProductMutationVariables,
   APITypes.DeleteAddProductMutation
+>;
+export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
+  $input: CreateCartItemInput!
+  $condition: ModelCartItemConditionInput
+) {
+  createCartItem(input: $input, condition: $condition) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateCartItemMutationVariables,
+  APITypes.CreateCartItemMutation
+>;
+export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
+  $input: UpdateCartItemInput!
+  $condition: ModelCartItemConditionInput
+) {
+  updateCartItem(input: $input, condition: $condition) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateCartItemMutationVariables,
+  APITypes.UpdateCartItemMutation
+>;
+export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
+  $input: DeleteCartItemInput!
+  $condition: ModelCartItemConditionInput
+) {
+  deleteCartItem(input: $input, condition: $condition) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteCartItemMutationVariables,
+  APITypes.DeleteCartItemMutation
+>;
+export const createReview = /* GraphQL */ `mutation CreateReview(
+  $input: CreateReviewInput!
+  $condition: ModelReviewConditionInput
+) {
+  createReview(input: $input, condition: $condition) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateReviewMutationVariables,
+  APITypes.CreateReviewMutation
+>;
+export const updateReview = /* GraphQL */ `mutation UpdateReview(
+  $input: UpdateReviewInput!
+  $condition: ModelReviewConditionInput
+) {
+  updateReview(input: $input, condition: $condition) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateReviewMutationVariables,
+  APITypes.UpdateReviewMutation
+>;
+export const deleteReview = /* GraphQL */ `mutation DeleteReview(
+  $input: DeleteReviewInput!
+  $condition: ModelReviewConditionInput
+) {
+  deleteReview(input: $input, condition: $condition) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteReviewMutationVariables,
+  APITypes.DeleteReviewMutation
 >;

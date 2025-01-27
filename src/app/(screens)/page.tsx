@@ -1,9 +1,10 @@
 'use client';
 
-import FrontPage from './homeComponents/frontPage';
-import BrandsLine from './homeComponents/BrandsLine';
-import NewArrivals from './homeComponents/NewArrivals';
-import DressStyle from './homeComponents//DressStyle';
+import FrontPage from '../../components/homeComponents/FrontPage';
+import BrandsLine from '../../components/homeComponents/BrandsLine';
+import NewArrivals from '../../components/homeComponents/NewArrivals';
+import DressStyle from '../../components/homeComponents/DressStyle';
+import Reviews from '@/components/homeComponents/Reviews';
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <BrandsLine />
       <NewArrivals />
       <DressStyle />
+      <Reviews/>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 'use client';
-import { Facebook, Instagram, Mail, Twitter, Youtube } from 'lucide-react';
+import { Facebook, Instagram,  Mail, Twitter, Youtube } from 'lucide-react';
 import React from 'react';
 import { footerImages, footerLinks } from './data';
+import Link from 'next/link';
 const Footer = () => {
   return (
     <>
@@ -61,9 +62,9 @@ const Footer = () => {
                   <ul className='space-y-2'>
                     {footerLinks.company.map((link:any) => (
                       <li key={link.name}>
-                        <a href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
+                        <Link href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
                           {link.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -74,9 +75,9 @@ const Footer = () => {
                   <ul className='space-y-2'>
                     {footerLinks.help.map((link) => (
                       <li key={link.name}>
-                        <a href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
+                        <Link href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
                           {link.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -87,9 +88,9 @@ const Footer = () => {
                   <ul className='space-y-2'>
                     {footerLinks.faq.map((link) => (
                       <li key={link.name}>
-                        <a href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
+                        <Link href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
                           {link.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -100,9 +101,9 @@ const Footer = () => {
                   <ul className='space-y-2'>
                     {footerLinks.resources.map((link) => (
                       <li key={link.name}>
-                        <a href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
+                        <Link href={link.href} className='text-sm text-gray-600 hover:text-gray-900'>
                           {link.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

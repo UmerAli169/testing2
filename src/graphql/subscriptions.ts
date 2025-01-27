@@ -18,6 +18,14 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
       nextToken
       __typename
     }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
@@ -35,6 +43,14 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
       nextToken
       __typename
     }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     __typename
   }
 }
@@ -49,6 +65,14 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
     createdAt
     updatedAt
     AddedProduct {
+      nextToken
+      __typename
+    }
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
       nextToken
       __typename
     }
@@ -81,6 +105,14 @@ export const onCreateAddProduct = /* GraphQL */ `subscription OnCreateAddProduct
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -111,6 +143,14 @@ export const onUpdateAddProduct = /* GraphQL */ `subscription OnUpdateAddProduct
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -141,6 +181,14 @@ export const onDeleteAddProduct = /* GraphQL */ `subscription OnDeleteAddProduct
       __typename
     }
     userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
     userAddedProductId
     __typename
   }
@@ -148,4 +196,256 @@ export const onDeleteAddProduct = /* GraphQL */ `subscription OnDeleteAddProduct
 ` as GeneratedSubscription<
   APITypes.OnDeleteAddProductSubscriptionVariables,
   APITypes.OnDeleteAddProductSubscription
+>;
+export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+  onCreateCartItem(filter: $filter) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateCartItemSubscriptionVariables,
+  APITypes.OnCreateCartItemSubscription
+>;
+export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+  onUpdateCartItem(filter: $filter) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateCartItemSubscriptionVariables,
+  APITypes.OnUpdateCartItemSubscription
+>;
+export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($filter: ModelSubscriptionCartItemFilterInput) {
+  onDeleteCartItem(filter: $filter) {
+    id
+    productName
+    quantity
+    price
+    size
+    color
+    imageKey
+    createdAt
+    updatedAt
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    productId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    userCartItemsId
+    addProductCartItemsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteCartItemSubscriptionVariables,
+  APITypes.OnDeleteCartItemSubscription
+>;
+export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter: ModelSubscriptionReviewFilterInput) {
+  onCreateReview(filter: $filter) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateReviewSubscriptionVariables,
+  APITypes.OnCreateReviewSubscription
+>;
+export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter: ModelSubscriptionReviewFilterInput) {
+  onUpdateReview(filter: $filter) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateReviewSubscriptionVariables,
+  APITypes.OnUpdateReviewSubscription
+>;
+export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter: ModelSubscriptionReviewFilterInput) {
+  onDeleteReview(filter: $filter) {
+    id
+    rating
+    text
+    createdAt
+    updatedAt
+    productId
+    product {
+      id
+      category
+      productName
+      price
+      description
+      size
+      color
+      imageKey
+      createdAt
+      updatedAt
+      userId
+      userAddedProductId
+      __typename
+    }
+    userId
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userReviewsId
+    addProductReviewsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteReviewSubscriptionVariables,
+  APITypes.OnDeleteReviewSubscription
 >;
