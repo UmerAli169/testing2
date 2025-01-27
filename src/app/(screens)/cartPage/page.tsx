@@ -4,6 +4,7 @@ import { Trash2, ChevronRight } from "lucide-react";
 import { deleteCartItem, updateCartItem } from "@/graphql/mutations"; // Correct mutations for CartItem
 import { listCartItems } from "@/graphql/queries"; // Correct query for CartItem
 import { generateClient } from "aws-amplify/api";
+import { StorageImage } from "@aws-amplify/ui-react-storage";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -13,10 +14,10 @@ const CartPage = () => {
   // Fetch cart items from the backend
   useEffect(() => {
     const fetchCartData = async () => {
-      console.log("umeralikhan")
+      console.log("Fetching cart data...");
       try {
         const response = await client.graphql({ query: listCartItems });
-        console.log(response,'responseresponse')
+        console.log(response, 'response');
         const items = response?.data?.listCartItems?.items || [];
         setCartItems(items);
       } catch (error) {
@@ -45,6 +46,7 @@ const CartPage = () => {
 
       const updatedData = response?.data?.updateCartItem;
       if (updatedData) {
+        // Update the state with the new quantity for the specific item
         setCartItems((items) =>
           items.map((item) =>
             item.id === id ? { ...item, quantity: newQuantity } : item
@@ -69,6 +71,7 @@ const CartPage = () => {
       });
 
       if (response?.data?.deleteCartItem) {
+        // Remove the item from the state after successful deletion
         setCartItems((items) => items.filter((item) => item.id !== id));
       }
     } catch (error) {
@@ -77,7 +80,7 @@ const CartPage = () => {
   };
 
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.product.price || 0) * item.quantity,
+    (sum, item) => sum + (item.product?.price || 0) * item.quantity,
     0
   );
   const discount = subtotal * 0.2; // 20% discount
@@ -101,15 +104,17 @@ const CartPage = () => {
               key={item.id}
               className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
             >
-              <img
-                src={item.product.imageKey || "/default-product.png"} // Use default if image is missing
-                alt={item.product.productName || "Product"}
-                className="w-20 h-20 object-cover rounded-md"
-              />
+               <StorageImage
+                        path={`public/${item.product?.imageKey || "default-product.png"}`} 
+                        alt={item.product?.productName || "Product"}                   
+                        accessLevel='guest'
+                        className='w-full h-full object-cover rounded-md'
+                    />
+              
               <div className="flex-grow">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-medium">
-                    {item.product.productName || "Product Name"}
+                    {item.product?.productName || "Product Name"}
                   </h3>
                   <button
                     onClick={() => deleteItem(item.id)}
@@ -119,21 +124,21 @@ const CartPage = () => {
                   </button>
                 </div>
                 <div className="text-sm text-gray-600 mb-2">
-                  <div>Size: {item.product.size || "N/A"}</div>
-                  <div>Color: {item.product.color || "N/A"}</div>
+                  <div>Size: {item.product?.size || "N/A"}</div>
+                  <div>Color: {item.product?.color || "N/A"}</div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <div className="font-medium">${item.product.price}</div>
+                  <div className="font-medium">${item.product?.price}</div>
                   <div className="flex items-center gap-3 bg-white rounded-full border px-4 py-2">
                     <button
-                      onClick={() => updateQuantity(item.id, -1)}
+                      onClick={() => updateQuantity(item?.id, -1)}
                       className="text-gray-500 hover:text-black"
                     >
                       -
                     </button>
-                    <span>{item.quantity}</span>
+                    <span>{item?.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item.id, 1)}
+                      onClick={() => updateQuantity(item?.id, 1)}
                       className="text-gray-500 hover:text-black"
                     >
                       +

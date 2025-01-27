@@ -43,11 +43,12 @@ function NewArrivals() {
       onClick={onClick} // Ensure the onClick is correctly handled here
     >
       <div className='relative aspect-square mb-4'>
-        {/* <StorageImage
-        path={product.imageKey} // Use path instead of imgKey
-        alt={product.productName}
-        className='w-full h-full object-cover rounded-md'
-      /> */}{' '}
+        <StorageImage
+          path={`public/${product.imageKey}`} // Use path instead of imgKey
+          alt={product.productName}
+          className='w-full h-full object-cover rounded-md'
+          accessLevel='guest'
+      />
       </div>
       <h3 className='text-sm font-medium mb-2'>{product.productName}</h3>
       <div className='flex items-center gap-2 mb-2'>

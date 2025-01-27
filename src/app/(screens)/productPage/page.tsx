@@ -1,13 +1,13 @@
 'use client';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
-import { listAddProducts, getAddProduct, getReview, listReviews } from '@/graphql/queries'; // Adjust paths
-import { createReview } from '@/graphql/mutations'; // Adjust paths
-
+import { listAddProducts, getAddProduct, listReviews } from '@/graphql/queries'; // Adjust paths
+import { createCartItem, createReview } from '@/graphql/mutations'; // Adjust paths
 import { generateClient } from 'aws-amplify/api';
 import { useSearchParams } from 'next/navigation';
 import { Filter, ChevronUp, MoreHorizontal } from 'lucide-react';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { StorageImage } from '@aws-amplify/ui-react-storage';
 
 const ProductDetails = () => {
   const [product, setProduct] = useState<any>(null); // State for product details
@@ -16,6 +16,7 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState('Large');
   const searchParams = useSearchParams();
   const productId = searchParams.get('productId');
+
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('Product Details');
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
@@ -90,12 +91,10 @@ const ProductDetails = () => {
 
         // Fetch product reviews (you might need to adjust the query based on your GraphQL schema)
         const reviewsResult = await client.graphql({ query: listReviews, variables: { id: productId } });
-
         setReviews(reviewsResult.data.listReviews.items);
 
         // Fetch related products (limit to 4)
         const relatedResult = await client.graphql({ query: listAddProducts, variables: { limit: 4 } });
-
         setRelatedProducts(relatedResult.data.listAddProducts.items);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -104,6 +103,7 @@ const ProductDetails = () => {
 
     fetchData();
   }, [productId]);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `Posted at ${date.toLocaleDateString('en-US', {
@@ -112,6 +112,39 @@ const ProductDetails = () => {
       year: 'numeric',
     })}`;
   };
+
+  const handleAddToCart = async () => {
+    try {
+      const currentUser = await getCurrentUser();
+      const userId = currentUser.userId;
+
+      // Ensure the product details are available
+      if (!product) {
+        return;
+      }
+
+      const result = await client.graphql({
+        query: createCartItem,
+        variables: {
+          input: {
+            productName: product.productName,
+            quantity: quantity,
+            price: product.price,
+            size: selectedSize,
+            color: product.color,
+            imageKey: product.imageKey,
+            userId: userId,
+            productId: product.id,
+          },
+        },
+      });
+
+      console.log('Added to cart result:', result);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  };
+
   return (
     <div className='mx-auto'>
       {/* Breadcrumb */}
@@ -130,10 +163,11 @@ const ProductDetails = () => {
         {/* Left Column - Images */}
         <div className='space-y-4'>
           <div className='rounded-lg p-8'>
-            <img
-              src={product?.image || '/placeholder.png'}
+            <StorageImage
+              path={`public/${product?.imageKey}`}
               alt={product?.name || 'Product Image'}
               className='w-full object-contain'
+              accessLevel='guest'
             />
           </div>
           <div className='grid grid-cols-3 gap-4'>
@@ -190,7 +224,9 @@ const ProductDetails = () => {
                 +
               </button>
             </div>
-            <button className='flex-1 bg-black text-white py-2 px-4 rounded-lg'>Add to Cart</button>
+            <button className='flex-1 bg-black text-white py-2 px-4 rounded-lg' onClick={handleAddToCart}>
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -286,47 +322,17 @@ const ProductDetails = () => {
                 onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
               />
             </div>
-            <div className='flex justify-end gap-4'>
-              <button className='text-gray-500' onClick={() => setIsModalOpen(false)}>
+            <div className='flex justify-between'>
+              <button className='py-2 px-4 bg-gray-300 rounded-lg' onClick={() => setIsModalOpen(false)}>
                 Cancel
               </button>
-              <button className='bg-black text-white px-4 py-2 rounded-full' onClick={handleSubmitReview}>
+              <button className='py-2 px-4 bg-black text-white rounded-lg' onClick={handleSubmitReview}>
                 Submit Review
               </button>
             </div>
           </div>
         </div>
       )}
-
-      {/* You might also like section */}
-      <div className='mt-12'>
-        <h2 className='text-xl font-semibold mb-6 text-center'>You might also like</h2>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-          {relatedProducts.map((product, index) => (
-            <div key={index} className='bg-gray-100 rounded-lg p-4'>
-              <div className='aspect-square relative mb-2'>
-                <img
-                  src={product.image || '/placeholder.png'}
-                  alt={product.name || 'Product'}
-                  className='object-cover'
-                />
-              </div>
-              <h3 className='text-sm font-medium'>{product.name}</h3>
-
-              <div className='flex items-center mt-2'>
-                {renderStars(product.rating || 0)}
-                <span className='text-sm text-gray-600 ml-2'>({product.rating || 0}/5)</span>
-              </div>
-
-              <div className='flex items-center gap-2 mt-2'>
-                <span className='text-sm font-bold text-black'>${product.price}</span>
-                {product.oldPrice && <span className='text-sm text-gray-500 line-through'>${product.oldPrice}</span>}
-                {product.discount && <span className='text-sm text-red-500'>-{product.discount}%</span>}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

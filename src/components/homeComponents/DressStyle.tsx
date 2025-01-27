@@ -1,5 +1,6 @@
 import React from 'react';
 import { categories } from './data';
+import { StorageImage } from '@aws-amplify/ui-react-storage';
 
 function DressStyle() {
   return (
@@ -15,10 +16,13 @@ function DressStyle() {
               key={index.toString()}
               className={`relative rounded-lg ${index === 0 || index === 3 ? 'col-span-1' : 'col-span-2'}`}
             >
-              <img
-                src={category.image}
-                className=' bg-[#FFFFFF] w-full h-full max-h-[289px] overflow-hidden object-cover object-top rounded-lg'
-              />
+               {/* <StorageImage
+                        path={`public/${category.image}`} // Use path instead of imgKey
+                        alt={category.productName || 'Product Image'}
+                        className=' bg-[#FFFFFF] w-full h-full max-h-[289px] overflow-hidden object-cover object-top rounded-lg'
+                        accessLevel='guest'
+                    />
+               */}
             </div>
           ))}
         </div>
