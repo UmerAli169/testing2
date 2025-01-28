@@ -57,7 +57,7 @@ export const getAddProduct = /* GraphQL */ `query GetAddProduct($id: ID!) {
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -98,7 +98,7 @@ export const listAddProducts = /* GraphQL */ `query ListAddProducts(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -121,7 +121,7 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -132,7 +132,7 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -170,7 +170,7 @@ export const listCartItems = /* GraphQL */ `query ListCartItems(
       price
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       productId
@@ -203,7 +203,7 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId

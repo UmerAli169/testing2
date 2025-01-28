@@ -9,12 +9,10 @@ import { StorageImage } from '@aws-amplify/ui-react-storage';
 import { StarIcon } from 'lucide-react';
 
 function NewArrivals() {
-  const [hoveredItem, setHoveredItem] = useState(null);
   const router = useRouter();
   const client = generateClient();
   const dispatch = useDispatch();
   const { newArrivals, topSelling } = useSelector((state: any) => state.products);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,14 +37,14 @@ function NewArrivals() {
 
   const ProductCard = ({ product, onClick }: any) => (
     <div
-      className='bg-[#F0EEED] max-w-[268px] max-height-[402px] rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg'
+      className=' max-w-[268px] max-height-[402px] rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg'
       onClick={onClick} // Ensure the onClick is correctly handled here
     >
-      <div className='relative aspect-square mb-4'>
+      <div className='relative aspect-square bg-[#F0EEED] mb-4'>
         <StorageImage
-          path={`public/${product.imageKey}`} // Use path instead of imgKey
+          path={`public/${product.imageKeys?.[0]}`} // Use the first image in the array
           alt={product.productName}
-          className='w-full h-full object-cover rounded-md'
+          className='w-full h-full object-cover rounded-md mix-blend-multiply'
           accessLevel='guest'
         />
       </div>
@@ -83,12 +81,11 @@ function NewArrivals() {
           />
         ))}
       </div>
-      <div className="flex justify-center py-[16px]">
-  <button className="w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]">
-    View All
-  </button>
-</div>
-
+      <div className='flex justify-center py-[16px]'>
+        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]'>
+          View All
+        </button>
+      </div>
 
       <h2 className='flex justify-center text-[48px] pt-[25px] w-full ABeeZee '>top Selling</h2>
       <div className='grid grid-cols-2 md:grid-cols-4 py-[48px] gap-6'>
@@ -100,12 +97,11 @@ function NewArrivals() {
           />
         ))}
       </div>
-      <div className="flex justify-center py-[16px]">
-  <button className="w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]">
-    View All
-  </button>
-</div>
-
+      <div className='flex justify-center py-[16px]'>
+        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]'>
+          View All
+        </button>
+      </div>
     </>
   );
 }

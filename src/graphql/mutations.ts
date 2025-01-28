@@ -104,7 +104,7 @@ export const createAddProduct = /* GraphQL */ `mutation CreateAddProduct(
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -143,7 +143,7 @@ export const updateAddProduct = /* GraphQL */ `mutation UpdateAddProduct(
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -182,7 +182,7 @@ export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -220,7 +220,7 @@ export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -231,7 +231,7 @@ export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -267,7 +267,7 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -278,7 +278,7 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -314,7 +314,7 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -325,7 +325,7 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -369,7 +369,7 @@ export const createReview = /* GraphQL */ `mutation CreateReview(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -412,7 +412,7 @@ export const updateReview = /* GraphQL */ `mutation UpdateReview(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -455,7 +455,7 @@ export const deleteReview = /* GraphQL */ `mutation DeleteReview(
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId

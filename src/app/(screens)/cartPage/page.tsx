@@ -102,13 +102,13 @@ const CartPage = () => {
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
+              className="flex items-center gap-4 p-4 bg-[#F0EEED] rounded-lg"
             >
                <StorageImage
                         path={`public/${item.product?.imageKey || "default-product.png"}`} 
                         alt={item.product?.productName || "Product"}                   
                         accessLevel='guest'
-                        className='w-full h-full object-cover rounded-md'
+                        className='w-full h-full object-cover mix-blend-multiply  rounded-md'
                     />
               
               <div className="flex-grow">

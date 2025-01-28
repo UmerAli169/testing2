@@ -18,9 +18,9 @@ type AddProduct @model {
   productName: String
   price: Float
   description: String
-  size: String
-  color: String
-  imageKey: String
+  size: [String]
+  color: [String]
+  imageKeys: [String]
   createdAt: String
   updatedAt: String
   user: User @belongsTo(fields: ["userId"])
@@ -36,7 +36,7 @@ type CartItem @model {
   price: Float
   size: String
   color: String
-  imageKey: String
+  imageKeys: String
   createdAt: String
   updatedAt: String
   product: AddProduct @belongsTo(fields: ["productId"])

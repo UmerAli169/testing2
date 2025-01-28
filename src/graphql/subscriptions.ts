@@ -94,7 +94,7 @@ export const onCreateAddProduct = /* GraphQL */ `subscription OnCreateAddProduct
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -132,7 +132,7 @@ export const onUpdateAddProduct = /* GraphQL */ `subscription OnUpdateAddProduct
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -170,7 +170,7 @@ export const onDeleteAddProduct = /* GraphQL */ `subscription OnDeleteAddProduct
     description
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     user {
@@ -205,7 +205,7 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -216,7 +216,7 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -249,7 +249,7 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -260,7 +260,7 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -293,7 +293,7 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
     price
     size
     color
-    imageKey
+    imageKeys
     createdAt
     updatedAt
     product {
@@ -304,7 +304,7 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -345,7 +345,7 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -385,7 +385,7 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
@@ -425,7 +425,7 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
       description
       size
       color
-      imageKey
+      imageKeys
       createdAt
       updatedAt
       userId
