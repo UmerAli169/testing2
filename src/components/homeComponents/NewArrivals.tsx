@@ -39,7 +39,7 @@ function NewArrivals() {
 
   const ProductCard = ({ product, onClick }: any) => (
     <div
-      className='bg-[#F2F0F1] rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg'
+      className='bg-[#F0EEED] max-w-[268px] max-height-[402px] rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg'
       onClick={onClick} // Ensure the onClick is correctly handled here
     >
       <div className='relative aspect-square mb-4'>
@@ -48,13 +48,13 @@ function NewArrivals() {
           alt={product.productName}
           className='w-full h-full object-cover rounded-md'
           accessLevel='guest'
-      />
+        />
       </div>
       <h3 className='text-sm font-medium mb-2'>{product.productName}</h3>
+      {renderRatingStars(product.rating)}
       <div className='flex items-center gap-2 mb-2'>
         <span className='text-lg font-bold'>${product.price}</span>
       </div>
-      {renderRatingStars(product.rating)}
     </div>
   );
 
@@ -72,9 +72,9 @@ function NewArrivals() {
 
   return (
     <>
-      <h2 className='flex justify-center text-2xl w-full font-normal mb-4'>New Arrivals</h2>
+      <h2 className='flex justify-center text-[48px] py-[35px] w-full ABeeZee '>New Arrivals</h2>
 
-      <div className='grid grid-cols-2 py-[48px] md:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-2 py-[48px] md:grid-cols-4 gap-2 min-w-[296px] min-height-[444px]'>
         {newArrivals.map((product: any) => (
           <ProductCard
             key={product.id}
@@ -83,11 +83,14 @@ function NewArrivals() {
           />
         ))}
       </div>
-      <button className='h-[52px] bg-[#F2F0F1] w-full text-black text-center px-[54px] py-[16px] rounded-[62px] gap-[2px]'>
-        View All
-      </button>
+      <div className="flex justify-center py-[16px]">
+  <button className="w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]">
+    View All
+  </button>
+</div>
 
-      <h2 className='flex justify-center text-2xl w-full font-normal mb-4'>Top Selling</h2>
+
+      <h2 className='flex justify-center text-[48px] pt-[25px] w-full ABeeZee '>top Selling</h2>
       <div className='grid grid-cols-2 md:grid-cols-4 py-[48px] gap-6'>
         {topSelling.map((product: any) => (
           <ProductCard
@@ -97,9 +100,12 @@ function NewArrivals() {
           />
         ))}
       </div>
-      <button className='w-[210px] h-[52px] bg-[#F2F0F1] text-black text-center px-[54px] py-[16px] rounded-[62px] gap-[2px]'>
-        View All
-      </button>
+      <div className="flex justify-center py-[16px]">
+  <button className="w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]">
+    View All
+  </button>
+</div>
+
     </>
   );
 }

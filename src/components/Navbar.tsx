@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import Header from './Header';
 import { useRouter } from 'next/navigation';
@@ -50,27 +51,29 @@ const Navbar = () => {
   return (
     <div>
       <Header />
-      <nav className='bg-white  py-4 border-b relative  gap-[40] bg-[#F2F0F1]'>
-        <div className=' mx-auto px-4'>
+      <nav className='bg-white py-4 border-b relative gap-[40] '>
+        <div className='mx-auto px-4'>
           <div className='flex items-center justify-between'>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='lg:hidden'>
-              {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
-            </button>
-            <div className='abeezee text-[32px] font-normal leading-[37.82px] text-left w-[160px] h-[39px] text-black'>
-              SHOP.CO
+            <div className='flex items-center gap-4'>
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='lg:hidden'>
+                {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
+              </button>
+              <div className='abeezee text-[32px] font-normal leading-[37.82px]  text-left w-[160px] h-[39px] text-black'>
+                SHOP.CO
+              </div>
             </div>
-
+            
             <div className='hidden lg:flex gap-[24px]'>
-              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-                Shop
-              </Link>
+              <button className='abeezee text-[16px] leading-[18.91px] text-black flex items-center gap-1'>
+                Shop <ChevronDown className='w-4 h-4' />
+              </button>
               <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 On Sale
               </Link>
               <Link href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 New Arrivals
               </Link>
-              <Link href='#' className='abeezee text-[16px] leading-[18.91px]  text-black decoration-black'>
+              <Link href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 Brands
               </Link>
               <button
@@ -81,9 +84,13 @@ const Navbar = () => {
               </button>
             </div>
 
-            <div className='hidden lg:flex items-center rounded-lg px-1 py-1 w-[258px] h-[48px] '>
+            <div className='hidden lg:flex items-center px-1 py-1 w-[258px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0]'>
               <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px]' />
-              <input type='text' placeholder='Search for products...' className='ml-2 outline-none w-full' />
+              <input
+                type='text'
+                placeholder='Search for products...'
+                className='ml-2 outline-none w-full bg-[#F0F0F0] '
+              />
             </div>
 
             {!isLoggedIn && (
@@ -99,6 +106,8 @@ const Navbar = () => {
 
             {isLoggedIn && userInfo && (
               <div className='flex items-center space-x-4'>
+                              <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px] lg:hidden' />
+
                 <img
                   src='/svgs/navbar/cart.svg'
                   alt=''
@@ -144,25 +153,6 @@ const Navbar = () => {
               </div>
             )}
           </div>
-
-          {isMenuOpen && (
-            <div className='lg:hidden absolute top-full left-0 right-0 bg-white border-b z-50'>
-              <div className='flex flex-col py-4'>
-                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
-                  Shop
-                </Link>
-                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
-                  On Sale
-                </Link>
-                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
-                  New Arrivals
-                </Link>
-                <Link href='#' className='px-4 py-2 hover:bg-gray-100'>
-                  Brands
-                </Link>
-              </div>
-            </div>
-          )}
         </div>
       </nav>
     </div>
