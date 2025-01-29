@@ -8,6 +8,42 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const customAddProduct = /* GraphQL */ `mutation CustomAddProduct($input: CreateAddProductInput) {
+  customAddProduct(input: $input) {
+    id
+    category
+    productName
+    price
+    description
+    size
+    color
+    imageKeys
+    createdAt
+    updatedAt
+    user {
+      id
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    userId
+    CartItems {
+      nextToken
+      __typename
+    }
+    Reviews {
+      nextToken
+      __typename
+    }
+    userAddedProductId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CustomAddProductMutationVariables,
+  APITypes.CustomAddProductMutation
+>;
 export const createUser = /* GraphQL */ `mutation CreateUser(
   $input: CreateUserInput!
   $condition: ModelUserConditionInput

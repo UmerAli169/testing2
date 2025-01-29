@@ -22,6 +22,10 @@
         "umereommercePostSignUpTrigger": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
           "s3Key": "amplify-builds/umereommercePostSignUpTrigger-41435469553834355672-build.zip"
+        },
+        "calculateCartItemPrice": {
+          "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
+          "s3Key": "amplify-builds/calculateCartItemPrice-5a4b32332f67476b5078-build.zip"
         }
       },
       "storage": {

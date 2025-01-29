@@ -2,6 +2,100 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateAddProductInput = {
+  category?: string | null,
+  productName?: string | null,
+  price?: number | null,
+  description?: string | null,
+  size?: Array< string | null > | null,
+  color?: Array< string | null > | null,
+  imageKeys?: Array< string | null > | null,
+  userId?: string | null,
+  userAddedProductId?: string | null,
+};
+
+export type AddProduct = {
+  __typename: "AddProduct",
+  id: string,
+  category?: string | null,
+  productName?: string | null,
+  price?: number | null,
+  description?: string | null,
+  size?: Array< string | null > | null,
+  color?: Array< string | null > | null,
+  imageKeys?: Array< string | null > | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  user?: User | null,
+  userId?: string | null,
+  CartItems?: ModelCartItemConnection | null,
+  Reviews?: ModelReviewConnection | null,
+  userAddedProductId?: string | null,
+};
+
+export type User = {
+  __typename: "User",
+  id: string,
+  email?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  AddedProduct?: ModelAddProductConnection | null,
+  CartItems?: ModelCartItemConnection | null,
+  Reviews?: ModelReviewConnection | null,
+};
+
+export type ModelAddProductConnection = {
+  __typename: "ModelAddProductConnection",
+  items:  Array<AddProduct | null >,
+  nextToken?: string | null,
+};
+
+export type ModelCartItemConnection = {
+  __typename: "ModelCartItemConnection",
+  items:  Array<CartItem | null >,
+  nextToken?: string | null,
+};
+
+export type CartItem = {
+  __typename: "CartItem",
+  id: string,
+  productName?: string | null,
+  quantity?: number | null,
+  price?: number | null,
+  size?: Array< string | null > | null,
+  color?: Array< string | null > | null,
+  imageKeys?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  product?: AddProduct | null,
+  productId?: string | null,
+  user?: User | null,
+  userId?: string | null,
+  userCartItemsId?: string | null,
+  addProductCartItemsId?: string | null,
+};
+
+export type ModelReviewConnection = {
+  __typename: "ModelReviewConnection",
+  items:  Array<Review | null >,
+  nextToken?: string | null,
+};
+
+export type Review = {
+  __typename: "Review",
+  id: string,
+  rating: number,
+  text: string,
+  createdAt: string,
+  updatedAt: string,
+  productId: string,
+  product?: AddProduct | null,
+  userId: string,
+  user?: User | null,
+  userReviewsId?: string | null,
+  addProductReviewsId?: string | null,
+};
+
 export type CreateUserInput = {
   id?: string | null,
   email?: string | null,
@@ -58,88 +152,6 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type User = {
-  __typename: "User",
-  id: string,
-  email?: string | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  AddedProduct?: ModelAddProductConnection | null,
-  CartItems?: ModelCartItemConnection | null,
-  Reviews?: ModelReviewConnection | null,
-};
-
-export type ModelAddProductConnection = {
-  __typename: "ModelAddProductConnection",
-  items:  Array<AddProduct | null >,
-  nextToken?: string | null,
-};
-
-export type AddProduct = {
-  __typename: "AddProduct",
-  id: string,
-  category?: string | null,
-  productName?: string | null,
-  price?: number | null,
-  description?: string | null,
-  size?: Array< string | null > | null,
-  color?: Array< string | null > | null,
-  imageKeys?: Array< string | null > | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  user?: User | null,
-  userId?: string | null,
-  CartItems?: ModelCartItemConnection | null,
-  Reviews?: ModelReviewConnection | null,
-  userAddedProductId?: string | null,
-};
-
-export type ModelCartItemConnection = {
-  __typename: "ModelCartItemConnection",
-  items:  Array<CartItem | null >,
-  nextToken?: string | null,
-};
-
-export type CartItem = {
-  __typename: "CartItem",
-  id: string,
-  productName?: string | null,
-  quantity?: number | null,
-  price?: number | null,
-  size?: string | null,
-  color?: string | null,
-  imageKeys?: string | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  product?: AddProduct | null,
-  productId?: string | null,
-  user?: User | null,
-  userId?: string | null,
-  userCartItemsId?: string | null,
-  addProductCartItemsId?: string | null,
-};
-
-export type ModelReviewConnection = {
-  __typename: "ModelReviewConnection",
-  items:  Array<Review | null >,
-  nextToken?: string | null,
-};
-
-export type Review = {
-  __typename: "Review",
-  id: string,
-  rating: number,
-  text: string,
-  createdAt: string,
-  updatedAt: string,
-  productId: string,
-  product?: AddProduct | null,
-  userId: string,
-  user?: User | null,
-  userReviewsId?: string | null,
-  addProductReviewsId?: string | null,
-};
-
 export type UpdateUserInput = {
   id: string,
   email?: string | null,
@@ -149,21 +161,6 @@ export type UpdateUserInput = {
 
 export type DeleteUserInput = {
   id: string,
-};
-
-export type CreateAddProductInput = {
-  id?: string | null,
-  category?: string | null,
-  productName?: string | null,
-  price?: number | null,
-  description?: string | null,
-  size?: Array< string | null > | null,
-  color?: Array< string | null > | null,
-  imageKeys?: Array< string | null > | null,
-  createdAt?: string | null,
-  updatedAt?: string | null,
-  userId?: string | null,
-  userAddedProductId?: string | null,
 };
 
 export type ModelAddProductConditionInput = {
@@ -235,8 +232,8 @@ export type CreateCartItemInput = {
   productName?: string | null,
   quantity?: number | null,
   price?: number | null,
-  size?: string | null,
-  color?: string | null,
+  size?: Array< string | null > | null,
+  color?: Array< string | null > | null,
   imageKeys?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
@@ -281,8 +278,8 @@ export type UpdateCartItemInput = {
   productName?: string | null,
   quantity?: number | null,
   price?: number | null,
-  size?: string | null,
-  color?: string | null,
+  size?: Array< string | null > | null,
+  color?: Array< string | null > | null,
   imageKeys?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
@@ -518,6 +515,43 @@ export type ModelSubscriptionReviewFilterInput = {
   or?: Array< ModelSubscriptionReviewFilterInput | null > | null,
 };
 
+export type CustomAddProductMutationVariables = {
+  input?: CreateAddProductInput | null,
+};
+
+export type CustomAddProductMutation = {
+  customAddProduct?:  {
+    __typename: "AddProduct",
+    id: string,
+    category?: string | null,
+    productName?: string | null,
+    price?: number | null,
+    description?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
+    imageKeys?: Array< string | null > | null,
+    createdAt?: string | null,
+    updatedAt?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      email?: string | null,
+      createdAt?: string | null,
+      updatedAt?: string | null,
+    } | null,
+    userId?: string | null,
+    CartItems?:  {
+      __typename: "ModelCartItemConnection",
+      nextToken?: string | null,
+    } | null,
+    Reviews?:  {
+      __typename: "ModelReviewConnection",
+      nextToken?: string | null,
+    } | null,
+    userAddedProductId?: string | null,
+  } | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -725,8 +759,8 @@ export type CreateCartItemMutation = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -771,8 +805,8 @@ export type UpdateCartItemMutation = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -817,8 +851,8 @@ export type DeleteCartItemMutation = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1099,8 +1133,8 @@ export type GetCartItemQuery = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1148,8 +1182,8 @@ export type ListCartItemsQuery = {
       productName?: string | null,
       quantity?: number | null,
       price?: number | null,
-      size?: string | null,
-      color?: string | null,
+      size?: Array< string | null > | null,
+      color?: Array< string | null > | null,
       imageKeys?: string | null,
       createdAt?: string | null,
       updatedAt?: string | null,
@@ -1428,8 +1462,8 @@ export type OnCreateCartItemSubscription = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1473,8 +1507,8 @@ export type OnUpdateCartItemSubscription = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1518,8 +1552,8 @@ export type OnDeleteCartItemSubscription = {
     productName?: string | null,
     quantity?: number | null,
     price?: number | null,
-    size?: string | null,
-    color?: string | null,
+    size?: Array< string | null > | null,
+    color?: Array< string | null > | null,
     imageKeys?: string | null,
     createdAt?: string | null,
     updatedAt?: string | null,

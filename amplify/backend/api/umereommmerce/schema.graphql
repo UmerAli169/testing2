@@ -1,7 +1,6 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 
-
 type User @model {
   id: ID!
   email: String
@@ -16,7 +15,7 @@ type AddProduct @model {
   id: ID!
   category: String
   productName: String
-  price: Float
+  price: Float 
   description: String
   size: [String]
   color: [String]
@@ -33,9 +32,9 @@ type CartItem @model {
   id: ID!
   productName: String
   quantity: Int
-  price: Float
-  size: String
-  color: String
+  price: Float 
+  size: [String]
+  color: [String]
   imageKeys: String
   createdAt: String
   updatedAt: String
@@ -44,6 +43,7 @@ type CartItem @model {
   user: User @belongsTo(fields: ["userId"])
   userId: ID
 }
+
 type Review @model {
   id: ID!
   rating: Int!
@@ -54,4 +54,20 @@ type Review @model {
   product: AddProduct @belongsTo(fields: ["productId"])
   userId: ID!
   user: User @belongsTo(fields: ["userId"])
+}
+
+type Mutation {
+  customAddProduct(input: CreateAddProductInput): AddProduct
+    @function(name: "calculateCartItemPriceLambda")
+}
+
+input CreateAddProductInput {
+  category: String
+  productName: String
+  price: Float
+  description: String
+  size: [String]
+  color: [String]
+  imageKeys: [String]
+  userId: ID
 }

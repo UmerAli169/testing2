@@ -44,6 +44,11 @@
     }
   },
   "function": {
+    "calculateCartItemPrice": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "umereommercePostSignUpTrigger": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -51,6 +56,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_calculateCartItemPrice_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "calculateCartItemPrice"
+        }
+      ]
+    },
+    "AMPLIFY_function_calculateCartItemPrice_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "calculateCartItemPrice"
+        }
+      ]
+    },
     "AMPLIFY_function_umereommercePostSignUpTrigger_deploymentBucketName": {
       "usedBy": [
         {
