@@ -1,243 +1,156 @@
-'use client';
-import { generateClient } from 'aws-amplify/api';
-import { createAddProduct } from '../../../graphql/mutations';
-import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { uploadData } from 'aws-amplify/storage';
-import { listAddProducts } from '@/graphql/queries';
-import { getCurrentUser } from 'aws-amplify/auth'; // Use getCurrentUser() as you requested
+"use client";
 
-const ProductFormPage = () => {
-  const [files, setFiles] = useState<File[]>([]);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [userId, setUserId] = useState<string | null>(null); // To store user ID
-  const [message, setMessage] = useState<string | null>(null); // For displaying messages
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useRouter } from "next/navigation";
+import { signIn, type SignInInput } from "aws-amplify/auth";
 
-  const client = generateClient();
+interface FormValues {
+  emailOrPhone: string;
+  password: string;
+}
 
-  const initialValues = {
-    category: 'newArrivals',
-    productName: '',
-    price: '',
-    description: '',
-    size: 'Small',
-    color: 'Red',
-    imageKeys: [] as string[], // Store multiple image keys
+const handleSignIn = async ({ username, password }: SignInInput) => {
+  try {
+    const { isSignedIn } = await signIn({ username, password });
+    return { success: true, isSignedIn };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
+export default function LoginForm() {
+  const router = useRouter();
+  const [message, setMessage] = useState<string | null>(null);
+
+  const initialValues: FormValues = {
+    emailOrPhone: "",
+    password: "",
   };
 
   const validationSchema = Yup.object({
-    productName: Yup.string().required('Product name is required'),
-    price: Yup.number().required('Price is required').positive('Price must be a positive number'),
-    description: Yup.string().required('Description is required'),
-    size: Yup.string().required('Please select a size'),
-    color: Yup.string().required('Please select a color'),
-    imageKeys: Yup.array().min(1, 'At least one image is required'),
+    emailOrPhone: Yup.string()
+      .required("Required")
+      .test(
+        "is-email-or-phone",
+        "Must be a valid email or phone number",
+        (value) => {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const phoneRegex = /^[\d\s-+()]{7,}$/;
+          return emailRegex.test(value!) || phoneRegex.test(value!);
+        }
+      ),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Required"),
   });
 
-  // Fetch userId when the component mounts using getCurrentUser
-  useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const user = await getCurrentUser(); // Fetch user data using getCurrentUser()
-        if (user) {
-          setUserId(user.id); // Assuming 'id' is the user ID
-        }
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-    fetchUserId();
-
-    const fetchingAllProduct = async () => {
-      const result = await client.graphql({ query: listAddProducts });
-      console.log(result, 'listed products');
-    };
-    fetchingAllProduct();
-  }, []);
-
-  const handleImageUpload = async () => {
-    const uploadedImageKeys: string[] = [];
-    for (const file of files) {
-      const uniqueFileName = `${Date.now()}_${file.name}`;
-      try {
-        await uploadData({
-          key: uniqueFileName,
-          data: file,
-          options: {
-            accessLevel: 'guest',
-            onProgress: (progress: any) => {
-              const progressPercent = Math.round((progress?.loaded / progress.total) * 100);
-              setUploadProgress(progressPercent);
-            },
-          },
-        });
-        uploadedImageKeys.push(uniqueFileName);
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        throw new Error('Image upload failed.');
-      }
-    }
-    return uploadedImageKeys;
-  };
-
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: FormValues) => {
     try {
-      const imageKeys = await handleImageUpload();
-      const newProduct = {
-        ...values,
-        imageKeys, // Store the multiple image keys
-        userId, // Include userId in the product data
-      };
-
-      const result = await client.graphql({
-        query: createAddProduct,
-        variables: { input: newProduct },
+      const response = await handleSignIn({
+        username: values.emailOrPhone,
+        password: values.password,
       });
 
-      console.log('Product created:', result);
-      setMessage('Product added successfully!'); // Show success message
-    } catch (error) {
-      console.error('Error creating product:', error);
-      setMessage('Failed to add product. Please try again.'); // Show error message
+      if (response.success && response.isSignedIn) {
+        router.push("/"); // Redirect to Dashboard after successful login
+      } else {
+        setMessage(response.message || "Login failed.");
+        setTimeout(() => setMessage(null), 3000);
+      }
+    } catch (error: any) {
+      console.error("Error during login:", error.message || error);
+      setMessage("An error occurred, please try again.");
+      setTimeout(() => setMessage(null), 3000);
     }
+  };
+
+  const navigateToSignUp = () => {
+    router.push("/auth/signup");
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
-
-      {/* Success/Error Message */}
-      {message && (
-        <div
-          className={`mb-4 text-sm ${message.includes('success') ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100'} rounded-lg p-3`}
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-400 to-blue-500">
+      <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+          Login
+        </h2>
+        {message && (
+          <div className="mb-4 text-sm text-red-600 bg-red-100 rounded-lg p-3">
+            {message}
+          </div>
+        )}
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
-          {message}
-        </div>
-      )}
-
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-        {({ setFieldValue }) => (
-          <Form className="space-y-6">
-            {/* Category */}
-            <div className="flex flex-col">
-              <label htmlFor="category" className="text-sm font-medium text-gray-700 mb-2">
-                Category
-              </label>
-              <Field as="select" id="category" name="category" className="p-3 border rounded-md">
-                <option value="newArrivals">New Arrivals</option>
-                <option value="topSelling">Top Selling</option>
-              </Field>
-            </div>
-
-            {/* Product Name */}
-            <div className="flex flex-col">
-              <label htmlFor="productName" className="text-sm font-medium text-gray-700 mb-2">
-                Product Name
-              </label>
-              <Field
-                type="text"
-                id="productName"
-                name="productName"
-                className="p-3 border rounded-md"
-                placeholder="Enter product name"
-              />
-              <ErrorMessage name="productName" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Price */}
-            <div className="flex flex-col">
-              <label htmlFor="price" className="text-sm font-medium text-gray-700 mb-2">
-                Price ($)
-              </label>
-              <Field
-                type="number"
-                id="price"
-                name="price"
-                className="p-3 border rounded-md"
-                placeholder="Enter product price"
-              />
-              <ErrorMessage name="price" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Description */}
-            <div className="flex flex-col">
-              <label htmlFor="description" className="text-sm font-medium text-gray-700 mb-2">
-                Description
-              </label>
-              <Field
-                as="textarea"
-                id="description"
-                name="description"
-                rows={4}
-                className="p-3 border rounded-md"
-                placeholder="Write a detailed description of the product"
-              />
-              <ErrorMessage name="description" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Sizes Dropdown */}
-            <div className="flex flex-col">
-              <label htmlFor="size" className="text-sm font-medium text-gray-700 mb-2">
-                Size
-              </label>
-              <Field as="select" id="size" name="size" className="p-3 border rounded-md">
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-                <option value="Extra Large">Extra Large</option>
-              </Field>
-              <ErrorMessage name="size" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Colors Dropdown */}
-            <div className="flex flex-col">
-              <label htmlFor="color" className="text-sm font-medium text-gray-700 mb-2">
-                Color
-              </label>
-              <Field as="select" id="color" name="color" className="p-3 border rounded-md">
-                <option value="Red">Red</option>
-                <option value="Blue">Blue</option>
-                <option value="Green">Green</option>
-              </Field>
-              <ErrorMessage name="color" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Image Upload */}
-            <div className="flex flex-col">
-              <label htmlFor="imageKeys" className="text-sm font-medium text-gray-700 mb-2">
-                Upload Images (Select multiple)
-              </label>
-              <input
-                type="file"
-                id="imageKeys"
-                name="imageKeys"
-                accept="image/*"
-                multiple
-                onChange={(e) => {
-                  const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
-                  setFiles(selectedFiles);
-                  setFieldValue('imageKeys', selectedFiles);
-                }}
-                className="p-3 border rounded-md"
-              />
-              <ErrorMessage name="imageKeys" component="div" className="text-red-500 text-sm mt-1" />
-            </div>
-
-            {/* Submit Button */}
-            <div>
+          {({ isSubmitting }) => (
+            <Form>
+              <div className="mb-4">
+                <label
+                  htmlFor="emailOrPhone"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email or Phone
+                </label>
+                <Field
+                  type="text"
+                  name="emailOrPhone"
+                  id="emailOrPhone"
+                  placeholder="Enter your email or phone number"
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <ErrorMessage
+                  name="emailOrPhone"
+                  component="div"
+                  className="text-sm text-red-600 mt-1"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Password
+                </label>
+                <Field
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-sm text-red-600 mt-1"
+                />
+              </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-3 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl"
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+                disabled={isSubmitting}
               >
-                Save Product
+                {isSubmitting ? "Logging in..." : "Login"}
               </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-600">
+                  Don&apos;t have an account?{" "}
+                  <button
+                    type="button"
+                    className="text-blue-600 hover:underline"
+                    onClick={navigateToSignUp}
+                  >
+                    Signup
+                  </button>
+                </p>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   );
-};
-
-export default ProductFormPage;
+}
