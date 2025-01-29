@@ -42,7 +42,6 @@ const Reviewss = () => {
 
   const handleSubmitReview = async () => {
     try {
-      // Fetch the logged-in user details using getCurrentUser
       const currentUser = await getCurrentUser(); // Your method to get the current user
       const userId = currentUser.userId; // Assuming the user object has 'userId'
 

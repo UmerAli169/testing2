@@ -35,7 +35,6 @@ function NameDetails() {
       const userId = currentUser.userId;
   
       if (!product) return;
-  console.log(product.imageKeys?.[0],'product.imageKeys?.[0]')
       const totalPrice = product.price * quantity; // Calculate price before sending
   
       const result = await client.graphql({
