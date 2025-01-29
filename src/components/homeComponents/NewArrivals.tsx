@@ -32,26 +32,26 @@ function NewArrivals() {
   }, []);
 
   const handleClick = (productId: string) => {
-    router.push(`/productPage/?productId=${productId}`);
+    // router.push(`/productPage/?productId=${productId}`);
   };
 
   const ProductCard = ({ product, onClick }: any) => (
     <div
-      className=' max-w-[268px] max-height-[402px] rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg'
+      className=' max-w-[296px] min-height-[444px] gap-1  '
       onClick={onClick} // Ensure the onClick is correctly handled here
     >
-      <div className='relative aspect-square bg-[#F0EEED] mb-4'>
+      <div className='relative aspect-square bg-[#F0EEED] mb-4 rounded-2xl'>
         <StorageImage
           path={`public/${product.imageKeys?.[0]}`} // Use the first image in the array
           alt={product.productName}
-          className='w-full h-full object-cover rounded-md mix-blend-multiply'
+          className='w-full h-full object-fill  rounded-md mix-blend-multiply'
           accessLevel='guest'
         />
       </div>
-      <h3 className='text-sm font-medium mb-2'>{product.productName}</h3>
+      <h3 className='ABeeZee:text-[18px] lg:text-[20px] sm:text-[16px] mb-2'>{product.productName}</h3>
       {renderRatingStars(product.rating)}
       <div className='flex items-center gap-2 mb-2'>
-        <span className='text-lg font-bold'>${product.price}</span>
+        <span className='ABeeZee:text-[22px] lg:text-[24px] sm:text-[20px] py-2 '>${product.price}</span>
       </div>
     </div>
   );
@@ -67,12 +67,12 @@ function NewArrivals() {
       <span className='text-sm text-gray-600 ml-1'>{rating}</span>
     </div>
   );
-
+  
   return (
     <>
       <h2 className='flex justify-center text-[48px] py-[35px] w-full ABeeZee '>New Arrivals</h2>
 
-      <div className='grid grid-cols-2 py-[48px] md:grid-cols-4 gap-2 min-w-[296px] min-height-[444px]'>
+      <div className='grid grid-cols-2 md:grid-cols-4    mx-[100px] '>
         {newArrivals.map((product: any) => (
           <ProductCard
             key={product.id}
@@ -82,7 +82,7 @@ function NewArrivals() {
         ))}
       </div>
       <div className='flex justify-center py-[16px]'>
-        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]'>
+        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#FFFFFF] text-black px-[54px] py-[16px] rounded-[62px]'>
           View All
         </button>
       </div>
@@ -98,7 +98,7 @@ function NewArrivals() {
         ))}
       </div>
       <div className='flex justify-center py-[16px]'>
-        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]'>
+        <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#FFFFFF] text-black px-[54px] py-[16px] rounded-[62px]'>
           View All
         </button>
       </div>

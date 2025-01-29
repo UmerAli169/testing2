@@ -171,7 +171,7 @@ const Reviewss = () => {
 
           <div className='text-center mt-4'>
             <div className='flex justify-center py-[16px]'>
-              <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#F2F0F1] text-black px-[54px] py-[16px] rounded-[62px]'>
+              <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#FFFFFF] text-black px-[54px] py-[16px] rounded-[62px]'>
                 Load More Reviews
               </button>
             </div>

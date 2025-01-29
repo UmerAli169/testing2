@@ -8,7 +8,7 @@ import Reviews from '@/components/homeComponents/Reviews';
 
 const HomePage = () => {
   return (
-    <div className='bg-[#F2F0F1]
+    <div className='bg-[#FFFFFF]
  justify-center flex-col items-center'>
       <FrontPage />
       <BrandsLine />

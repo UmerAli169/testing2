@@ -28,7 +28,7 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     currentSession(); // Check for existing session on page load
   }, []);
 
@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <div>
       <Header />
-      <nav className='bg-white py-4 border-b relative gap-[40] '>
+      <nav className='bg-white py-4 border-b relative gap-[40] px-1 md:px-1 lg:px-3 xl:px-20 '>
         <div className='mx-auto px-4'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-4'>
@@ -63,7 +63,7 @@ const Navbar = () => {
               </div>
             </div>
             
-            <div className='hidden lg:flex gap-[24px]'>
+            <div className='hidden lg:flex gap-[14px]'>
               <button className='abeezee text-[16px] leading-[18.91px] text-black flex items-center gap-1'>
                 Shop <ChevronDown className='w-4 h-4' />
               </button>
@@ -84,12 +84,12 @@ const Navbar = () => {
               </button>
             </div>
 
-            <div className='hidden lg:flex items-center px-1 py-1 w-[258px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0]'>
+            <div className='hidden lg:flex items-center px-1 py-1 max-w-[558px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0] mycontainer'>
               <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px]' />
               <input
                 type='text'
                 placeholder='Search for products...'
-                className='ml-2 outline-none w-full bg-[#F0F0F0] '
+                className='  outline-none w-full bg-[#F0F0F0] '
               />
             </div>
 
@@ -105,7 +105,7 @@ const Navbar = () => {
             )}
 
             {isLoggedIn && userInfo && (
-              <div className='flex items-center space-x-4'>
+              <div className='flex items-center space-x-4 '>
                               <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px] lg:hidden' />
 
                 <img

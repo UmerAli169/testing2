@@ -8,12 +8,12 @@ export default function Header() {
             <span className="underline decoration-solid">Sign Up Now</span>
           </header>
         </div>
-        {/* Cross Icon */}
-        {/* <img
+        
+        <img
           src="svgs/header/cross.svg"
           alt="Close"
           className="absolute w-[13.13px] *: h-[13.13px] top-1/2  right-4 transform -translate-y-1/2 cursor-pointer mx-[75px] sm:block hidden"
-        /> */}
+        />
       </div>
     </>
   );

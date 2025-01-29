@@ -9,6 +9,7 @@ import { listAddProducts } from '@/graphql/queries';
 import { generateClient } from 'aws-amplify/api';
 import Reviewss from '@/components/productPage/Reviewss';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const ProductDetails = () => {
   const [topSelling, setTopSelling] = useState<any[]>([]);
@@ -68,6 +69,37 @@ const ProductDetails = () => {
 
   return (
     <div className='mx-auto'>
+                  <div className='w-full border-t border-gray-300 '></div>
+
+      <div className="flex items-center space-x-2 text-sm text-gray-500 py-5">
+          <Link href="/" className="hover:text-gray-700">
+            Home
+          </Link>
+          <img
+          src="/svgs/productTopBar/replaceOFSlash.svg"
+          alt="Close"
+          className="w-[6px] "
+        />
+          <Link href="/shop" className="hover:text-gray-700">
+            Shop
+          </Link>
+          <img
+          src="/svgs/productTopBar/replaceOFSlash.svg"
+          alt="Close"
+             className="w-[6px] "
+        />
+          <Link href="/shop/men" className="hover:text-gray-700">
+            Men
+          </Link>
+          <img
+          src="/svgs/productTopBar/replaceOFSlash.svg"
+          alt="Close"
+           className="w-[6px] "
+        />
+          <span className="text-gray-900">T-shirts</span>
+        </div>
+    
+      
       <NameDetails />
 
       <Reviewss />

@@ -37,7 +37,7 @@ const Footer = () => {
       </div></div>
 
       <div className=' flex flex-col  ABeeZee'>
-        <footer className='bg-[#F2F0F1] pt-16 pb-8 px-4 md:px-8 mt-auto'>
+        <footer className='bg-[#FFFFFF] pt-16 pb-8 px-4 md:px-8 mt-auto'>
           <div className=' mx-auto'>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-8'>
               <div className='md:col-span-1'>

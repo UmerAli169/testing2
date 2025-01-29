@@ -25,6 +25,7 @@ const CartPage = () => {
     };
     fetchCartData();
   }, []);
+
   // Update quantity
   const updateQuantity = async (id: string, change: number) => {
     try {
@@ -88,7 +89,7 @@ const CartPage = () => {
 
       <div className='grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-8'>
         {/* Cart Items */}
-        <div className='space-y-4'>
+        <div className='space-y-4 overflow-y-auto max-h-[500px]'>
           {cartItems.map((item) => (
             <div key={item.id} className='flex items-center gap-4 p-4 bg-[#F0EEED] rounded-lg'>
               {/* Handling the image path properly */}
@@ -171,3 +172,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
