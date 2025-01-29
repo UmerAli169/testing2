@@ -89,12 +89,15 @@ export const onCreateAddProduct = /* GraphQL */ `subscription OnCreateAddProduct
   onCreateAddProduct(filter: $filter) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -127,12 +130,15 @@ export const onUpdateAddProduct = /* GraphQL */ `subscription OnUpdateAddProduct
   onUpdateAddProduct(filter: $filter) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -165,12 +171,15 @@ export const onDeleteAddProduct = /* GraphQL */ `subscription OnDeleteAddProduct
   onDeleteAddProduct(filter: $filter) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -211,12 +220,15 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -255,12 +267,15 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -299,12 +314,15 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -340,12 +358,15 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -380,12 +401,15 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -420,12 +444,15 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId

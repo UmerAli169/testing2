@@ -32,7 +32,7 @@ function NewArrivals() {
   }, []);
 
   const handleClick = (productId: string) => {
-    // router.push(`/productPage/?productId=${productId}`);
+    router.push(`/productPage/?productId=${productId}`);
   };
 
   const ProductCard = ({ product, onClick }: any) => (

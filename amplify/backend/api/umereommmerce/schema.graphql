@@ -14,12 +14,15 @@ type User @model {
 type AddProduct @model {
   id: ID!
   category: String
-  productName: String
-  price: Float 
-  description: String
-  size: [String]
   color: [String]
+  description: String
+  discountType: String  # New field for discount type (fixed/percentage)
+  discountValue: Float  # New field for discount value (12 for fixed or percentage for percentage)
+  discountedPrice: Float  # Discounted price
   imageKeys: [String]
+  price: Float
+  productName: String
+  size: [String]
   createdAt: String
   updatedAt: String
   user: User @belongsTo(fields: ["userId"])
@@ -58,16 +61,19 @@ type Review @model {
 
 type Mutation {
   customAddProduct(input: CreateAddProductInput): AddProduct
-    @function(name: "calculateCartItemPriceLambda")
+    @function(name: "calculateCartItemPriceLambda")  # Lambda function for price calculation
 }
 
 input CreateAddProductInput {
   category: String
-  productName: String
-  price: Float
-  description: String
-  size: [String]
   color: [String]
+  description: String
+  discountType: String
+  discountValue: Float
+  discountedPrice: Float
   imageKeys: [String]
+  price: Float
+  productName: String
+  size: [String]
   userId: ID
 }

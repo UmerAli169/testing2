@@ -12,12 +12,15 @@ export const customAddProduct = /* GraphQL */ `mutation CustomAddProduct($input:
   customAddProduct(input: $input) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -135,12 +138,15 @@ export const createAddProduct = /* GraphQL */ `mutation CreateAddProduct(
   createAddProduct(input: $input, condition: $condition) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -174,12 +180,15 @@ export const updateAddProduct = /* GraphQL */ `mutation UpdateAddProduct(
   updateAddProduct(input: $input, condition: $condition) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -213,12 +222,15 @@ export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
   deleteAddProduct(input: $input, condition: $condition) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -262,12 +274,15 @@ export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -309,12 +324,15 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -356,12 +374,15 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -400,12 +421,15 @@ export const createReview = /* GraphQL */ `mutation CreateReview(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -443,12 +467,15 @@ export const updateReview = /* GraphQL */ `mutation UpdateReview(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -486,12 +513,15 @@ export const deleteReview = /* GraphQL */ `mutation DeleteReview(
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId

@@ -25,7 +25,7 @@
         },
         "calculateCartItemPrice": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
-          "s3Key": "amplify-builds/calculateCartItemPrice-5a4b32332f67476b5078-build.zip"
+          "s3Key": "amplify-builds/calculateCartItemPrice-2b58393667436b744f43-build.zip"
         }
       },
       "storage": {

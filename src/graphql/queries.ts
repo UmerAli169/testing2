@@ -52,12 +52,15 @@ export const getAddProduct = /* GraphQL */ `query GetAddProduct($id: ID!) {
   getAddProduct(id: $id) {
     id
     category
-    productName
-    price
-    description
-    size
     color
+    description
+    discountType
+    discountValue
+    discountedPrice
     imageKeys
+    price
+    productName
+    size
     createdAt
     updatedAt
     user {
@@ -93,12 +96,15 @@ export const listAddProducts = /* GraphQL */ `query ListAddProducts(
     items {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -127,12 +133,15 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId
@@ -198,12 +207,15 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
     product {
       id
       category
-      productName
-      price
-      description
-      size
       color
+      description
+      discountType
+      discountValue
+      discountedPrice
       imageKeys
+      price
+      productName
+      size
       createdAt
       updatedAt
       userId

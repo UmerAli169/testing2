@@ -3,9 +3,7 @@ import { generateClient } from 'aws-amplify/api';
 import { createAddProduct } from '../../../graphql/mutations';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import { uploadData } from 'aws-amplify/storage';
-import { listAddProducts } from '@/graphql/queries';
 import { getCurrentUser } from 'aws-amplify/auth'; // Use getCurrentUser() as you requested
 
 const ProductFormPage = () => {
@@ -22,27 +20,22 @@ const ProductFormPage = () => {
     category: 'newArrivals',
     productName: '',
     price: '',
+    discountedPrice: '',
+    discountType: 'percentage', // 'percentage' or 'fixed'
+    discountValue: '',
     description: '',
     size: [] as string[], // Allow multiple sizes
     color: [] as string[], // Allow multiple colors
     imageKeys: [] as string[],
   };
 
-  const validationSchema = Yup.object({
-    productName: Yup.string().required('Product name is required'),
-    price: Yup.number().required('Price is required').positive('Price must be a positive number'),
-    description: Yup.string().required('Description is required'),
-    size: Yup.array().min(1, 'Please select at least one size'),
-    color: Yup.array().min(1, 'Please select at least one color'),
-    imageKeys: Yup.array().min(1, 'At least one image is required'),
-  });
+  // Removed validationSchema
 
   // Fetch userId when the component mounts using getCurrentUser
   useEffect(() => {
     const fetchUserId = async () => {
       try {
         const user = await getCurrentUser(); // Fetch user data using getCurrentUser()
-
         setUserId(user.userId); // Assuming 'id' is the user ID
       } catch (error) {
         console.error('Error fetching user:', error);
@@ -79,18 +72,29 @@ const ProductFormPage = () => {
   const handleSubmit = async (values: any) => {
     try {
       const imageKeys = await handleImageUpload();
+  
+      // Calculate the discounted price
+      const discountedPrice = calculateDiscountedPrice(
+        Number(values.price),
+        Number(values.discountValue),
+        values.discountType
+      );
+  
       const newProduct = {
         ...values,
         imageKeys, // Store the multiple image keys
         userId, // Include userId in the product data
+        discountedPrice, // Add the calculated discounted price
       };
-      console.log(newProduct,'newProduct')
+  
+      console.log(newProduct, 'newProduct');
+      // Uncomment below line to make the actual API call
       const result = await client.graphql({
         query: createAddProduct,
         variables: { input: newProduct },
       });
-
       console.log('Product created:', result);
+  
       setMessage('Product added successfully!');
       setMessageType('success');
       setIsVisible(true);
@@ -106,6 +110,17 @@ const ProductFormPage = () => {
         setIsVisible(false); // Hide message after 1.5 seconds
       }, 1500);
     }
+  };
+  
+  
+
+  const calculateDiscountedPrice = (price: number, discountValue: number, discountType: string) => {
+    if (discountType === 'percentage') {
+      return price - (price * discountValue) / 100;
+    } else if (discountType === 'fixed') {
+      return price - discountValue;
+    }
+    return price;
   };
 
   return (
@@ -127,8 +142,8 @@ const ProductFormPage = () => {
         </div>
       )}
 
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-        {({ setFieldValue }) => (
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {({ setFieldValue, values }) => (
           <Form className='space-y-6'>
             {/* Category */}
             <div className='flex flex-col'>
@@ -153,7 +168,6 @@ const ProductFormPage = () => {
                 className='p-3 border rounded-md'
                 placeholder='Enter product name'
               />
-              <ErrorMessage name='productName' component='div' className='text-red-500 text-sm mt-1' />
             </div>
 
             {/* Price */}
@@ -168,7 +182,47 @@ const ProductFormPage = () => {
                 className='p-3 border rounded-md'
                 placeholder='Enter product price'
               />
-              <ErrorMessage name='price' component='div' className='text-red-500 text-sm mt-1' />
+            </div>
+
+            {/* Discount Type */}
+            <div className='flex flex-col'>
+              <label htmlFor='discountType' className='text-sm font-medium text-gray-700 mb-2'>
+                Discount Type
+              </label>
+              <Field as='select' id='discountType' name='discountType' className='p-3 border rounded-md'>
+                <option value='percentage'>Percentage</option>
+                <option value='fixed'>Fixed Amount</option>
+              </Field>
+            </div>
+
+            {/* Discount Value */}
+            <div className='flex flex-col'>
+              <label htmlFor='discountValue' className='text-sm font-medium text-gray-700 mb-2'>
+                Discount Value
+              </label>
+              <Field
+                type='number'
+                id='discountValue'
+                name='discountValue'
+                className='p-3 border rounded-md'
+                placeholder='Enter discount value'
+              />
+            </div>
+
+            {/* Display discounted price */}
+            <div className='flex flex-col'>
+              <label className='text-sm font-medium text-gray-700 mb-2'>
+                Discounted Price ($)
+              </label>
+              <p className='text-lg font-medium'>
+                {values.price && values.discountValue
+                  ? calculateDiscountedPrice(
+                      Number(values.price),
+                      Number(values.discountValue),
+                      values.discountType
+                    ).toFixed(2)
+                  : '0.00'}
+              </p>
             </div>
 
             {/* Description */}
@@ -184,10 +238,9 @@ const ProductFormPage = () => {
                 className='p-3 border rounded-md'
                 placeholder='Write a detailed description of the product'
               />
-              <ErrorMessage name='description' component='div' className='text-red-500 text-sm mt-1' />
             </div>
 
-            {/* Sizes Dropdown */}
+            {/* Sizes */}
             <div className='flex flex-col'>
               <label className='text-sm font-medium text-gray-700 mb-2'>Sizes</label>
               <div className='flex gap-4'>
@@ -198,10 +251,9 @@ const ProductFormPage = () => {
                   </label>
                 ))}
               </div>
-              <ErrorMessage name='sizes' component='div' className='text-red-500 text-sm mt-1' />
             </div>
 
-            {/* Colors Dropdown */}
+            {/* Colors */}
             <div className='flex flex-col'>
               <label className='text-sm font-medium text-gray-700 mb-2'>Colors</label>
               <div className='flex gap-4'>
@@ -212,37 +264,32 @@ const ProductFormPage = () => {
                   </label>
                 ))}
               </div>
-              <ErrorMessage name='colors' component='div' className='text-red-500 text-sm mt-1' />
             </div>
 
-            {/* Image Upload */}
+            {/* Images Upload */}
             <div className='flex flex-col'>
               <label htmlFor='imageKeys' className='text-sm font-medium text-gray-700 mb-2'>
-                Upload Images (Select multiple)
+                Product Images
               </label>
               <input
                 type='file'
-                id='imageKeys'
-                name='imageKeys'
                 accept='image/*'
                 multiple
-                onChange={(e) => {
-                  const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
-                  setFiles(selectedFiles);
-                  setFieldValue('imageKeys', selectedFiles);
-                }}
+                onChange={(e) => setFiles(Array.from(e.target.files || []))}
                 className='p-3 border rounded-md'
               />
-              <ErrorMessage name='imageKeys' component='div' className='text-red-500 text-sm mt-1' />
             </div>
 
             {/* Submit Button */}
-            <div>
+            <div className='flex justify-center'>
               <button
                 type='submit'
-                className='w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-3 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl'
+                className='bg-blue-500 text-white p-4 rounded-md mt-6'
+                disabled={uploadProgress > 0 && uploadProgress < 100} // Disable button during upload
               >
-                Save Product
+                {uploadProgress > 0 && uploadProgress < 100
+                  ? `Uploading (${uploadProgress}%)`
+                  : 'Submit Product'}
               </button>
             </div>
           </Form>
