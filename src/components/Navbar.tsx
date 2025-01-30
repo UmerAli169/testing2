@@ -84,7 +84,7 @@ const Navbar = () => {
               </button>
             </div>
 
-            <div className='hidden lg:flex items-center px-1 py-1 max-w-[558px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0] mycontainer'>
+            <div className='hidden lg:flex items-center px-1 py-1 max-w-[558px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0] '>
               <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px]' />
               <input
                 type='text'

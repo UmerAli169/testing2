@@ -7,39 +7,39 @@ function FrontPage() {
         <div className='grid lg:grid-cols-2 gap-20  items-start '>
           {/* Left Content */}
           <div className='  pt-[10px] md:min-w-20 sm:w-full  '>
-            <h1 className='ABeeZee lg:text-[64px] pt-[90px] min-w-[577px] sm:text-[36px] sm:min-w-[315px] leading-[64px]'>
+            <h1 className='ABeeZee lg:text-[64px] pt-[90px]  sm:text-[36px] sm:min-w-[315px] leading-[64px]'>
               FIND CLOTHES THAT MATCHES YOUR STYLE
             </h1>
 
-            <p className='  ABeeZee text-[16px] font-normal my-[24px] leading-[22px] text-[#00000099]  max-w-[540px] '>
+            <p className='  ABeeZee text-[16px] font-normal my-[24px] leading-[22px] text-[#00000099]  '>
               Browse through our diverse range of meticulously crafted garments, designed to bring out your
               individuality and cater to your sense of style.
             </p>
 
-            <button className='w-full sm:w-[600px] lg:max-w-[210px] h-[52px] bg-black text-white text-center px-[54px] py-[16px] rounded-[62px] gap-[2px] top-[507px]'>
+            <button className=' sm:w-[600px] lg:max-w-[210px] h-[52px] bg-black text-white text-center px-[54px] py-[16px] rounded-[62px] gap-[2px] top-[507px]'>
               Shop Now
             </button>
 
             {/* Stats */}
-            <div className='flex flex-wrap gap-4 mt-8  ABeeZee gap-[95px]'>
+            <div className='flex flex-wrap gap-2 mt-8  ABeeZee gap-[95px]'>
               <div className='text-black  font-sans text-base font-normal leading-6'>
-                <div className='text-xl lg:text-2xl '>200+</div>
-                <div className='text-gray-600 text-xs lg:text-sm'>International Brands</div>
+                <div className=' '>200+</div>
+                <div className='text-gray-600  lg:ABeeZee'>International Brands</div>
               </div>
               <div className='text-black  font-sans text-base font-normal leading-6'>
                 <div className='text-xl lg:text-2xl '>2,000+</div>
-                <div className='text-gray-600 text-xs lg:text-sm'>High-Quality Products</div>
+                <div className='text-gray-600 lg:ABeeZee'>High-Quality Products</div>
               </div>
               <div className='text-black  font-sans text-base font-normal leading-6'>
                 <div className='text-xl lg:text-2xl '>30,000+</div>
-                <div className='text-gray-600 text-xs lg:text-sm'>Happy Customers</div>
+                <div className='text-gray-600 lg:ABeeZee'>Happy Customers</div>
               </div>
             </div>
           </div>
 
           {/* Right Image */}
           <div className='relative '>
-            <img src='/fasion.jpg' alt='Fashion' className=' max-h-[662px] w-full  object-cover object-top ' />
+            <img src='/fasion.jpg' alt='Fashion' className='lg:max-h-[662px]  lg:w-full sm:max-w-[390px] sm:max-h-[448px]  object-cover object-top ' />
             <div className='absolute   top-[68px] right-[81px] w-[104px] h-[104px]'>
               <img src='svgs/homePic/star.svg' className='max-w-[104px] h-[104px] top-[220px] left-[1255px]   ' />
             </div>

@@ -29,7 +29,6 @@ const ProductFormPage = () => {
     imageKeys: [] as string[],
   };
 
-  // Removed validationSchema
 
   // Fetch userId when the component mounts using getCurrentUser
   useEffect(() => {
@@ -72,47 +71,44 @@ const ProductFormPage = () => {
   const handleSubmit = async (values: any) => {
     try {
       const imageKeys = await handleImageUpload();
-  
-      // Calculate the discounted price
-      const discountedPrice = calculateDiscountedPrice(
-        Number(values.price),
-        Number(values.discountValue),
-        values.discountType
-      );
-  
+
+      // Ensure discountValue is a valid number (default to 0 if not applicable)
+      const discountValue = values.discountType === 'fixed' ? 0 : Number(values.discountValue) || 0;
+
+      // Calculate discounted price only if discount is applied
+      const discountedPrice =
+        values.discountType === 'fixed' || !values.discountValue
+          ? undefined // Use `undefined` instead of `null` to prevent GraphQL validation errors
+          : calculateDiscountedPrice(Number(values.price), discountValue, values.discountType);
+
       const newProduct = {
         ...values,
-        imageKeys, // Store the multiple image keys
-        userId, // Include userId in the product data
-        discountedPrice, // Add the calculated discounted price
+        imageKeys,
+        userId,
+        discountValue, // Always a valid number
+        discountedPrice, // Only set if there's a discount
       };
-  
+
       console.log(newProduct, 'newProduct');
-      // Uncomment below line to make the actual API call
+
       const result = await client.graphql({
         query: createAddProduct,
         variables: { input: newProduct },
       });
+
       console.log('Product created:', result);
-  
       setMessage('Product added successfully!');
       setMessageType('success');
       setIsVisible(true);
-      setTimeout(() => {
-        setIsVisible(false); // Hide message after 1.5 seconds
-      }, 1500);
+      setTimeout(() => setIsVisible(false), 1500);
     } catch (error) {
       console.error('Error creating product:', error);
       setMessage('Failed to add product. Please try again.');
       setMessageType('error');
       setIsVisible(true);
-      setTimeout(() => {
-        setIsVisible(false); // Hide message after 1.5 seconds
-      }, 1500);
+      setTimeout(() => setIsVisible(false), 1500);
     }
   };
-  
-  
 
   const calculateDiscountedPrice = (price: number, discountValue: number, discountType: string) => {
     if (discountType === 'percentage') {
@@ -206,22 +202,21 @@ const ProductFormPage = () => {
                 name='discountValue'
                 className='p-3 border rounded-md'
                 placeholder='Enter discount value'
+                disabled={values.discountType === 'fixed'} // Disable input if fixed is selected
               />
             </div>
 
             {/* Display discounted price */}
             <div className='flex flex-col'>
-              <label className='text-sm font-medium text-gray-700 mb-2'>
-                Discounted Price ($)
-              </label>
+              <label className='text-sm font-medium text-gray-700 mb-2'>Discounted Price ($)</label>
               <p className='text-lg font-medium'>
-                {values.price && values.discountValue
-                  ? calculateDiscountedPrice(
+                {values.discountType === 'fixed' || !values.discountValue
+                  ? '' // Show nothing if discountType is fixed or no discount is applied
+                  : calculateDiscountedPrice(
                       Number(values.price),
                       Number(values.discountValue),
                       values.discountType
-                    ).toFixed(2)
-                  : '0.00'}
+                    ).toFixed(2)}
               </p>
             </div>
 
@@ -287,9 +282,7 @@ const ProductFormPage = () => {
                 className='bg-blue-500 text-white p-4 rounded-md mt-6'
                 disabled={uploadProgress > 0 && uploadProgress < 100} // Disable button during upload
               >
-                {uploadProgress > 0 && uploadProgress < 100
-                  ? `Uploading (${uploadProgress}%)`
-                  : 'Submit Product'}
+                {uploadProgress > 0 && uploadProgress < 100 ? `Uploading (${uploadProgress}%)` : 'Submit Product'}
               </button>
             </div>
           </Form>

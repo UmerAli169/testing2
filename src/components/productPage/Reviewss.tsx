@@ -81,15 +81,27 @@ const Reviewss = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productResult = await client.graphql({ query: getAddProduct, variables: { id: productId } });
-        console.log(productResult.data.getAddProduct, 'productResult');
+        const productResult = await client.graphql({
+          query: getAddProduct,
+          variables: { id: productId },
+        });
         setProduct(productResult.data.getAddProduct);
-        // Fetch product reviews (you might need to adjust the query based on your GraphQL schema)
-        const reviewsResult = await client.graphql({ query: listReviews, variables: { id: productId } });
+
+        // Fetch reviews specific to this product
+        const reviewsResult = await client.graphql({
+          query: listReviews,
+          variables: {
+            filter: { productId: { eq: productId } }, // Filter reviews by productId
+          },
+        });
+
         setReviews(reviewsResult.data.listReviews.items);
 
         // Fetch related products (limit to 4)
-        const relatedResult = await client.graphql({ query: listAddProducts, variables: { limit: 4 } });
+        const relatedResult = await client.graphql({
+          query: listAddProducts,
+          variables: { limit: 4 },
+        });
         setRelatedProducts(relatedResult.data.listAddProducts.items);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -97,6 +109,7 @@ const Reviewss = () => {
     };
     fetchData();
   }, [productId]);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `Posted at ${date.toLocaleDateString('en-US', {
@@ -157,7 +170,10 @@ const Reviewss = () => {
                       {review.verified && <span className='bg-green-500 w-2 h-2 rounded-full ' />}
                     </div>
                     {renderStars(review.rating)}
-                    <span className='ABeeZee'>{review.userId}</span>
+                    <span className='ABeeZee flex items-center gap-1'>
+                      {review.userId}
+                      <img src='/svgs/reviews/greenTick.svg' alt='' className='w-6 h-6' />
+                    </span>
                   </div>
                   <button>
                     <MoreHorizontal className='w-6 h-6 text-gray-500' />
