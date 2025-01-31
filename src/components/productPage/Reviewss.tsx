@@ -203,9 +203,9 @@ const Reviewss = () => {
               <label className='block mb-2'>Rating</label>
               <div className='flex gap-1'>
                 {[...Array(5)].map((_, i) => (
-                  <Star
+                   <img src='/svgs/reviews/star.svg' alt='Verified' 
                     key={i}
-                    className={`w-6 h-6 cursor-pointer ${i < newReview.rating ? 'fill-yellow-400' : 'text-gray-300'}`}
+                    className={`w-6 h-6 cursor-pointer w-[19.5px] h-[19.5px] ${i < newReview.rating ? 'fill-yellow-400' : 'text-gray-300'}`}
                     onClick={() => setNewReview({ ...newReview, rating: i + 1 })}
                   />
                 ))}

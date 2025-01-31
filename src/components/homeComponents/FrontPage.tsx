@@ -3,11 +3,11 @@ import React from 'react';
 function FrontPage() {
   return (
     <div className='w-full '>
-      <div className=' min-h-[662px] px-4  lg:px-[100px] bg-[#F2F0F1] '>
-        <div className='grid lg:grid-cols-2 gap-20  items-start '>
+      <div className=' w-full h-[662px] px-4  lg:px-[100px] bg-[#F2F0F1]  '>
+        <div className='grid lg:grid-cols-2 gap-20  items-start  '>
           {/* Left Content */}
-          <div className='  pt-[10px] md:min-w-20 sm:w-full  '>
-            <h1 className='ABeeZee lg:text-[64px] pt-[90px]  sm:text-[36px] sm:min-w-[315px] leading-[64px]'>
+          <div className=' mycontainer '>
+            <h1 className='mycontainer ABeeZee text-[44px] max-w-[558px]  lg:mt-[103px] sm:mt-[30px]  mt-[40px] leading-[64px]'>
               FIND CLOTHES THAT MATCHES YOUR STYLE
             </h1>
 
@@ -38,7 +38,7 @@ function FrontPage() {
           </div>
 
           {/* Right Image */}
-          <div className='relative '>
+          <div className='relative mycontainer '>
             <img src='/fasion.jpg' alt='Fashion' className='lg:max-h-[662px]  lg:w-full sm:max-w-[390px] sm:max-h-[448px]  object-cover object-top ' />
             <div className='absolute   top-[68px] right-[81px] w-[104px] h-[104px]'>
               <img src='svgs/homePic/star.svg' className='max-w-[104px] h-[104px] top-[220px] left-[1255px]   ' />

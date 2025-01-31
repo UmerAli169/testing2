@@ -3,12 +3,12 @@ import { categories } from './data';
 
 function DressStyle() {
   return (
-    <div className='flex justify-center bg-white items-center'>
+    <div className='flex justify-center items-center'>
       <div className=' my-[64px]  pt-[44px]  rounded-lg'>
        
         <div
           className='
-       bg-red-100 w-full h-full  max-h-[866px] overflow-hidden   md:p-[64px] rounded-lg shadow-md'
+       bg-[#F0F0F0] w-full h-full  max-h-[866px] overflow-hidden   md:p-[64px] rounded-lg shadow-md'
         >
            <h2 className='flex justify-center text-center mb-[65px] ABeeZee text-[20px] md:text-[36px] lg:text-[48px] leading-[56.74px]  '>
           BROWSE BY dress STYLE
