@@ -81,46 +81,64 @@ const CartPage = () => {
   return (
     <div className='max-w-6xl mx-auto px-4 py-8'>
       {/* Breadcrumb */}
-      <div className='mb-6 text-sm text-gray-600'>
-        <span>Home / Cart</span>
+      <div className='mb-6 ABeeZee flex items-center'>
+        <span>Home</span>
+        <img src='/svgs/productTopBar/replaceOFSlash.svg' alt='Slash' className='w-[6px] mx-1' />
+        <span>Cart</span>
       </div>
 
-      <h1 className='text-2xl font-medium mb-8'>Your cart</h1>
+      <h1 className='text-[38px] sm:text-[40px] lg:text-[47px] ABeeZee mb-6'>Your cart</h1>
 
-      <div className='grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-8'>
+      <div className='grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-4'>
         {/* Cart Items */}
-        <div className='space-y-4 overflow-y-auto max-h-[500px]'>
-          {cartItems.map((item) => (
-            <div key={item.id} className='flex items-center gap-4 p-4 bg-[#F0EEED] rounded-lg'>
-              {/* Handling the image path properly */}
-              <StorageImage
-                path={`public/${item.imageKeys || ''}`} // imageKeys is a string
-                alt={item.productName || 'Product'}
-                accessLevel='guest'
-                className='max-w-[100px] max-h-[100px] object-cover mix-blend-multiply rounded-md'
-              />
+        <div className='overflow-y-auto leading-[20px] max-h-[508px] border max-w-[715px] p-2 rounded-lg border-gray-300'>
+          {cartItems.slice(0, 3).map((item, index) => (
+            <div key={item.id}>
+              {/* Apply top border only if it's not the first item */}
+              {index !== 0 && <div className='w-[667px] border-t border-gray-300 my-2'></div>}
 
-              <div className='flex-grow'>
-                <div className='flex justify-between items-start mb-2'>
-                  <h3 className='font-medium'>{item.productName || 'Product Name'}</h3>
-                  <button onClick={() => deleteItem(item.id)} className='text-red-500'>
-                    <Trash2 className='w-4 h-4' />
-                  </button>
-                </div>
-                <div className='text-sm text-gray-600 mb-2'>
-                  <div>Size: {item.size?.[0] || 'N/A'}</div>
-                  <div>Color: {item.color?.[0] || 'N/A'}</div>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <div className='font-medium'>${(item?.price || 0) * item.quantity}</div>
-                  <div className='flex items-center gap-3 bg-white rounded-full border px-4 py-2'>
-                    <button onClick={() => updateQuantity(item.id, -1)} className='text-gray-500 hover:text-black'>
-                      -
+              <div className='flex items-center gap-4 p-2 rounded-lg'>
+                <StorageImage
+                  path={`public/${item.imageKeys || ''}`}
+                  alt={item.productName || 'Product'}
+                  accessLevel='guest'
+                  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
+                />
+
+                <div className='flex-grow'>
+                  <div className='flex justify-between items-start mb-2'>
+                    <h3 className='ABeeZee lg:text-[18px] sm:text-[16px] text-[20px]'>
+                      {item.productName || 'Product Name'}
+                    </h3>
+                    <button onClick={() => deleteItem(item.id)} className='text-red-500'>
+                      <img src='/svgs/cartPage/delete.svg' alt='Close' className='w-[16px] lg:w-[18px] sm:w-[20px]' />
                     </button>
-                    <span>{item.quantity}</span> {/* Adjusted for quantity */}
-                    <button onClick={() => updateQuantity(item.id, 1)} className='text-gray-500 hover:text-black'>
-                      +
-                    </button>
+                  </div>
+                  <div className='ABeeZee lg:text-[12px] sm:text-[10px] text-[14px] text-gray-600 mb-2'>
+                    <div>Size: {item.size?.[0] || 'N/A'}</div>
+                    <div>Color: {item.color?.[0] || 'N/A'}</div>
+                  </div>
+                  <div className='flex justify-between items-center'>
+                    <div className='ABeeZee lg:text-[20px] sm:text-[18px] text-[24px]'>
+                      ${(item?.price || 0) * item.quantity}
+                    </div>
+                    <div className='flex items-center gap-3 bg-[#F0F0F0] rounded-full border px-4 py-2'>
+                      <button onClick={() => updateQuantity(item.id, -1)} className='text-gray-500 hover:text-black'>
+                        <img
+                          src='/svgs/cartPage/minus.svg'
+                          alt='Close'
+                          className='w-[15.63px] lg:w-[14px] sm:w-[16px]'
+                        />
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, 1)} className=' hover:text-black'>
+                        <img
+                          src='/svgs/cartPage/plus.svg'
+                          alt='Close'
+                          className='w-[15.63px] lg:w-[14px] sm:w-[16px]'
+                        />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -129,8 +147,8 @@ const CartPage = () => {
         </div>
 
         {/* Order Summary */}
-        <div className='bg-gray-50 rounded-lg p-6'>
-          <h2 className='text-lg font-medium mb-6'>Order Summary</h2>
+        <div className=' border border-gray-300  w-[505px] max-h-[458px] rounded-lg p-6 '>
+          <h2 className=' lg:text-[20px] sm:text-[18px] text-[24px] ABeeZee mb-6'>Order Summary</h2>
           <div className='space-y-4 mb-6'>
             <div className='flex justify-between'>
               <span>Subtotal</span>
@@ -144,25 +162,33 @@ const CartPage = () => {
               <span>Delivery Fee</span>
               <span>${deliveryFee.toFixed(2)}</span>
             </div>
-            <div className='flex justify-between font-medium pt-4 border-t'>
+            <div className='flex justify-between ABeeZee pt-4 border-t'>
               <span>Total</span>
               <span>${total.toFixed(2)}</span>
             </div>
           </div>
 
           <div className='space-y-4'>
-            <div className='flex gap-2'>
+            <div className='relative flex items-center w-full'>
+              {/* Tag Icon Inside Input */}
+              <img src='/svgs/cartPage/tag.svg' alt='Tag' className='absolute left-4 w-[16px] text-gray-500' />
+
+              {/* Input Field with Padding for Icon */}
               <input
                 type='text'
                 placeholder='Add promo code'
-                className='flex-grow px-4 py-2 rounded-lg border'
+                className='flex-grow pl-10 pr-4 py-2 rounded-full border bg-[#F0F0F0] ABeeZee border-gray-300'
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
               />
-              <button className='bg-black text-white px-6 py-2 rounded-lg'>Apply</button>
+
+              {/* Apply Button */}
+              <button className='bg-black text-white px-6 py-2 rounded-full ml-2'>Apply</button>
             </div>
-            <button className='w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2'>
-              Go to Checkout <ChevronRight className='w-4 h-4' />
+
+            <button className='w-full bg-black text-white py-3 rounded-full flex items-center justify-center gap-2'>
+              Go to Checkout
+              <img src='/svgs/cartPage/allow.svg' alt='Arrow' className='w-[16px]' />
             </button>
           </div>
         </div>
@@ -172,4 +198,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-

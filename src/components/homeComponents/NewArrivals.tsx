@@ -51,7 +51,7 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
               ${product.discountedPrice }
             </span>
             <span className="text-gray-400 lg:text-[24px] sm:text-[20px] line-through ABeeZee">${product.price }</span>
-            <p className="bg-red-300/20 ABeeZee rounded-2xl">-{product.discountValue}%</p>
+            <p className="bg-red-300/20 ABeeZee rounded-2xl">{product.discountValue}%</p>
           </>
         ) : (
           <span className=" ABeeZee text-[22px] lg:text-[24px] sm:text-[20px]">${product.price }</span>
