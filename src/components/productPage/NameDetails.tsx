@@ -41,7 +41,7 @@ function NameDetails() {
 
       const totalPrice = product.price * quantity;
 
-      const result = await client.graphql({
+      await client.graphql({
         query: createCartItem,
         variables: {
           input: {
@@ -56,24 +56,27 @@ function NameDetails() {
           },
         },
       });
-
-      console.log('Added to cart result:', result);
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
   };
 
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color === selectedColor ? null : color);
+  };
+
   const renderRatingStars = (rating: number = 0) => (
-    <div className='flex items-center gap-1'>
-      {[...Array(5)].map((_, index) => (
-        <Star
-          key={index}
-          className={`h-4 w-4 ${index < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-          fill={index < Math.floor(rating) ? 'currentColor' : 'none'}
-        />
-      ))}
-      <span className='text-sm text-gray-600 ml-1'>{rating.toFixed(1)}</span>
-    </div>
+    <div className="flex items-center gap-1">
+  {[...Array(5)].map((_, index) => (
+    <Star
+      key={index}
+      className={`h-4 w-4 ${index < 4 ? 'text-yellow-400' : 'text-gray-300'}`}
+      fill={index < 4 ? 'currentColor' : 'none'}
+    />
+  ))}
+  <span className="text-sm text-gray-600 ml-1">4/5</span>
+</div>
+
   );
 
   return (
@@ -112,28 +115,31 @@ function NameDetails() {
           {renderRatingStars(product?.rating ?? 0)}
           <div className='flex items-center gap-4 my-6'>
             <span className='text-2xl font-bold'>${(product?.price || 0) * quantity}</span>
-
             <span className='flex justify-between rounded-full bg-red-100 px-2 py-1 text-red-500'> -40%</span>
           </div>
           <span className='ABeeZee line-clamp-4 overflow-hidden text-ellipsis mt-4'>{product?.description}</span>
 
           <div className='w-full border-t border-gray-300'></div>
 
+          {/* Colors Section - Fixed */}
           <div className='my-6'>
             <h3 className='mb-2 ABeeZee'>Choose Color</h3>
-            <div className='flex gap-2'>
-              {product?.color?.map((color: string) => (
-                <button
-                  key={color}
-                  className={`px-4 py-2 rounded-full border ${
-                    selectedColor === color ? 'bg-black text-white' : 'border-gray-300'
-                  }`}
-                  onClick={() => setSelectedColor(color)}
-                >
-                  {color}
-                </button>
-              ))}
-            </div>
+            <div className="flex flex-wrap gap-2">
+  {product?.color?.map((color: string, index: number) => (
+    <div
+      key={index}
+      onClick={() => handleColorClick(color)}
+      style={{ backgroundColor: color.toLowerCase() }}
+      className={`relative w-8 h-8 rounded-full cursor-pointer border flex items-center justify-center 
+        ${selectedColor === color ? 'ring-2 ring-gray-300' : ''}`}
+    >
+      {selectedColor === color && (
+        <span className="absolute text-white font-bold text-sm">✔</span>
+      )}
+    </div>
+  ))}
+</div>
+
           </div>
 
           <div className='w-full border-t border-gray-300'></div>

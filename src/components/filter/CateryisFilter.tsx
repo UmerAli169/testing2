@@ -36,7 +36,10 @@ function CateryisFilter({ applyFilters }: Props) {
 
   return (
     <div className="w-64 p-6 bg-white border-r">
-      <h2 className="ABeeZee font-medium mb-4">Filters</h2>
+<div className="flex justify-between items-center w-full">
+  <h2 className="ABeeZee font-medium mb-4">Filters</h2>
+  <img src="/svgs/filter/filter.svg" alt="Filter Icon" className="w-[19.5px] h-[19.5px]" />
+</div>
 
       {/* Categories */}
       <div className="mb-6">

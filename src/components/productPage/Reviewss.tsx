@@ -142,10 +142,13 @@ const Reviewss = () => {
             <h3 className='font-medium'>ALL Reviews ({reviews.length})</h3>
             <div className='flex gap-4'>
               <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
-                <Filter className='w-5 h-5 text-gray-600 mr-2' />
+              <img src='/svgs/filter/filter.svg' alt='Verified' className='w-[19.5px] h-[19.5px]' />
               </button>
               <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
                 <span className='mr-2'>Latest</span>
+
+
+
                 <ChevronUp className='w-4 h-4 text-gray-600' />
               </button>
               <button

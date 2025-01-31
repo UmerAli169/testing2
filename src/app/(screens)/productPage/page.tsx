@@ -58,6 +58,7 @@ const ProductDetails = () => {
             <li className='ABeeZee px-2 py-2 cursor-pointer hover:bg-gray-100' onClick={() => setMenuOpen(null)}>
               Cancel
             </li>
+            
           </ul>
         </div>
       )}
@@ -101,18 +102,19 @@ const ProductDetails = () => {
       <div className='flex items-center gap-2 mb-2'>
         {product.discountedPrice ? (
           <>
-            <span className='text-[22px] lg:text-[24px] sm:text-[20px]'>${product.discountedPrice}</span>
-            <span className='text-gray-400 line-through text-[20px]'>${product.price}</span>
-            <p className='bg-red-300/20 text-[12px] rounded-2xl'>-{product.discountValue}%</p>
+            <span className='text-[10px] lg:text-[12px] sm:text-[8px]'>${product.discountedPrice}</span>
+            <span className='text-gray-400 line-through text-[10px] lg:text-[12px] sm:text-[8px]'>${product.price}</span>
+            <p className='bg-red-300/20 text-[10px] lg:text-[12px] sm:text-[8px] rounded-2xl'>-{product.discountValue}%</p>
           </>
         ) : (
-          <span className='text-[22px] lg:text-[24px] sm:text-[20px]'>${product.price}</span>
+          <span className='text-[10px] lg:text-[12px] sm:text-[8px]'>${product.price}</span>
         )}
       </div>
     </div>
   );
 
   const handleClick = (productId: string) => {
+    console.log(productId,'productId')
     router.push(`/productPage/?productId=${productId}`);
   };
 

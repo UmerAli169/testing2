@@ -70,11 +70,11 @@ const Navbar = () => {
               <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 On Sale
               </Link>
-              <Link href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-                New Arrivals
+              <Link href='/catergiesPage' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              Catergies Page
               </Link>
-              <Link href='#' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-                Brands
+              <Link href='/about' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+               About
               </Link>
               <button
                 onClick={() => handleNavigate('/addDataForm')}

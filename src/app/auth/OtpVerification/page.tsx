@@ -10,7 +10,7 @@ import { confirmSignUp, type ConfirmSignUpInput } from 'aws-amplify/auth';
 
 
 
-export const handleSignUpConfirmation=async({
+const handleSignUpConfirmation=async({
   username,
   confirmationCode
 }: ConfirmSignUpInput) =>{
