@@ -1,58 +1,81 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { currentSession } from '../../../utils/checkingAuthToken/authenication';
+import React, { useEffect, useState, ReactNode } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { fetchAuthSession } from "aws-amplify/auth";
 
-const ProtectedRoute = ({ children }) => {
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [message, setMessage] = useState<string>("");
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const pathname = usePathname();
 
-  // Define routes to exclude from ProtectedRoute
-  const excludedRoutes = ['/components/Signin', '/components/Signup',"components/OtpVerification","/"];
+  const excludedRoutes = [
+    "/auth/login",
+    "/auth/signup",
+    "/auth/OtpVerification",
+    "/",
+  ];
 
   const isExcludedRoute = excludedRoutes.includes(pathname);
 
   useEffect(() => {
     const checkAuth = async () => {
-      setLoading(true); // Start loading state
+      setLoading(true);
       try {
-        const session = await currentSession();
-        const isValidSession = Boolean(
-          session?.accessToken &&
-          typeof session.accessToken === 'string' &&
-          session.accessToken.trim() !== ''
-        );
+        const session = await fetchAuthSession();
+        const accessToken = session?.tokens?.accessToken ?? null;
+        const idToken = session?.tokens?.idToken ?? null;
+
+        const isValidSession = accessToken !== null && idToken !== null;
 
         if (isValidSession) {
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);
-          router.push('/'); // Redirect to the homepage if not authenticated
+          router.push("/");
         }
-      } catch (error) {
-        console.error('Error checking session:', error);
+      } catch (error: any) {
+        if (error?.name === "NotAuthorizedException") {
+          setMessage("You are not authorized to access this resource.");
+          setIsVisible(true);
+          setTimeout(() => setIsVisible(false), 3000); // Hide after 3s
+        }
+
         setIsAuthenticated(false);
-        router.push('/'); // Redirect on error
+        router.push("/");
       } finally {
-        setLoading(false); // End loading state
+        setLoading(false);
       }
     };
 
     if (!isExcludedRoute) {
       checkAuth();
     } else {
-      setLoading(false); // If it's an excluded route, stop loading
+      setLoading(false);
     }
   }, [router, pathname, isExcludedRoute]);
 
   if (loading) {
-    return <div>Loading...</div>; // Render loading state
+    return <div>Loading...</div>;
   }
 
-  return isAuthenticated || isExcludedRoute ? <>{children}</> : null; // Render children if authenticated or route is excluded
+  return (
+    <>
+      {isVisible && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md">
+          {message}
+        </div>
+      )}
+      {isAuthenticated || isExcludedRoute ? <>{children}</> : null}
+    </>
+  );
 };
 
 export default ProtectedRoute;

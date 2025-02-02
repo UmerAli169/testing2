@@ -10,7 +10,6 @@ import {
 } from "../../app/Redux/features/products/productsSlice";
 import { StorageImage } from "@aws-amplify/ui-react-storage";
 
-// Reusable Product Card Component
 const ProductCard = ({ product, onClick, onDelete }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = (e: React.MouseEvent) => {
@@ -22,7 +21,6 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
       className="max-w-[296px] min-height-[444px] gap-1 cursor-pointer relative"
       onClick={() => onClick(product.id)} // Corrected onClick event
     >
-      {/* Image */}
       <div className="relative aspect-square bg-[#F0EEED] mb-4 rounded-2xl">
         <StorageImage
           path={`public/${product.imageKeys?.[0]}`}
@@ -32,12 +30,10 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
         />
       </div>
 
-      {/* Product Name */}
       <h3 className="font-ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2">
         {product.productName}
       </h3>
 
-      {/* Price Section */}
       <div className="flex ABeeZee items-center gap-2 mb-2">
         {product.discountedPrice ? (
           <>
@@ -74,17 +70,18 @@ function NewArrivals() {
       try {
         const result = await client.graphql({ query: listAddProducts });
         const products = result.data.listAddProducts.items;
-        const newArrivalsData = products.filter(
+        const newArrivalsData: any = products.filter(
           (product: any) => product.category === "newArrivals"
         );
-        const topSellingData = products.filter(
+        const topSellingData: any = products.filter(
           (product: any) => product.category === "topSelling"
         );
 
         dispatch(setNewArrivals(newArrivalsData.slice(0, 4)));
         dispatch(setTopSelling(topSellingData.slice(0, 4)));
+        return products;
       } catch (error) {
-        console.error("Error fetching products:", error);
+        return;
       }
     };
 
@@ -97,7 +94,6 @@ function NewArrivals() {
 
   return (
     <>
-      {/* New Arrivals Section */}
       <h2 className="flex justify-center text-[48px] py-[35px] w-full font-ABeeZee">
         New Arrivals
       </h2>

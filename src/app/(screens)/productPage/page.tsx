@@ -124,7 +124,6 @@ const ProductDetails = () => {
   );
 
   const handleClick = (productId: string) => {
-    console.log(productId, "productId");
     router.push(`/productPage/?productId=${productId}`);
   };
 

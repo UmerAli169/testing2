@@ -1,8 +1,8 @@
-'use client';
-import { Star } from 'lucide-react';
-import React, { useState, useEffect, useRef } from 'react';
-import { generateClient } from 'aws-amplify/api';
-import { listReviews } from '@/graphql/queries';
+"use client";
+import { Star } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { generateClient } from "aws-amplify/api";
+import { listReviews } from "@/graphql/queries";
 
 function Reviews() {
   const [reviewsData, setReviewsData] = useState<any[]>([]);
@@ -18,19 +18,20 @@ function Reviews() {
 
         const fetchedReviews = response.data.listReviews.items;
         setReviewsData(fetchedReviews);
+        return fetchedReviews;
       } catch (error) {
-        console.error('Error fetching reviews:', error);
+        return;
       }
     };
 
     fetchReviews();
   }, []);
 
-  const scrollToReview = (direction: 'prev' | 'next') => {
+  const scrollToReview = (direction: "prev" | "next") => {
     if (!scrollContainer.current) return;
 
     const scrollAmount = scrollContainer.current.offsetWidth / 4;
-    if (direction === 'next') {
+    if (direction === "next") {
       scrollContainer.current.scrollLeft += scrollAmount;
     } else {
       scrollContainer.current.scrollLeft -= scrollAmount;
@@ -39,10 +40,10 @@ function Reviews() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return `Posted at ${date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
+    return `Posted at ${date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
     })}`;
   };
 
@@ -54,14 +55,14 @@ function Reviews() {
         </h2>
         <div className="flex gap-2">
           <img
-            onClick={() => scrollToReview('next')}
+            onClick={() => scrollToReview("next")}
             src="/svgs/reviews/moveup.svg"
             className="p-1 h-[18.75px] w-[21.75px] rounded-full "
             aria-label="Next review"
           />
 
           <img
-            onClick={() => scrollToReview('prev')}
+            onClick={() => scrollToReview("prev")}
             src="/svgs/reviews/movedown.svg"
             aria-label="Previous review"
             className="p-1  h-[18.75px] w-[21.75px]  rounded-full "
@@ -69,9 +70,15 @@ function Reviews() {
         </div>
       </div>
 
-      <div ref={scrollContainer} className="flex gap-6 overflow-x-auto hide-scrollbar">
+      <div
+        ref={scrollContainer}
+        className="flex gap-6 overflow-x-auto hide-scrollbar"
+      >
         {reviewsData.map((review) => (
-          <div key={review.id} className="p-6 rounded-lg border border-gray-300 min-w-[300px] flex-shrink-0">
+          <div
+            key={review.id}
+            className="p-6 rounded-lg border border-gray-300 min-w-[300px] flex-shrink-0"
+          >
             {/* Stars */}
             <div className="flex gap-1 mb-2">
               {[...Array(5)].map((_, i) => (
@@ -79,19 +86,27 @@ function Reviews() {
                   key={i}
                   src="/svgs/reviews/star.svg"
                   alt="Verified"
-                  className={`w-[22.5px] h-[22.5px] ${i < review.rating ? 'fill-yellow-400' : 'text-gray-300'}`}
+                  className={`w-[22.5px] h-[22.5px] ${
+                    i < review.rating ? "fill-yellow-400" : "text-gray-300"
+                  }`}
                 />
               ))}
             </div>
 
             {/* User Info */}
             <span className="font-medium flex items-center gap-1">
-              {review.userId.slice(0,6)}
-              <img src="/svgs/reviews/greenTick.svg" alt="Verified" className="w-[19.5px] h-[19.5px]" />
+              {review.userId.slice(0, 6)}
+              <img
+                src="/svgs/reviews/greenTick.svg"
+                alt="Verified"
+                className="w-[19.5px] h-[19.5px]"
+              />
             </span>
 
             <p className="text-gray-600 text-sm mb-1">{review.text}</p>
-            <p className="text-gray-500 text-xs">{formatDate(review.updatedAt)}</p>
+            <p className="text-gray-500 text-xs">
+              {formatDate(review.updatedAt)}
+            </p>
           </div>
         ))}
       </div>
