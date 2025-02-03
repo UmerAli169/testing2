@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }) => {
   const pathname = usePathname();
 
   // Define routes to exclude from ProtectedRoute
-  const excludedRoutes = ['/components/Signin', '/components/Signup',"components/OtpVerification","/"];
+  const excludedRoutes = ['/auth/loginin', '/auth/signup',"auth/OtpVerification","/"];
 
   const isExcludedRoute = excludedRoutes.includes(pathname);
 

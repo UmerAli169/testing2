@@ -2,7 +2,7 @@
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import CustomProvider from '../components/wrapper';
-
+import ProtectedRouteWrapper from './auth/ProtectedRoute/page';
 // import ProtectedRoute from './auth/ProtectedRoute/page';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
@@ -24,9 +24,9 @@ export default function RootLayout({
       <Provider store={store}>
         <CustomProvider>
           <Navbar />
-          {/* <ProtectedRouteWrapper> */}
+          <ProtectedRouteWrapper>
           {children}
-          {/* </ProtectedRouteWrapper> */}
+          </ProtectedRouteWrapper>
           <Footer />
         </CustomProvider>
         </Provider>
