@@ -6,6 +6,7 @@ import { StarIcon } from 'lucide-react';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 import { useRouter } from 'next/navigation';
 import CategoryFilter from '@/components/filter/cateryisFilter';
+type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
 const client = generateClient();
 const ITEMS_PER_PAGE = 9;
@@ -118,8 +119,7 @@ const ProductListing = () => {
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
           className='w-full h-full object-cover rounded-md border-none bg-[#F0EEED]'
-          accessLevel='guest'
-        />
+          accessLevel={'guest' as StorageAccessLevel}         />
       </div>
       <h3 className='ABeeZee lg:text-[18px] sm:text-[14px] text-[16px] text-gray-800 mb-1'>
         {product.productName}

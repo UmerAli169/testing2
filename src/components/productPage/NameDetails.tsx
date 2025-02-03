@@ -17,6 +17,7 @@ function NameDetails() {
   const searchParams = useSearchParams();
   const productId = searchParams.get("productId");
   const client = generateClient();
+  type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,7 +103,7 @@ function NameDetails() {
                   key={index}
                   path={`public/${img}`}
                   className="lg:w-[152px] lg:h-[167px] w-[130px] h-[140px] sm:w-[111px] sm:h-[106px] rounded-md "
-                  accessLevel="guest"
+                  accessLevel={'guest' as StorageAccessLevel}  
                 />
               ))}
           </div>
@@ -113,8 +114,8 @@ function NameDetails() {
               <StorageImage
                 path={`public/${product.imageKeys[0]}`}
                 className="   lg:w-[444px] lg:h-[530px]  sm:w-[358px] sm:h-[345px] "
-                accessLevel="guest"
-              />
+                accessLevel={'guest' as StorageAccessLevel}  
+                />
             )}
           </div>
         </div>

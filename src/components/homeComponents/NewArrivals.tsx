@@ -9,6 +9,7 @@ import {
   setTopSelling,
 } from "../../app/Redux/features/products/productsSlice";
 import { StorageImage } from "@aws-amplify/ui-react-storage";
+type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
 const ProductCard = ({ product, onClick, onDelete }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,8 +27,8 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
           className="w-full h-full object-cover rounded-md mix-blend-multiply"
-          accessLevel="guest"
-        />
+          accessLevel={'guest' as StorageAccessLevel}  
+          />
       </div>
 
       <h3 className="font-ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2">

@@ -1,6 +1,6 @@
 import React from "react";
 import { Instagram, Twitter, Linkedin, BadgeCheck, HeadphonesIcon, Truck } from "lucide-react";
-import { stats, teamMembers, features } from "./data";
+import { stats, teamMembers } from "./data";
 
 const OurStory = () => {
      const features = [

@@ -1,17 +1,18 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { Trash2, ChevronRight } from 'lucide-react';
-import { deleteCartItem, updateCartItem } from '@/graphql/mutations'; // Correct mutations for CartItem
-import { listCartItems } from '@/graphql/queries'; // Correct query for CartItem
+import { deleteCartItem, updateCartItem } from '@/graphql/mutations';
+import { listCartItems } from '@/graphql/queries';
 import { generateClient } from 'aws-amplify/api';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
+type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [promoCode, setPromoCode] = useState('');
   const client = generateClient();
 
-  // Fetch cart items from the backend
   useEffect(() => {
     const fetchCartData = async () => {
       console.log('Fetching cart data...');
@@ -25,8 +26,10 @@ const CartPage = () => {
     };
     fetchCartData();
   }, []);
-
-  // Update quantity
+  const subtotal = cartItems.reduce((sum, item) => sum + (item?.price || 0) * item.quantity, 0);
+  const discount = subtotal * 0.2;
+  const deliveryFee = 15;
+  const total = subtotal - discount + deliveryFee;
   const updateQuantity = async (id: string, change: number) => {
     try {
       const updatedItem = cartItems.find((item) => item.id === id);
@@ -53,7 +56,6 @@ const CartPage = () => {
     }
   };
 
-  // Delete item
   const deleteItem = async (id: string) => {
     try {
       const response = await client.graphql({
@@ -73,14 +75,8 @@ const CartPage = () => {
     }
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item?.price || 0) * item.quantity, 0);
-  const discount = subtotal * 0.2; // 20% discount
-  const deliveryFee = 15;
-  const total = subtotal - discount + deliveryFee;
-
   return (
     <div className='max-w-6xl mx-auto px-4 py-8'>
-      {/* Breadcrumb */}
       <div className='mb-6 ABeeZee flex items-center'>
         <span>Home</span>
         <img src='/svgs/productTopBar/replaceOFSlash.svg' alt='Slash' className='w-[6px] mx-1' />
@@ -90,20 +86,19 @@ const CartPage = () => {
       <h1 className='text-[38px] sm:text-[40px] lg:text-[47px] ABeeZee mb-6'>Your cart</h1>
 
       <div className='grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-4'>
-        {/* Cart Items */}
         <div className='overflow-y-auto leading-[20px] max-h-[508px] border max-w-[715px] p-2 rounded-lg border-gray-300'>
           {cartItems.slice(0, 3).map((item, index) => (
             <div key={item.id}>
-              {/* Apply top border only if it's not the first item */}
               {index !== 0 && <div className='w-[667px] border-t border-gray-300 my-2'></div>}
 
               <div className='flex items-center gap-4 p-2 rounded-lg'>
-                <StorageImage
-                  path={`public/${item.imageKeys || ''}`}
-                  alt={item.productName || 'Product'}
-                  accessLevel='guest'
-                  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
-                />
+              <StorageImage
+  path={`public/${item.imageKeys || ''}`}
+  alt={item.productName || 'Product'}
+  accessLevel="private"  // Directly assign the value without the cast
+  className="lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md"
+/>
+
 
                 <div className='flex-grow'>
                   <div className='flex justify-between items-start mb-2'>
@@ -146,7 +141,6 @@ const CartPage = () => {
           ))}
         </div>
 
-        {/* Order Summary */}
         <div className=' border border-gray-300  w-[505px] max-h-[458px] rounded-lg p-6 '>
           <h2 className=' lg:text-[20px] sm:text-[18px] text-[24px] ABeeZee mb-6'>Order Summary</h2>
           <div className='space-y-4 mb-6'>
@@ -170,10 +164,8 @@ const CartPage = () => {
 
           <div className='space-y-4'>
             <div className='relative flex items-center w-full'>
-              {/* Tag Icon Inside Input */}
               <img src='/svgs/cartPage/tag.svg' alt='Tag' className='absolute left-4 w-[16px] text-gray-500' />
 
-              {/* Input Field with Padding for Icon */}
               <input
                 type='text'
                 placeholder='Add promo code'
@@ -182,7 +174,6 @@ const CartPage = () => {
                 onChange={(e) => setPromoCode(e.target.value)}
               />
 
-              {/* Apply Button */}
               <button className='bg-black text-white px-6 py-2 rounded-full ml-2'>Apply</button>
             </div>
 

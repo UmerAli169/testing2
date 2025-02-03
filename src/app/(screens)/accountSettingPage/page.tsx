@@ -2,7 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { updatePassword, updateUserAttributes, sendUserAttributeVerificationCode, confirmUserAttribute } from 'aws-amplify/auth';
+import {
+  updatePassword,
+  updateUserAttributes,
+  sendUserAttributeVerificationCode,
+  confirmUserAttribute,
+} from 'aws-amplify/auth';
 
 const ProfileEdit = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +25,6 @@ const ProfileEdit = () => {
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false); // Track if OTP has been sent
 
-
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
@@ -29,14 +33,14 @@ const ProfileEdit = () => {
     currentPassword: Yup.string().required('Current password is required'),
     newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New password is required'),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+      .oneOf([Yup.ref('newPassword')], 'Passwords must match') // Removed `null`
       .required('Confirm new password is required'),
   });
 
   const formik = useFormik({
     initialValues: formData,
     validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values: any, { setSubmitting }) => {
       console.log('Profile updates:', values);
       setSubmitting(true);
 
@@ -61,7 +65,7 @@ const ProfileEdit = () => {
     },
   });
 
-  const handleUpdatePassword = async (oldPassword, newPassword) => {
+  const handleUpdatePassword = async (oldPassword: any, newPassword: any) => {
     try {
       await updatePassword({ oldPassword, newPassword });
       console.log('Password updated successfully');
@@ -72,7 +76,7 @@ const ProfileEdit = () => {
     }
   };
 
-  const handleUpdateEmail = async (newEmail) => {
+  const handleUpdateEmail = async (newEmail: any) => {
     try {
       await updateUserAttributes({
         userAttributes: {
@@ -176,7 +180,11 @@ const ProfileEdit = () => {
                     placeholder={`Enter ${field}`}
                   />
                   {formik.touched[field] && formik.errors[field] && (
-                    <div className='text-sm text-red-500 mt-1'>{formik.errors[field]}</div>
+                    <div className='text-sm text-red-500 mt-1'>
+                      {/* Type assertion to ensure it's a string */}
+                      {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}{' '}
+                      {/* Fallback message */}
+                    </div>
                   )}
                 </div>
               ))}
@@ -196,7 +204,11 @@ const ProfileEdit = () => {
                 }`}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className='text-sm text-red-500 mt-1'>{formik.errors.email}</div>
+                <div className='text-sm text-red-500 mt-1'>
+                  {/* Type assertion for email error */}
+                  {typeof formik.errors.email === 'string' ? formik.errors.email : 'Invalid email format'}{' '}
+                  {/* Fallback message */}
+                </div>
               )}
             </div>
 
@@ -230,7 +242,6 @@ const ProfileEdit = () => {
               </div>
             )}
 
-            {/* Password Fields */}
             {otpVerified && (
               <div className='mb-6'>
                 <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Password Changes</label>
@@ -255,7 +266,11 @@ const ProfileEdit = () => {
                         }`}
                       />
                       {formik.touched[field] && formik.errors[field] && (
-                        <div className='text-sm text-red-500 mt-1'>{formik.errors[field]}</div>
+                        <div className='text-sm text-red-500 mt-1'>
+                          {/* Type assertion to ensure it's a string */}
+                          {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}{' '}
+                          {/* Fallback message */}
+                        </div>
                       )}
                     </div>
                   ))}

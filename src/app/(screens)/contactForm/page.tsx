@@ -23,7 +23,7 @@ const ContactPage = () => {
   const formik = useFormik({
     initialValues: { name: '', email: '', phone: '', message: '' },
     validationSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values :any, { resetForm }) => {
       try {
         const response = await client.graphql({
           query: sendEmail,
