@@ -4,11 +4,8 @@ import React, { useEffect, useState, ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { fetchAuthSession } from "aws-amplify/auth";
 
-interface ProtectedRouteProps {
-  children: ReactNode;
-}
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children }: any) => {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
