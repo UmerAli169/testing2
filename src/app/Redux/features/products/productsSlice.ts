@@ -23,10 +23,10 @@ const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setNewArrivals: (state, action: PayloadAction<Product[]>) => {
+    setNewArrivals: (state:any, action:any) => {
       state.newArrivals = action.payload;
     },
-    setTopSelling: (state, action: PayloadAction<Product[]>) => {
+    setTopSelling:(state:any, action:any) => {
       state.topSelling = action.payload;
     },
   },

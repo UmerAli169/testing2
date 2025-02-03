@@ -1,7 +1,22 @@
 import { ChevronRight, Menu, X } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
-import { categories, colors, sizes, styles } from './data';
+// import { categories, colors, sizes, styles } from './data'; 
+const categories = ["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"];
 
+const colors = [
+  'Red','Blue','Green','White','Black'
+];
+
+const sizes = [
+ 
+  'Small',
+  'Medium',
+  'Large',
+  'Extra Large',
+  
+];
+
+const styles = ["Casual", "Formal", "Sporty", "Traditional", "Streetcar"];
 interface Props {
   applyFilters: (filters: {
     category: string;

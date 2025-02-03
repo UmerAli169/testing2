@@ -71,8 +71,8 @@ const ProductDetails = () => {
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
           className="w-full h-full object-cover rounded-md mix-blend-multiply"
-          accessLevel="guest"
-        />
+          accessLevel={'guest' as any}         />
+        
       </div>
 
       {/* Product Name */}

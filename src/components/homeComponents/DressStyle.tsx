@@ -1,6 +1,10 @@
 import React from 'react';
-import { categories } from './data';
-
+const categories = [
+  { image: '/casual.png' },
+  { image: '/formal.png' },
+  { image: '/party.png' },
+  { image: '/gym.png' },
+];
 function DressStyle() {
   return (
     <div className='flex justify-center items-center'>
@@ -27,7 +31,7 @@ function DressStyle() {
               </div>
             ))}
           </div>
-        </div>{' '}
+        </div>
       </div>
     </div>
   );

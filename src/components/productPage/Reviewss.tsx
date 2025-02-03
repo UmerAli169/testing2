@@ -7,7 +7,6 @@ import { generateClient } from 'aws-amplify/api';
 import { useSearchParams } from 'next/navigation';
 import { Filter, ChevronUp, MoreHorizontal } from 'lucide-react';
 import { getCurrentUser } from 'aws-amplify/auth';
-import NameDetails from '@/components/productPage/nameDetails';
 
 const Reviewss = () => {
   const [product, setProduct] = useState<any>(null);
@@ -83,7 +82,7 @@ const Reviewss = () => {
       try {
         const productResult = await client.graphql({
           query: getAddProduct,
-          variables: { id: productId },
+          variables: { id: productId as any },
         });
         setProduct(productResult.data.getAddProduct);
 
@@ -91,7 +90,7 @@ const Reviewss = () => {
         const reviewsResult = await client.graphql({
           query: listReviews,
           variables: {
-            filter: { productId: { eq: productId } }, // Filter reviews by productId
+            filter: { productId: { eq: productId } }, 
           },
         });
 

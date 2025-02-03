@@ -10,11 +10,11 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCartAction: (state, action) => {
+    addToCartAction: (state:any, action:any) => {
       state.cartItems.push(action.payload);
     },
-    removeFromCartAction: (state, action) => {
-      state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
+    removeFromCartAction: (state:any, action:any) => {
+      state.cartItems = state.cartItems.filter((item:any) => item.id !== action.payload);
     },
     // Add other actions like clearing the cart, updating quantity, etc.
   },

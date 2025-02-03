@@ -27,8 +27,8 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
           className="w-full h-full object-cover rounded-md mix-blend-multiply"
-          accessLevel={'guest' as StorageAccessLevel}  
-          />
+          accessLevel={'guest' as any}         />
+          
       </div>
 
       <h3 className="font-ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2">

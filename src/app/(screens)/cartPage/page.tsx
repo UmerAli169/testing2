@@ -6,7 +6,7 @@ import { deleteCartItem, updateCartItem } from '@/graphql/mutations';
 import { listCartItems } from '@/graphql/queries';
 import { generateClient } from 'aws-amplify/api';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
-type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
+const accessLevel: any = 'guest';
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -95,8 +95,8 @@ const CartPage = () => {
               <StorageImage
   path={`public/${item.imageKeys || ''}`}
   alt={item.productName || 'Product'}
-  accessLevel="private"  // Directly assign the value without the cast
-  className="lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md"
+  accessLevel={accessLevel as any | undefined} // Type assertion
+  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
 />
 
 

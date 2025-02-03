@@ -5,7 +5,7 @@ import { listAddProducts } from '@/graphql/queries';
 import { StarIcon } from 'lucide-react';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 import { useRouter } from 'next/navigation';
-import CategoryFilter from '@/components/filter/cateryisFilter';
+import CategoryFilter from '../../../components/filter/CateryisFilter';
 type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
 const client = generateClient();
@@ -119,7 +119,7 @@ const ProductListing = () => {
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
           className='w-full h-full object-cover rounded-md border-none bg-[#F0EEED]'
-          accessLevel={'guest' as StorageAccessLevel}         />
+          accessLevel={'guest' as any}         />
       </div>
       <h3 className='ABeeZee lg:text-[18px] sm:text-[14px] text-[16px] text-gray-800 mb-1'>
         {product.productName}

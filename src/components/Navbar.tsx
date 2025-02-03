@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const currentSession = async () => {
     try {
-      const user = await getCurrentUser();
+      const user:any = await getCurrentUser();
       if (user) {
         setUserInfo(user);
         setIsLoggedIn(true);
