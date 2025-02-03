@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     }
 
     const params = {
-        TableName: 'AddProduct-ecyypbtekzgwllwdy7owgfb35q-dev', // Ensure the correct table name
+        TableName: 'AddProduct-n3un64tafva3flal3qzekiabi4-dev', 
         Key: { id: productId },
     };
 

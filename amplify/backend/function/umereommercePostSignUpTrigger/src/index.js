@@ -1,6 +1,6 @@
 var aws = require('aws-sdk');
 var ddb = new aws.DynamoDB.DocumentClient();
-const TABLE_NAME = 'User-ecyypbtekzgwllwdy7owgfb35q-dev'
+const TABLE_NAME = 'User-n3un64tafva3flal3qzekiabi4-dev'
 
 exports.handler = async (event, context) => {
     console.log( event.request.userAttributes,' event.request.userAttributes')

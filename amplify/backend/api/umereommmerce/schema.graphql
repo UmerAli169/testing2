@@ -1,12 +1,13 @@
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
 
 type User @model {
   id: ID!
   email: String
-  firstName:String
-  lastName:String
-  Address:String
+  firstName: String
+  lastName: String
+  Address: String
   createdAt: String
   updatedAt: String
   AddedProduct: [AddProduct] @hasMany
@@ -19,9 +20,9 @@ type AddProduct @model {
   category: String
   color: [String]
   description: String
-  discountType: String  # New field for discount type (fixed/percentage)
-  discountValue: Float  # New field for discount value (12 for fixed or percentage for percentage)
-  discountedPrice: Float  # Discounted price
+  discountType: String
+  discountValue: Float
+  discountedPrice: Float
   imageKeys: [String]
   price: Float
   productName: String
@@ -38,7 +39,7 @@ type CartItem @model {
   id: ID!
   productName: String
   quantity: Int
-  price: Float 
+  price: Float
   size: [String]
   color: [String]
   imageKeys: String
@@ -52,19 +53,26 @@ type CartItem @model {
 
 type Review @model {
   id: ID!
-  rating: Int!
-  text: String!
-  createdAt: String!
-  updatedAt: String!
-  productId: ID!
+  rating: Int
+  text: String
+  createdAt: String
+  updatedAt: String
+  productId: ID
   product: AddProduct @belongsTo(fields: ["productId"])
-  userId: ID!
+  userId: ID
   user: User @belongsTo(fields: ["userId"])
 }
 
+type EmailResponse {
+  message: String
+  success: Boolean
+}
+
 type Mutation {
-  customAddProduct(input: CreateAddProductInput): AddProduct
-    @function(name: "calculateCartItemPriceLambda")  # Lambda function for price calculation
+  customAddProduct(input: CreateAddProductInput): AddProduct @function(name: "calculateCartItemPriceLambda")
+
+  sendEmail(name: String!, email: String!, phone: String, message: String!): EmailResponse
+    @function(name: "umerSESecommmerce")
 }
 
 input CreateAddProductInput {

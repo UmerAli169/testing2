@@ -18,8 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased flex flex-col max-w-[1440px]  mx-auto w-full`}
-      >
+        className={`${inter.className} antialiased flex flex-col max-w-[1440px]  mx-auto w-full`}  >
         <Provider store={store}>
           <CustomProvider>
             <Navbar />

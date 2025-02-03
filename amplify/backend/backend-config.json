@@ -49,6 +49,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "umerSESecommmerce": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "umereommercePostSignUpTrigger": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -69,6 +74,22 @@
         {
           "category": "function",
           "resourceName": "calculateCartItemPrice"
+        }
+      ]
+    },
+    "AMPLIFY_function_umerSESecommmerce_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "umerSESecommmerce"
+        }
+      ]
+    },
+    "AMPLIFY_function_umerSESecommmerce_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "umerSESecommmerce"
         }
       ]
     },

@@ -26,6 +26,9 @@ export const customAddProduct = /* GraphQL */ `mutation CustomAddProduct($input:
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -47,6 +50,22 @@ export const customAddProduct = /* GraphQL */ `mutation CustomAddProduct($input:
   APITypes.CustomAddProductMutationVariables,
   APITypes.CustomAddProductMutation
 >;
+export const sendEmail = /* GraphQL */ `mutation SendEmail(
+  $name: String!
+  $email: String!
+  $phone: String
+  $message: String!
+) {
+  sendEmail(name: $name, email: $email, phone: $phone, message: $message) {
+    message
+    success
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.SendEmailMutationVariables,
+  APITypes.SendEmailMutation
+>;
 export const createUser = /* GraphQL */ `mutation CreateUser(
   $input: CreateUserInput!
   $condition: ModelUserConditionInput
@@ -54,6 +73,9 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   createUser(input: $input, condition: $condition) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -82,6 +104,9 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
   updateUser(input: $input, condition: $condition) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -110,6 +135,9 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   deleteUser(input: $input, condition: $condition) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -152,6 +180,9 @@ export const createAddProduct = /* GraphQL */ `mutation CreateAddProduct(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -194,6 +225,9 @@ export const updateAddProduct = /* GraphQL */ `mutation UpdateAddProduct(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -236,6 +270,9 @@ export const deleteAddProduct = /* GraphQL */ `mutation DeleteAddProduct(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -293,6 +330,9 @@ export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -343,6 +383,9 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -393,6 +436,9 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -440,6 +486,9 @@ export const createReview = /* GraphQL */ `mutation CreateReview(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -486,6 +535,9 @@ export const updateReview = /* GraphQL */ `mutation UpdateReview(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -532,6 +584,9 @@ export const deleteReview = /* GraphQL */ `mutation DeleteReview(
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename

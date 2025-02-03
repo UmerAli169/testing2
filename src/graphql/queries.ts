@@ -12,6 +12,9 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
   getUser(id: $id) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -39,6 +42,9 @@ export const listUsers = /* GraphQL */ `query ListUsers(
     items {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -66,6 +72,9 @@ export const getAddProduct = /* GraphQL */ `query GetAddProduct($id: ID!) {
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -152,6 +161,9 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -226,6 +238,9 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename

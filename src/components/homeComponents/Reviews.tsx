@@ -72,12 +72,12 @@ function Reviews() {
 
       <div
         ref={scrollContainer}
-        className="flex gap-6 overflow-x-auto hide-scrollbar"
+        className="flex gap-6 overflow-x-auto hide-scrollbar   "
       >
         {reviewsData.map((review) => (
           <div
             key={review.id}
-            className="p-6 rounded-lg border border-gray-300 min-w-[300px] flex-shrink-0"
+            className="p-6 rounded-lg border border-gray-300 h-[240px] w-[400px] flex-shrink-0"
           >
             {/* Stars */}
             <div className="flex gap-1 mb-2">
@@ -99,14 +99,12 @@ function Reviews() {
               <img
                 src="/svgs/reviews/greenTick.svg"
                 alt="Verified"
-                className="w-[19.5px] h-[19.5px]"
+                className="w-[19.5px] h-[19.5px] my-[8px]"
               />
             </span>
 
             <p className="text-gray-600 text-sm mb-1">{review.text}</p>
-            <p className="text-gray-500 text-xs">
-              {formatDate(review.updatedAt)}
-            </p>
+            
           </div>
         ))}
       </div>

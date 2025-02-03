@@ -15,21 +15,25 @@
       "auth": {
         "umereommmerce76ed7580": {}
       },
-      "api": {
-        "umereommmerce": {}
-      },
       "function": {
         "umereommercePostSignUpTrigger": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
-          "s3Key": "amplify-builds/umereommercePostSignUpTrigger-41435469553834355672-build.zip"
+          "s3Key": "amplify-builds/umereommercePostSignUpTrigger-76735848575745344643-build.zip"
         },
         "calculateCartItemPrice": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
-          "s3Key": "amplify-builds/calculateCartItemPrice-2b58393667436b744f43-build.zip"
+          "s3Key": "amplify-builds/calculateCartItemPrice-2b6f514a636868506976-build.zip"
+        },
+        "umerSESecommmerce": {
+          "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
+          "s3Key": "amplify-builds/umerSESecommmerce-3465784a41426a726561-build.zip"
         }
       },
       "storage": {
         "ecommmerceUmer": {}
+      },
+      "api": {
+        "umereommmerce": {}
       }
     }
   }

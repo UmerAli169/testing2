@@ -12,6 +12,9 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
   onCreateUser(filter: $filter) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -37,6 +40,9 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
   onUpdateUser(filter: $filter) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -62,6 +68,9 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
   onDeleteUser(filter: $filter) {
     id
     email
+    firstName
+    lastName
+    Address
     createdAt
     updatedAt
     AddedProduct {
@@ -103,6 +112,9 @@ export const onCreateAddProduct = /* GraphQL */ `subscription OnCreateAddProduct
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -144,6 +156,9 @@ export const onUpdateAddProduct = /* GraphQL */ `subscription OnUpdateAddProduct
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -185,6 +200,9 @@ export const onDeleteAddProduct = /* GraphQL */ `subscription OnDeleteAddProduct
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -239,6 +257,9 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -286,6 +307,9 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -333,6 +357,9 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -377,6 +404,9 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -420,6 +450,9 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
@@ -463,6 +496,9 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
     user {
       id
       email
+      firstName
+      lastName
+      Address
       createdAt
       updatedAt
       __typename
