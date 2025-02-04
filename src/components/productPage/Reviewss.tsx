@@ -1,17 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Star } from 'lucide-react';
-import { listAddProducts, getAddProduct, listReviews } from '@/graphql/queries'; // Adjust paths
-import { createCartItem, createReview } from '@/graphql/mutations'; // Adjust paths
+import { Star, ChevronUp, MoreHorizontal } from 'lucide-react';
+import { listAddProducts, getAddProduct, listReviews } from '@/graphql/queries';
+import { createReview } from '@/graphql/mutations';
 import { generateClient } from 'aws-amplify/api';
 import { useSearchParams } from 'next/navigation';
-import { Filter, ChevronUp, MoreHorizontal } from 'lucide-react';
 import { getCurrentUser } from 'aws-amplify/auth';
 
 const Reviewss = () => {
   const [product, setProduct] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
-  const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const searchParams = useSearchParams();
   const productId = searchParams.get('productId');
 
@@ -24,16 +22,7 @@ const Reviewss = () => {
     return (
       <div className='flex gap-0.5'>
         {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`w-4 h-4 ${
-              i < Math.floor(rating)
-                ? 'fill-yellow-400 text-yellow-400'
-                : i < rating
-                ? 'fill-yellow-400 text-yellow-400'
-                : 'text-gray-300'
-            }`}
-          />
+          <Star key={i} className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} />
         ))}
       </div>
     );
@@ -41,35 +30,27 @@ const Reviewss = () => {
 
   const handleSubmitReview = async () => {
     try {
-      const currentUser = await getCurrentUser(); // Your method to get the current user
-      const userId = currentUser.userId; // Assuming the user object has 'userId'
+      const currentUser = await getCurrentUser();
+      const userId = currentUser.userId;
 
-      // Add the review to the local state
-      setReviews([
-        ...reviews,
-        {
-          ...newReview,
-          userId: userId, // Sending userId instead of name
-          productId: product.id, // Product ID
-        },
-      ]);
-
-      // Submit the review to the backend
+      // Submit review to backend
       const reviewResult = await client.graphql({
         query: createReview,
         variables: {
           input: {
             rating: newReview.rating,
-            text: newReview.text, // Your comment field
-            userId: userId, // User ID
-            productId: product.id, // Product ID
+            text: newReview.text,
+            userId: userId,
+            productId: product.id,
           },
         },
       });
 
-      console.log('Review submission result:', reviewResult);
+      const newReviewData = reviewResult.data.createReview;
 
-      // Reset the form and close the modal
+      // Add review to local state
+      setReviews([...reviews, newReviewData]);
+
       setIsModalOpen(false);
       setNewReview({ rating: 0, text: '' });
     } catch (error) {
@@ -82,26 +63,18 @@ const Reviewss = () => {
       try {
         const productResult = await client.graphql({
           query: getAddProduct,
-          variables: { id: productId as any },
+          variables: { id: productId },
         });
         setProduct(productResult.data.getAddProduct);
 
-        // Fetch reviews specific to this product
         const reviewsResult = await client.graphql({
           query: listReviews,
           variables: {
-            filter: { productId: { eq: productId } }, 
+            filter: { productId: { eq: productId } },
           },
         });
 
         setReviews(reviewsResult.data.listReviews.items);
-
-        // Fetch related products (limit to 4)
-        const relatedResult = await client.graphql({
-          query: listAddProducts,
-          variables: { limit: 4 },
-        });
-        setRelatedProducts(relatedResult.data.listAddProducts.items);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -110,13 +83,15 @@ const Reviewss = () => {
   }, [productId]);
 
   const formatDate = (dateString: string) => {
+    if (!dateString) return 'Date not available';
     const date = new Date(dateString);
-    return `Posted at ${date.toLocaleDateString('en-US', {
+    return `Posted on ${date.toLocaleDateString('en-US', {
       month: 'long',
       day: 'numeric',
       year: 'numeric',
     })}`;
   };
+
   return (
     <div className='mx-auto'>
       <div className='w-full border-t border-gray-300 mt-12'>
@@ -125,7 +100,7 @@ const Reviewss = () => {
             <button
               key={tab}
               className={`pb-2 ${
-                activeTab === tab ? ' max-w-[145px] ABeeZee border-b-2 border-black' : 'text-gray-500'
+                activeTab === tab ? 'max-w-[145px] ABeeZee border-b-2 border-black' : 'text-gray-500'
               }`}
               onClick={() => setActiveTab(tab)}
             >
@@ -140,16 +115,6 @@ const Reviewss = () => {
           <div className='flex justify-between items-center'>
             <h3 className='font-medium'>ALL Reviews ({reviews.length})</h3>
             <div className='flex gap-4'>
-              <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
-              <img src='/svgs/filter/filter.svg' alt='Verified' className='w-[19.5px] h-[19.5px]' />
-              </button>
-              <button className='flex items-center bg-gray-200 px-4 py-2 rounded-full text-sm'>
-                <span className='mr-2'>Latest</span>
-
-
-
-                <ChevronUp className='w-4 h-4 text-gray-600' />
-              </button>
               <button
                 className='text-sm bg-black text-white px-4 py-2 rounded-full'
                 onClick={() => setIsModalOpen(true)}
@@ -163,36 +128,21 @@ const Reviewss = () => {
             {reviews.slice(0, 6).map((review, index) => (
               <div
                 key={index}
-                className='px-[28px] py-[32px] rounded-lg border border-gray-300 max-w-[610px] max-h-[241px] 
-               overflow-hidden text-ellipsis'
+                className='px-[28px] py-[32px] rounded-lg border border-gray-300 max-w-[610px] max-h-[241px] overflow-hidden'
               >
-                <div className='flex justify-between items-start mb-2 '>
+                <div className='flex justify-between items-start mb-2'>
                   <div>
-                    <div className='flex items-center'>
-                      {review.verified && <span className='bg-green-500 w-2 h-2 rounded-full ' />}
-                    </div>
                     {renderStars(review.rating)}
-                    <span className='ABeeZee flex items-center gap-1'>
-                      {review.userId}
-                      <img src='/svgs/reviews/greenTick.svg' alt='' className='w-6 h-6' />
-                    </span>
+                    <span className='ABeeZee flex items-center gap-1'>{review.userId}</span>
                   </div>
                   <button>
                     <MoreHorizontal className='w-6 h-6 text-gray-500' />
                   </button>
                 </div>
                 <p className='text-gray-600 ABeeZee mb-2 line-clamp-3'>{review.text}</p>
-                <p className='text-sm ABeeZee text-gray-500'>{formatDate(review.updatedAt)}</p>
+                <p className='text-sm ABeeZee text-gray-500'>{formatDate(review.createdAt)}</p>
               </div>
             ))}
-          </div>
-
-          <div className='text-center mt-4'>
-            <div className='flex justify-center py-[16px]'>
-              <button className='w-full sm:w-auto h-[52px] border border-gray-300 bg-[#FFFFFF] text-black px-[54px] py-[16px] rounded-[62px]'>
-                Load More Reviews
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -205,9 +155,11 @@ const Reviewss = () => {
               <label className='block mb-2'>Rating</label>
               <div className='flex gap-1'>
                 {[...Array(5)].map((_, i) => (
-                   <img src='/svgs/reviews/star.svg' alt='Verified' 
+                  <Star
                     key={i}
-                    className={`w-6 h-6 cursor-pointer w-[19.5px] h-[19.5px] ${i < newReview.rating ? 'fill-yellow-400' : 'text-gray-300'}`}
+                    className={`w-6 h-6 cursor-pointer ${
+                      i < newReview.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                    }`}
                     onClick={() => setNewReview({ ...newReview, rating: i + 1 })}
                   />
                 ))}

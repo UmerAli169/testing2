@@ -52,9 +52,9 @@ mt-[10px]'
         </div>
       </div>
 
-      <div className=' w-full flex justify-center overflow-hidden'>
-        <div className='relative top-[90px]  h-[590px] '>
-          <img src='/fasion.jpg' alt='Fashion' className='w-full lg:min-h-[662px] w-[390px]  h-[490px] object-cover' />
+      <div className=' min-w-[400px] flex justify-start overflow-hidden '>
+        <div className='relative lg:top-[90px] top-[10px] h-[590px] '>
+          <img src='/fasion.jpg' alt='Fashion' className=' lg:min-h-[662px] w-[390px]  h-[490px] object-cover' />
 
           <div className='absolute top-[10%] right-[0%] w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] lg:w-[104px] lg:h-[104px]'>
             <img src='svgs/homePic/star.svg' className='w-full h-full' />

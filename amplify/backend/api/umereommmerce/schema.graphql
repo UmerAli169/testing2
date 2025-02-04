@@ -57,10 +57,10 @@ type Review @model {
   text: String
   createdAt: String
   updatedAt: String
-  productId: ID
   product: AddProduct @belongsTo(fields: ["productId"])
-  userId: ID
+  productId: ID
   user: User @belongsTo(fields: ["userId"])
+  userId: ID
 }
 
 type EmailResponse {

@@ -17,7 +17,6 @@ function NameDetails() {
   const searchParams = useSearchParams();
   const productId = searchParams.get('productId');
   const client = generateClient();
-  type StorageAccessLevel = 'public' | 'private' | 'guest' | undefined;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +25,6 @@ function NameDetails() {
           query: getAddProduct,
           variables: { id: productId as any }, // Type assertion
         });
-
         setProduct(productResult.data.getAddProduct);
       } catch (error) {
         console.error('Error fetching product details:', error);
@@ -75,11 +73,11 @@ function NameDetails() {
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
-          className={`h-4 w-4 ${index < 4 ? 'text-yellow-400' : 'text-gray-300'}`}
-          fill={index < 4 ? 'currentColor' : 'none'}
+          className={`h-4 w-4 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+          fill={index < rating ? 'currentColor' : 'none'}
         />
       ))}
-      <span className='text-sm text-gray-600 ml-1'>4/5</span>
+      <span className='text-sm text-gray-600 ml-1'>{rating}/5</span>
     </div>
   );
 
@@ -93,7 +91,6 @@ function NameDetails() {
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 '>
         <div className='flex gap-4  md:flex-row sm:flex-col-reverse '>
-          {/* Small Images */}
           <div className='flex gap-4  md:flex-col sm:flex-row '>
             {product?.imageKeys?.slice(0, 3).map((img: string, index: number) => (
               <StorageImage
@@ -106,12 +103,11 @@ function NameDetails() {
             ))}
           </div>
 
-          {/* Main Image */}
           <div className='flex-1 rounded-md'>
             {product?.imageKeys?.[0] && (
               <StorageImage
                 path={`public/${product.imageKeys[0]}`}
-                alt='Image 1' 
+                alt='Image 1'
                 className='lg:w-[444px] lg:h-[530px] sm:w-[358px] sm:h-[345px]'
                 accessLevel={'guest' as any}
               />
@@ -121,16 +117,16 @@ function NameDetails() {
 
         <div className='px-[16px]'>
           <h1 className='text-2xl font-bold mb-2'>{product?.productName || 'Product Name'}</h1>
-          {renderRatingStars(product?.rating ?? 0)}
-          <div className='flex items-center gap-4 my-6'>
-            <span className='text-2xl font-bold'>${(product?.price || 0) * quantity}</span>
-            <span className='flex justify-between rounded-full bg-red-100 px-2 py-1 text-red-500'> -40%</span>
+          {renderRatingStars(product?.rating ?? 4)}
+          <div className='flex items-center gap-2 my-6'>
+            <span className='lg:text-[24px] text-[20px] ABeeZee '>${(product?.discountedPrice || 0) * quantity}</span>
+            <span className='text-gray-400 lg:text-[24px] text-[20px] line-through ABeeZee'>${product?.price || 0}</span>
+            <p className='bg-red-300/20 ABeeZee rounded-2xl'>{product?.discountValue}%</p>
           </div>
           <span className='ABeeZee line-clamp-4 overflow-hidden text-ellipsis mt-4'>{product?.description}</span>
 
           <div className='w-full border-t border-gray-300'></div>
 
-          {/* Colors Section - Fixed */}
           <div className='my-6'>
             <h3 className='mb-2 ABeeZee'>Choose Color</h3>
             <div className='flex flex-wrap gap-2'>

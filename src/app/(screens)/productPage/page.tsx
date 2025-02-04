@@ -80,23 +80,18 @@ const ProductDetails = () => {
 
       {/* Rating */}
       <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, index) => (
-          <div className="relative w-[18.49px] h-[18.49px]" key={index}>
-            {/* Empty star */}
-            <StarIcon className="absolute inset-0 w-full h-full text-gray-300" />
-            {/* Filled star based on rating */}
-            <div
-              className="absolute inset-0 w-full h-full overflow-hidden"
-              style={{
-                width: `${(product.rating || 4) >= index + 1 ? "100%" : "0%"}`, // Fill based on the rating
-              }}
-            >
-              <StarIcon className="w-full h-full text-[#FFC633]" />
-            </div>
-          </div>
-        ))}
+      {[...Array(5)].map((_, i) => (
+                <img
+                  key={i}
+                  src="/svgs/reviews/star.svg"
+                  alt="Verified"
+                  className={`w-[18.49px] h-[18.49px] ${
+                    i < product.rating  ? "fill-yellow-400" : "text-gray-300"
+                  }`}
+                />
+              ))}
         <span className="ABeeZee lg:text-[14px] sm:text-[12px] text-gray-600 ml-1">
-          {product.rating ? `${product.rating}/5` : "4.5/5"}
+          {product?.rating || 0 }/5
         </span>
       </div>
 

@@ -18,20 +18,11 @@ const ProductListing = () => {
     colors: [],
     sizes: [],
   });
-
-  const applyFilters = (filters: {
-    category: string;
-    minPrice: number;
-    maxPrice: number;
-    colors: string[];
-    sizes: string[];
-  }) => {
-    setFilters(filters); // Update filter state here
-  };
+  const [products, setProducts] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -42,8 +33,29 @@ const ProductListing = () => {
         console.error('Error fetching products:', error);
       }
     };
+
+    const query = new URLSearchParams(window.location.search).get('search');
+    if (query) {
+      setSearchQuery(query);
+    }
+
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    // Re-fetch products if the filters or search query change
+    setCurrentPage(1);
+  }, [filter, searchQuery]);
+
+  const applyFilters = (filters: {
+    category: string;
+    minPrice: number;
+    maxPrice: number;
+    colors: string[];
+    sizes: string[];
+  }) => {
+    setFilters(filters);
+  };
 
   const handleClick = (productId: string) => {
     router.push(`/productPage/?productId=${productId}`);
@@ -63,19 +75,21 @@ const ProductListing = () => {
 
   const filteredProducts = products.filter((product) => {
     const isCategoryMatch = filter.category ? product.category === filter.category : true;
-    // Check if price matches
     const isPriceMatch = product.discountedPrice >= filter.minPrice && product.discountedPrice <= filter.maxPrice;
-    // Check if color matches
     const isColorMatch = filter.colors.length > 0 ? filter.colors.includes(product.color) : true;
-    // Check if size matches
     const isSizeMatch = filter.sizes.length > 0 ? filter.sizes.includes(product.size) : true;
 
-    // Show product if any of the filter conditions match
-    return isCategoryMatch || isPriceMatch || isColorMatch || isSizeMatch;
+    // Check if product matches the search query
+    const isSearchMatch = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
+
+    // Show product if any of the filter or search conditions match
+    return (isCategoryMatch || isPriceMatch || isColorMatch || isSizeMatch) && isSearchMatch;
   });
 
   const productsToDisplay =
-    filter.category || filter.colors.length || filter.sizes.length ? filteredProducts : products;
+    filter.category || filter.colors.length || filter.sizes.length || searchQuery
+      ? filteredProducts
+      : products;
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -83,7 +97,7 @@ const ProductListing = () => {
   const totalPages = Math.ceil(productsToDisplay.length / ITEMS_PER_PAGE);
 
   return (
-  <>
+    <>
       <div className='flex justify-between items-center mb-6'>
         <div className='flex items-center gap-2'>
           <span className='ABeeZee text-gray-500'>Home</span>
@@ -103,11 +117,11 @@ const ProductListing = () => {
             </span>
           </div>
 
-          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 gap-4 '>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 gap-4'>
             {paginatedProducts.map((product: any) => (
               <div
                 key={product.id}
-                className='relative  max-height-[441px] rounded-lg p-2 transition-shadow duration-100 hover:shadow-lg font-ABeeZee '
+                className='relative  max-height-[441px] rounded-lg p-2 transition-shadow duration-100 hover:shadow-lg font-ABeeZee'
                 onClick={() => handleClick(product.id)}
               >
                 <div className='relative aspect-square mb-2 border rounded-lg'>

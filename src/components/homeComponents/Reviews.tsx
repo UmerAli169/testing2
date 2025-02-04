@@ -86,7 +86,7 @@ function Reviews() {
                   key={i}
                   src="/svgs/reviews/star.svg"
                   alt="Verified"
-                  className={`w-[22.5px] h-[22.5px] ${
+                  className={`w-[18.49px] h-[18.49px]  ${
                     i < review.rating ? "fill-yellow-400" : "text-gray-300"
                   }`}
                 />

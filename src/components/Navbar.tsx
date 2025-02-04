@@ -11,11 +11,13 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
   const router = useRouter();
 
   const currentSession = async () => {
     try {
-      const user:any = await getCurrentUser();
+      const user: any = await getCurrentUser();
       if (user) {
         setUserInfo(user);
         setIsLoggedIn(true);
@@ -28,7 +30,7 @@ const Navbar = () => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     currentSession(); // Check for existing session on page load
   }, []);
 
@@ -48,6 +50,18 @@ const Navbar = () => {
     setUserInfo(null);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+  };
+
+  const handleSearchSubmit = () => {
+    // Redirect to categoriesPage with search query as a URL parameter
+    if (searchQuery) {
+      router.push(`/catergiesPage?search=${searchQuery}`);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -62,7 +76,7 @@ const Navbar = () => {
                 SHOP.CO
               </div>
             </div>
-            
+
             <div className='hidden lg:flex gap-[14px]'>
               <button className='abeezee text-[16px] leading-[18.91px] text-black flex items-center gap-1'>
                 Shop <ChevronDown className='w-4 h-4' />
@@ -71,10 +85,10 @@ const Navbar = () => {
                 On Sale
               </Link>
               <Link href='/catergiesPage' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-              Catergies Page
+                Catergies Page
               </Link>
-              <Link href='/about' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-               About
+              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+                New Arrivals
               </Link>
               <button
                 onClick={() => handleNavigate('/addDataForm')}
@@ -89,7 +103,10 @@ const Navbar = () => {
               <input
                 type='text'
                 placeholder='Search for products...'
-                className='  outline-none w-full bg-[#F0F0F0] '
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onKeyUp={(e) => e.key === 'Enter' && handleSearchSubmit()} // Allow submit with Enter key
+                className='outline-none w-full bg-[#F0F0F0]'
               />
             </div>
 
@@ -106,7 +123,7 @@ const Navbar = () => {
 
             {isLoggedIn && userInfo && (
               <div className='flex items-center space-x-4 '>
-                              <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px] lg:hidden' />
+                <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px] lg:hidden' />
 
                 <img
                   src='/svgs/navbar/cart.svg'

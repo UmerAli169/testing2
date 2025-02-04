@@ -17,7 +17,7 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
     e.stopPropagation();
     setIsMenuOpen(!isMenuOpen);
   };
-  return (
+  return (  
     <div
       className="max-w-[296px] min-height-[444px] gap-1 cursor-pointer relative"
       onClick={() => onClick(product.id)} // Corrected onClick event
@@ -34,7 +34,18 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
       <h3 className="font-ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2">
         {product.productName}
       </h3>
-
+      <div className="flex gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <img
+                  key={i}
+                  src="/svgs/reviews/star.svg"
+                  alt="Verified"
+                  className={`w-[18.49px] h-[18.49px] ${
+                    i < product.rating ? "fill-yellow-400" : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
       <div className="flex ABeeZee items-center gap-2 mb-2">
         {product.discountedPrice ? (
           <>
@@ -77,7 +88,6 @@ function NewArrivals() {
         const topSellingData: any = products.filter(
           (product: any) => product.category === "topSelling"
         );
-
         dispatch(setNewArrivals(newArrivalsData.slice(0, 4)));
         dispatch(setTopSelling(topSellingData.slice(0, 4)));
         return products;
