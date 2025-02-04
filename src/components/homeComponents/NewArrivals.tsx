@@ -81,6 +81,7 @@ function NewArrivals() {
     const fetchProducts = async () => {
       try {
         const result = await client.graphql({ query: listAddProducts });
+
         const products = result.data.listAddProducts.items;
         const newArrivalsData: any = products.filter(
           (product: any) => product.category === "newArrivals"

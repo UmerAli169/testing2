@@ -11,10 +11,9 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 
 const ProfileEdit = () => {
-
-  const [otpVerified, setOtpVerified] = useState(false); 
+  const [otpVerified, setOtpVerified] = useState(false);
   const [otp, setOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false); 
+  const [otpSent, setOtpSent] = useState(false);
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
@@ -24,7 +23,7 @@ const ProfileEdit = () => {
     currentPassword: Yup.string().required('Current password is required'),
     newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New password is required'),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('newPassword')], 'Passwords must match') // Removed `null`
+      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
       .required('Confirm new password is required'),
   });
 
@@ -40,44 +39,44 @@ const ProfileEdit = () => {
       confirmPassword: '',
     },
     validationSchema,
-    onSubmit: async (values:any, { setSubmitting }) => {
+    onSubmit: async (values: any, { setSubmitting }) => {
       setSubmitting(true);
       console.log('Submitting form...', values);
-    
+
       try {
         if (values.newEmail && values.newEmail !== values.email) {
           await handleUpdateEmail(values.newEmail);
         }
-    
+
         if (otpVerified && values.newPassword) {
           console.log('Updating password...');
           await handleUpdatePassword(values.currentPassword, values.newPassword);
         } else if (!otpVerified) {
           toast.error('Please verify OTP before updating password.');
         }
-    
+
         toast.success('Profile updated successfully!');
       } catch (error) {
         console.error('Profile update failed:', error);
         toast.error('Failed to update profile.');
       }
-    
+
       setSubmitting(false);
     },
-    
   });
+
+  console.log(formik, 'formik');
+
   const handleUpdatePassword = async (oldPassword: any, newPassword: any) => {
     try {
-      console.log("Calling updatePassword with:", oldPassword, newPassword);
+      console.log('Calling updatePassword with:', oldPassword, newPassword);
       await updatePassword({ oldPassword, newPassword });
       toast.success('Password updated successfully!');
-    } catch (err:any) {
-      console.error("Error updating password:", err);
+    } catch (err: any) {
+      console.error('Error updating password:', err);
       toast.error(err.message || 'Failed to update password.');
     }
   };
-  
-  
 
   const handleUpdateEmail = async (newEmail: any) => {
     try {
@@ -107,14 +106,13 @@ const ProfileEdit = () => {
         options: {},
       });
       setOtpSent(true);
-      setOtpVerified(false); 
+      setOtpVerified(false);
       toast.info('A new OTP has been sent to your email.');
     } catch (err) {
       console.error('Error sending OTP:', err);
       toast.error('Failed to send OTP. Try again later.');
     }
   };
-  
 
   const handleVerifyOtp = async () => {
     try {
@@ -126,7 +124,7 @@ const ProfileEdit = () => {
       toast.success('OTP verified successfully. You can now update your email.');
     } catch (err: any) {
       console.error('Error verifying OTP:', err);
-      
+
       if (err.name === 'ExpiredCodeException') {
         toast.error('OTP expired. Please request a new one.');
         setOtpSent(false); // Allow resending OTP
@@ -135,11 +133,10 @@ const ProfileEdit = () => {
       }
     }
   };
-  
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-8'>
-            <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position='top-right' autoClose={3000} />
 
       <div className='mb-4 flex justify-between text-sm text-gray-600'>
         <span>Home / My Account</span>
@@ -189,9 +186,7 @@ const ProfileEdit = () => {
                   />
                   {formik.touched[field] && formik.errors[field] && (
                     <div className='text-sm text-red-500 mt-1'>
-                      {/* Type assertion to ensure it's a string */}
-                      {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}{' '}
-                      {/* Fallback message */}
+                      {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}
                     </div>
                   )}
                 </div>
@@ -212,10 +207,11 @@ const ProfileEdit = () => {
               />
               {formik.touched.email && formik.errors.email && (
                 <div className='text-sm text-red-500 mt-1'>
-                  {typeof formik.errors.email === 'string' ? formik.errors.email : 'Invalid email format'}{' '}
+                  {typeof formik.errors.email === 'string' ? formik.errors.email : 'Invalid email format'}
                 </div>
               )}
             </div>
+
             <div className='mb-6'>
               <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>New Email</label>
               <input
@@ -231,6 +227,24 @@ const ProfileEdit = () => {
               />
               {formik.touched.newEmail && formik.errors.newEmail && (
                 <div className='text-sm text-red-500 mt-1'>{formik.errors.newEmail as any}</div>
+              )}
+            </div>
+
+            <div className='mb-6'>
+              <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Address</label>
+              <input
+                type='text'
+                name='address'
+                value={formik.values.address}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                  formik.touched.address && formik.errors.address ? 'border-red-500' : ''
+                }`}
+                placeholder='Enter your address'
+              />
+              {formik.touched.address && formik.errors.address && (
+                <div className='text-sm text-red-500 mt-1'>{formik.errors.address as any}</div>
               )}
             </div>
 
@@ -288,9 +302,7 @@ const ProfileEdit = () => {
                       />
                       {formik.touched[field] && formik.errors[field] && (
                         <div className='text-sm text-red-500 mt-1'>
-                          {/* Type assertion to ensure it's a string */}
-                          {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}{' '}
-                          {/* Fallback message */}
+                          {typeof formik.errors[field] === 'string' ? formik.errors[field] : 'Invalid input'}
                         </div>
                       )}
                     </div>

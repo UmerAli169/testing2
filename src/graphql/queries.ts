@@ -18,14 +18,508 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
     createdAt
     updatedAt
     AddedProduct {
+      items {
+        id
+        category
+        color
+        description
+        discountType
+        discountValue
+        discountedPrice
+        imageKeys
+        price
+        productName
+        size
+        createdAt
+        updatedAt
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        userAddedProductId
+        __typename
+      }
       nextToken
       __typename
     }
     CartItems {
+      items {
+        id
+        productName
+        quantity
+        price
+        size
+        color
+        imageKeys
+        createdAt
+        updatedAt
+        product {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        productId
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        userCartItemsId
+        addProductCartItemsId
+        __typename
+      }
       nextToken
       __typename
     }
     Reviews {
+      items {
+        id
+        rating
+        text
+        createdAt
+        updatedAt
+        product {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        productId
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        userReviewsId
+        addProductReviewsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -47,6 +541,238 @@ export const listUsers = /* GraphQL */ `query ListUsers(
       Address
       createdAt
       updatedAt
+      AddedProduct {
+        items {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       __typename
     }
     nextToken
@@ -77,14 +803,562 @@ export const getAddProduct = /* GraphQL */ `query GetAddProduct($id: ID!) {
       Address
       createdAt
       updatedAt
+      AddedProduct {
+        items {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       __typename
     }
     userId
     CartItems {
+      items {
+        id
+        productName
+        quantity
+        price
+        size
+        color
+        imageKeys
+        createdAt
+        updatedAt
+        product {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        productId
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        userCartItemsId
+        addProductCartItemsId
+        __typename
+      }
       nextToken
       __typename
     }
     Reviews {
+      items {
+        id
+        rating
+        text
+        createdAt
+        updatedAt
+        product {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        productId
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        userReviewsId
+        addProductReviewsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -116,7 +1390,301 @@ export const listAddProducts = /* GraphQL */ `query ListAddProducts(
       size
       createdAt
       updatedAt
+      user {
+        id
+        email
+        firstName
+        lastName
+        Address
+        createdAt
+        updatedAt
+        AddedProduct {
+          items {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        __typename
+      }
       userId
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       userAddedProductId
       __typename
     }
@@ -153,7 +1721,301 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
       size
       createdAt
       updatedAt
+      user {
+        id
+        email
+        firstName
+        lastName
+        Address
+        createdAt
+        updatedAt
+        AddedProduct {
+          items {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        __typename
+      }
       userId
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       userAddedProductId
       __typename
     }
@@ -166,6 +2028,238 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
       Address
       createdAt
       updatedAt
+      AddedProduct {
+        items {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       __typename
     }
     userId
@@ -194,7 +2288,327 @@ export const listCartItems = /* GraphQL */ `query ListCartItems(
       imageKeys
       createdAt
       updatedAt
+      product {
+        id
+        category
+        color
+        description
+        discountType
+        discountValue
+        discountedPrice
+        imageKeys
+        price
+        productName
+        size
+        createdAt
+        updatedAt
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        userAddedProductId
+        __typename
+      }
       productId
+      user {
+        id
+        email
+        firstName
+        lastName
+        Address
+        createdAt
+        updatedAt
+        AddedProduct {
+          items {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        __typename
+      }
       userId
       userCartItemsId
       addProductCartItemsId
@@ -215,7 +2629,6 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
     text
     createdAt
     updatedAt
-    productId
     product {
       id
       category
@@ -230,11 +2643,305 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
       size
       createdAt
       updatedAt
+      user {
+        id
+        email
+        firstName
+        lastName
+        Address
+        createdAt
+        updatedAt
+        AddedProduct {
+          items {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        __typename
+      }
       userId
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       userAddedProductId
       __typename
     }
-    userId
+    productId
     user {
       id
       email
@@ -243,8 +2950,241 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
       Address
       createdAt
       updatedAt
+      AddedProduct {
+        items {
+          id
+          category
+          color
+          description
+          discountType
+          discountValue
+          discountedPrice
+          imageKeys
+          price
+          productName
+          size
+          createdAt
+          updatedAt
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          userAddedProductId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      CartItems {
+        items {
+          id
+          productName
+          quantity
+          price
+          size
+          color
+          imageKeys
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userCartItemsId
+          addProductCartItemsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
+      Reviews {
+        items {
+          id
+          rating
+          text
+          createdAt
+          updatedAt
+          product {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          productId
+          user {
+            id
+            email
+            firstName
+            lastName
+            Address
+            createdAt
+            updatedAt
+            AddedProduct {
+              nextToken
+              __typename
+            }
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            __typename
+          }
+          userId
+          userReviewsId
+          addProductReviewsId
+          __typename
+        }
+        nextToken
+        __typename
+      }
       __typename
     }
+    userId
     userReviewsId
     addProductReviewsId
     __typename
@@ -263,7 +3203,327 @@ export const listReviews = /* GraphQL */ `query ListReviews(
       text
       createdAt
       updatedAt
+      product {
+        id
+        category
+        color
+        description
+        discountType
+        discountValue
+        discountedPrice
+        imageKeys
+        price
+        productName
+        size
+        createdAt
+        updatedAt
+        user {
+          id
+          email
+          firstName
+          lastName
+          Address
+          createdAt
+          updatedAt
+          AddedProduct {
+            items {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          CartItems {
+            items {
+              id
+              productName
+              quantity
+              price
+              size
+              color
+              imageKeys
+              createdAt
+              updatedAt
+              productId
+              userId
+              userCartItemsId
+              addProductCartItemsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          Reviews {
+            items {
+              id
+              rating
+              text
+              createdAt
+              updatedAt
+              productId
+              userId
+              userReviewsId
+              addProductReviewsId
+              __typename
+            }
+            nextToken
+            __typename
+          }
+          __typename
+        }
+        userId
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        userAddedProductId
+        __typename
+      }
       productId
+      user {
+        id
+        email
+        firstName
+        lastName
+        Address
+        createdAt
+        updatedAt
+        AddedProduct {
+          items {
+            id
+            category
+            color
+            description
+            discountType
+            discountValue
+            discountedPrice
+            imageKeys
+            price
+            productName
+            size
+            createdAt
+            updatedAt
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            CartItems {
+              nextToken
+              __typename
+            }
+            Reviews {
+              nextToken
+              __typename
+            }
+            userAddedProductId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        CartItems {
+          items {
+            id
+            productName
+            quantity
+            price
+            size
+            color
+            imageKeys
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userCartItemsId
+            addProductCartItemsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        Reviews {
+          items {
+            id
+            rating
+            text
+            createdAt
+            updatedAt
+            product {
+              id
+              category
+              color
+              description
+              discountType
+              discountValue
+              discountedPrice
+              imageKeys
+              price
+              productName
+              size
+              createdAt
+              updatedAt
+              userId
+              userAddedProductId
+              __typename
+            }
+            productId
+            user {
+              id
+              email
+              firstName
+              lastName
+              Address
+              createdAt
+              updatedAt
+              __typename
+            }
+            userId
+            userReviewsId
+            addProductReviewsId
+            __typename
+          }
+          nextToken
+          __typename
+        }
+        __typename
+      }
       userId
       userReviewsId
       addProductReviewsId

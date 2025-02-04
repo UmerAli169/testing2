@@ -65,6 +65,9 @@ const Reviewss = () => {
           query: getAddProduct,
           variables: { id: productId  as any},
         });
+
+
+        console.log(productResult,'productResultproductResultproductResultproductResultproductResult')
         setProduct(productResult.data.getAddProduct);
 
         const reviewsResult = await client.graphql({
