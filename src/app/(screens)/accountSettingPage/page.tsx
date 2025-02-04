@@ -33,7 +33,7 @@ const ProfileEdit = () => {
       firstName: '',
       lastName: '',
       email: '',
-      newEmail: '', // Add this field
+      newEmail: '',
       address: '',
       currentPassword: '',
       newPassword: '',
@@ -107,7 +107,7 @@ const ProfileEdit = () => {
         options: {},
       });
       setOtpSent(true);
-      setOtpVerified(false); // Reset OTP verification status
+      setOtpVerified(false); 
       toast.info('A new OTP has been sent to your email.');
     } catch (err) {
       console.error('Error sending OTP:', err);
@@ -212,9 +212,7 @@ const ProfileEdit = () => {
               />
               {formik.touched.email && formik.errors.email && (
                 <div className='text-sm text-red-500 mt-1'>
-                  {/* Type assertion for email error */}
                   {typeof formik.errors.email === 'string' ? formik.errors.email : 'Invalid email format'}{' '}
-                  {/* Fallback message */}
                 </div>
               )}
             </div>

@@ -15,7 +15,6 @@ const CartPage = () => {
 
   useEffect(() => {
     const fetchCartData = async () => {
-      console.log('Fetching cart data...');
       try {
         const response = await client.graphql({ query: listCartItems });
         const items = response?.data?.listCartItems?.items || [];
@@ -92,13 +91,12 @@ const CartPage = () => {
               {index !== 0 && <div className='w-[667px] border-t border-gray-300 my-2'></div>}
 
               <div className='flex items-center gap-4 p-2 rounded-lg'>
-              <StorageImage
-  path={`public/${item.imageKeys || ''}`}
-  alt={item.productName || 'Product'}
-  accessLevel={accessLevel as any | undefined} // Type assertion
-  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
-/>
-
+                <StorageImage
+                  path={`public/${item.imageKeys || ''}`}
+                  alt={item.productName || 'Product'}
+                  accessLevel={accessLevel as any | undefined} // Type assertion
+                  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
+                />
 
                 <div className='flex-grow'>
                   <div className='flex justify-between items-start mb-2'>
@@ -110,8 +108,8 @@ const CartPage = () => {
                     </button>
                   </div>
                   <div className='ABeeZee lg:text-[12px] sm:text-[10px] text-[14px] text-gray-600 mb-2'>
-                    <div>Size: {item.size?.[0] || 'N/A'}</div>
-                    <div>Color: {item.color?.[0] || 'N/A'}</div>
+                    <div>Size: {item?.size?.[0] || 'N/A'}</div>
+                    <div>Color: {item?.color?.[0] || 'N/A'}</div>
                   </div>
                   <div className='flex justify-between items-center'>
                     <div className='ABeeZee lg:text-[20px] sm:text-[18px] text-[24px]'>
@@ -148,9 +146,9 @@ const CartPage = () => {
               <span>Subtotal</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
-            <div className='flex justify-between text-red-500'>
+            <div className='flex justify-between '>
               <span>Discount (-20%)</span>
-              <span>-${discount.toFixed(2)}</span>
+              <span className=' text-red-500'>-${discount.toFixed(2)}</span>
             </div>
             <div className='flex justify-between'>
               <span>Delivery Fee</span>
