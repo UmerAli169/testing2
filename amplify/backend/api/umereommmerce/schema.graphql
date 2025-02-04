@@ -69,10 +69,10 @@ type EmailResponse {
 }
 
 type Mutation {
-  customAddProduct(input: CreateAddProductInput): AddProduct @function(name: "calculateCartItemPriceLambda")
+  customAddProduct(input: CreateAddProductInput): AddProduct @function(name: "calculateCartItemPriceLambda-dev")
 
   sendEmail(name: String!, email: String!, phone: String, message: String!): EmailResponse
-    @function(name: "umerSESecommmerce")
+    @function(name: "umerSESecommmerce-dev")
 }
 
 input CreateAddProductInput {

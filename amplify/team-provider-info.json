@@ -16,17 +16,17 @@
         "umereommmerce76ed7580": {}
       },
       "function": {
-        "umereommercePostSignUpTrigger": {
-          "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
-          "s3Key": "amplify-builds/umereommercePostSignUpTrigger-76735848575745344643-build.zip"
-        },
         "calculateCartItemPrice": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
           "s3Key": "amplify-builds/calculateCartItemPrice-2b6f514a636868506976-build.zip"
         },
         "umerSESecommmerce": {
           "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
-          "s3Key": "amplify-builds/umerSESecommmerce-3465784a41426a726561-build.zip"
+          "s3Key": "amplify-builds/umerSESecommmerce-303734306a4d644e796f-build.zip"
+        },
+        "umereommercePostSignUpTrigger": {
+          "deploymentBucketName": "amplify-umereommmerce-dev-d382e-deployment",
+          "s3Key": "amplify-builds/umereommercePostSignUpTrigger-76735848575745344643-build.zip"
         }
       },
       "storage": {

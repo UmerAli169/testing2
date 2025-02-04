@@ -31,7 +31,7 @@ const ContactPage = () => {
           query: sendEmail,
           variables: {
             name: values.name,
-            email: values.email,
+            email: values.email,  
             phone: values.phone,
             message: values.message,
           },

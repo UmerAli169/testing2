@@ -8,22 +8,13 @@ import {
   sendUserAttributeVerificationCode,
   confirmUserAttribute,
 } from 'aws-amplify/auth';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProfileEdit = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-    newEmail: '',
-  });
 
-  const [otpVerified, setOtpVerified] = useState(false); // Track OTP verification status
+  const [otpVerified, setOtpVerified] = useState(false); 
   const [otp, setOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false); // Track if OTP has been sent
+  const [otpSent, setOtpSent] = useState(false); 
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
@@ -38,43 +29,55 @@ const ProfileEdit = () => {
   });
 
   const formik = useFormik({
-    initialValues: formData,
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      newEmail: '', // Add this field
+      address: '',
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
     validationSchema,
-    onSubmit: async (values: any, { setSubmitting }) => {
-      console.log('Profile updates:', values);
+    onSubmit: async (values:any, { setSubmitting }) => {
       setSubmitting(true);
-
+      console.log('Submitting form...', values);
+    
       try {
-        if (values.newEmail !== formData.email && otpVerified) {
+        if (values.newEmail && values.newEmail !== values.email) {
           await handleUpdateEmail(values.newEmail);
         }
-
-        if (values.newPassword && otpVerified) {
+    
+        if (otpVerified && values.newPassword) {
+          console.log('Updating password...');
           await handleUpdatePassword(values.currentPassword, values.newPassword);
+        } else if (!otpVerified) {
+          toast.error('Please verify OTP before updating password.');
         }
-
-        // Save the form data to localStorage
-        localStorage.setItem('profileData', JSON.stringify(values));
-        alert('Profile updated successfully!');
+    
+        toast.success('Profile updated successfully!');
       } catch (error) {
-        console.error('Error updating profile:', error);
-        alert('Failed to update profile.');
+        console.error('Profile update failed:', error);
+        toast.error('Failed to update profile.');
       }
-
+    
       setSubmitting(false);
     },
+    
   });
-
   const handleUpdatePassword = async (oldPassword: any, newPassword: any) => {
     try {
+      console.log("Calling updatePassword with:", oldPassword, newPassword);
       await updatePassword({ oldPassword, newPassword });
-      console.log('Password updated successfully');
-      alert('Password updated successfully!');
-    } catch (err) {
-      console.log('Error updating password:', err);
-      alert('Failed to update password');
+      toast.success('Password updated successfully!');
+    } catch (err:any) {
+      console.error("Error updating password:", err);
+      toast.error(err.message || 'Failed to update password.');
     }
   };
+  
+  
 
   const handleUpdateEmail = async (newEmail: any) => {
     try {
@@ -90,13 +93,10 @@ const ProfileEdit = () => {
       });
 
       console.log('Email update initiated. Please verify the new email.');
-      alert('Please check your email for a verification code.');
-
-      // Redirect to verification page
-      window.location.href = `/auth/emailotp?email=${encodeURIComponent(newEmail)}`;
+      toast.success('OTP verified successfully. You can now update your password.');
     } catch (err) {
       console.log('Error updating email:', err);
-      alert('Failed to update email');
+      toast.error('Invalid OTP. Please try again.');
     }
   };
 
@@ -107,12 +107,14 @@ const ProfileEdit = () => {
         options: {},
       });
       setOtpSent(true);
-      alert('OTP sent to your email. Please check your inbox.');
+      setOtpVerified(false); // Reset OTP verification status
+      toast.info('A new OTP has been sent to your email.');
     } catch (err) {
       console.error('Error sending OTP:', err);
-      alert('Failed to send OTP');
+      toast.error('Failed to send OTP. Try again later.');
     }
   };
+  
 
   const handleVerifyOtp = async () => {
     try {
@@ -121,23 +123,30 @@ const ProfileEdit = () => {
         confirmationCode: otp,
       });
       setOtpVerified(true);
-      alert('OTP verified successfully. You can now update your password.');
-    } catch (err) {
+      toast.success('OTP verified successfully. You can now update your email.');
+    } catch (err: any) {
       console.error('Error verifying OTP:', err);
-      alert('Invalid OTP. Please try again.');
+      
+      if (err.name === 'ExpiredCodeException') {
+        toast.error('OTP expired. Please request a new one.');
+        setOtpSent(false); // Allow resending OTP
+      } else {
+        toast.error('Invalid OTP. Please try again.');
+      }
     }
   };
+  
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-8'>
-      {/* Breadcrumb */}
+            <ToastContainer position="top-right" autoClose={3000} />
+
       <div className='mb-4 flex justify-between text-sm text-gray-600'>
         <span>Home / My Account</span>
         <span>Welcome!</span>
       </div>
 
       <div className='grid grid-cols-[250px,1fr] gap-8'>
-        {/* Sidebar */}
         <div className='space-y-4 font-ABeeZee text-gray-600 text-[16px] mt-12'>
           <h2 className='text-[24px] sm:text-[22px] lg:text-[20px] text-gray-800'>Manage My Account</h2>
           <div className='space-y-2'>
@@ -157,7 +166,6 @@ const ProfileEdit = () => {
           <div className='text-black'>My Wishlist</div>
         </div>
 
-        {/* Edit Profile Form */}
         <div className='m-8'>
           <h2 className='text-[24px] sm:text-[28px] text-black font-ABeeZee my-6'>Edit Your Profile</h2>
 
@@ -190,7 +198,6 @@ const ProfileEdit = () => {
               ))}
             </div>
 
-            {/* Email */}
             <div className='mb-6'>
               <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Email</label>
               <input
@@ -211,6 +218,23 @@ const ProfileEdit = () => {
                 </div>
               )}
             </div>
+            <div className='mb-6'>
+              <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>New Email</label>
+              <input
+                type='email'
+                name='newEmail'
+                value={formik.values.newEmail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                  formik.touched.newEmail && formik.errors.newEmail ? 'border-red-500' : ''
+                }`}
+                placeholder='Enter new email'
+              />
+              {formik.touched.newEmail && formik.errors.newEmail && (
+                <div className='text-sm text-red-500 mt-1'>{formik.errors.newEmail as any}</div>
+              )}
+            </div>
 
             <button
               type='button'
@@ -221,7 +245,6 @@ const ProfileEdit = () => {
               Send OTP to Email
             </button>
 
-            {/* OTP Input */}
             {otpSent && (
               <div className='mt-4'>
                 <input
@@ -278,7 +301,6 @@ const ProfileEdit = () => {
               </div>
             )}
 
-            {/* Buttons */}
             <div className='flex justify-end'>
               <button
                 type='submit'
