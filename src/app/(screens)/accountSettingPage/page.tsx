@@ -65,7 +65,6 @@ const ProfileEdit = () => {
     },
   });
 
-  console.log(formik, 'formik');
 
   const handleUpdatePassword = async (oldPassword: any, newPassword: any) => {
     try {
@@ -80,17 +79,17 @@ const ProfileEdit = () => {
 
   const handleUpdateEmail = async (newEmail: any) => {
     try {
-      await updateUserAttributes({
+    let a=  await updateUserAttributes({
         userAttributes: {
           email: newEmail,
         },
       });
-
-      await sendUserAttributeVerificationCode({
+console.log(a,'a')
+      let b=await sendUserAttributeVerificationCode({
         userAttributeKey: 'email',
         options: {},
       });
-
+console.log(b,'b')
       console.log('Email update initiated. Please verify the new email.');
       toast.success('OTP verified successfully. You can now update your password.');
     } catch (err) {

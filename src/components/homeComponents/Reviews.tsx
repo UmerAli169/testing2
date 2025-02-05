@@ -17,7 +17,8 @@ function Reviews() {
         });
 
         const fetchedReviews = response.data.listReviews.items;
-        setReviewsData(fetchedReviews);
+        const filteredReviews = fetchedReviews.filter((review: any) => review.rating >= 4);
+        setReviewsData(filteredReviews);
         return fetchedReviews;
       } catch (error) {
         return;
@@ -79,7 +80,6 @@ function Reviews() {
             key={review.id}
             className="p-6 rounded-lg border border-gray-300 h-[240px] w-[400px] flex-shrink-0"
           >
-            {/* Stars */}
             <div className="flex gap-1 mb-2">
               {[...Array(5)].map((_, i) => (
                 <img
@@ -93,7 +93,6 @@ function Reviews() {
               ))}
             </div>
 
-            {/* User Info */}
             <span className="font-medium flex items-center gap-1">
               {review.userId.slice(0, 6)}
               <img
