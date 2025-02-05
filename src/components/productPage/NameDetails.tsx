@@ -36,7 +36,9 @@ function NameDetails({ productId }: { productId: string })  {
     if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
   
     const total = product.Reviews.items.reduce((sum:any, review:any) => sum + review.rating, 0);
-    return total / product.Reviews.items.length;
+    const average = total / product.Reviews.items.length;
+    return parseFloat(average.toFixed(1));
+
   };
   const handleAddToCart = async () => {
     try {

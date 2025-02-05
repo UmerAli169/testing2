@@ -56,13 +56,13 @@ const ContactPage = () => {
   return (
     <div className='max-w-7xl mx-auto px-4'>
       {/* Breadcrumb */}
-      <div className='py-4 text-[14px] font-ABeeZee'>
+      <div className='py-4 text-[14px] ABeeZee'>
         <span className='text-black'>Home / Contact</span>
       </div>
 
       <div className='grid md:grid-cols-[300px,1fr] gap-8 mb-12'>
         {/* Contact Info Box */}
-        <div className='p-6 h-fit font-ABeeZee'>
+        <div className='p-6 h-fit ABeeZee'>
           <div className='mb-8'>
             <div className='flex items-center gap-3 mb-3'>
               <img src='/svgs/contactForm/phone.svg' alt='Phone' className='w-[40px]' />
@@ -96,7 +96,7 @@ const ContactPage = () => {
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] font-ABeeZee'
+                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] ABeeZee'
                 />
                 {formik.touched.name && formik.errors.name && (
                   <div className='absolute text-red-500 text-xs mt-1'>{formik.errors.name as any}</div>
@@ -111,7 +111,7 @@ const ContactPage = () => {
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] font-ABeeZee'
+                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] ABeeZee'
                 />
                 {formik.touched.email && formik.errors.email && (
                   <div className='absolute text-red-500 text-xs mt-1'>{formik.errors.email as any}</div>
@@ -126,7 +126,7 @@ const ContactPage = () => {
                   value={formik.values.phone}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] font-ABeeZee'
+                  className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] ABeeZee'
                 />
                 {formik.touched.phone && formik.errors.phone && (
                   <div className='absolute text-red-500 text-xs mt-1'>{formik.errors.phone as any}</div>
@@ -142,7 +142,7 @@ const ContactPage = () => {
                 value={formik.values.message}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] resize-none font-ABeeZee'
+                className='w-full px-4 py-3 rounded-md bg-[#F5F5F5] resize-none ABeeZee'
               />
               {formik.touched.name && formik.errors.name && (
                 <div className='absolute text-red-500 text-xs mt-1'>{formik.errors.name as any}</div>
@@ -150,14 +150,14 @@ const ContactPage = () => {
             </div>
 
             {messageSent && (
-              <p className='text-green-500 text-sm font-ABeeZee'>
+              <p className='text-green-500 text-sm ABeeZee'>
                 Message sent successfully! We will contact you soon.
               </p>
             )}
-            {errorMessage && <p className='text-red-500 text-sm font-ABeeZee'>{errorMessage}</p>}
+            {errorMessage && <p className='text-red-500 text-sm ABeeZee'>{errorMessage}</p>}
 
             <div className='flex justify-end'>
-              <button type='submit' className='bg-black text-white px-8 py-3 rounded-md hover:bg-gray-800 font-ABeeZee'>
+              <button type='submit' className='bg-black text-white px-8 py-3 rounded-md hover:bg-gray-800 ABeeZee'>
                 Send Message
               </button>
             </div>

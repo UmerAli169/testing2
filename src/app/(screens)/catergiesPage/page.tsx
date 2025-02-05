@@ -79,7 +79,9 @@ const ProductListing = () => {
   const getAverageRating = (product: any) => {
     if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
     const total = product.Reviews.items.reduce((sum: number, review: any) => sum + review.rating, 0);
-    return total / product.Reviews.items.length;
+    const average = total / product.Reviews.items.length;
+    return parseFloat(average.toFixed(1));
+
   };
 
   const renderRatingStars = (product: any) => {
@@ -124,7 +126,7 @@ const ProductListing = () => {
             {paginatedProducts.map((product: any) => (
               <div
                 key={product.id}
-                className='relative  max-height-[441px] rounded-lg p-2 transition-shadow duration-100 hover:shadow-lg font-ABeeZee'
+                className='relative  max-height-[441px] rounded-lg p-2 transition-shadow duration-100 hover:shadow-lg ABeeZee'
                 onClick={() => handleClick(product.id)}
               >
                 <div className='relative aspect-square mb-2 border rounded-lg'>

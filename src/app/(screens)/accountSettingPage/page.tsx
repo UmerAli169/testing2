@@ -144,7 +144,7 @@ const ProfileEdit = () => {
       </div>
 
       <div className='grid grid-cols-[250px,1fr] gap-8'>
-        <div className='space-y-4 font-ABeeZee text-gray-600 text-[16px] mt-12'>
+        <div className='space-y-4 ABeeZee text-gray-600 text-[16px] mt-12'>
           <h2 className='text-[24px] sm:text-[22px] lg:text-[20px] text-gray-800'>Manage My Account</h2>
           <div className='space-y-2'>
             <div className='text-black'>My Profile</div>
@@ -164,13 +164,13 @@ const ProfileEdit = () => {
         </div>
 
         <div className='m-8'>
-          <h2 className='text-[24px] sm:text-[28px] text-black font-ABeeZee my-6'>Edit Your Profile</h2>
+          <h2 className='text-[24px] sm:text-[28px] text-black ABeeZee my-6'>Edit Your Profile</h2>
 
           <form onSubmit={formik.handleSubmit} className='max-w-2xl mt-10'>
             <div className='grid grid-cols-2 gap-6 mb-6'>
               {['firstName', 'lastName'].map((field) => (
                 <div key={field}>
-                  <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>
+                  <label className='block text-sm text-gray-600 mb-2 ABeeZee'>
                     {field === 'firstName' ? 'First Name' : 'Last Name'}
                   </label>
                   <input
@@ -179,7 +179,7 @@ const ProfileEdit = () => {
                     value={formik.values[field]}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                    className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
                       formik.touched[field] && formik.errors[field] ? 'border-red-500' : ''
                     }`}
                     placeholder={`Enter ${field}`}
@@ -194,14 +194,14 @@ const ProfileEdit = () => {
             </div>
 
             <div className='mb-6'>
-              <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Email</label>
+              <label className='block text-sm text-gray-600 mb-2 ABeeZee'>Email</label>
               <input
                 type='email'
                 name='email'
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
                   formik.touched.email && formik.errors.email ? 'border-red-500' : ''
                 }`}
               />
@@ -213,14 +213,14 @@ const ProfileEdit = () => {
             </div>
 
             <div className='mb-6'>
-              <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>New Email</label>
+              <label className='block text-sm text-gray-600 mb-2 ABeeZee'>New Email</label>
               <input
                 type='email'
                 name='newEmail'
                 value={formik.values.newEmail}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
                   formik.touched.newEmail && formik.errors.newEmail ? 'border-red-500' : ''
                 }`}
                 placeholder='Enter new email'
@@ -231,14 +231,14 @@ const ProfileEdit = () => {
             </div>
 
             <div className='mb-6'>
-              <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Address</label>
+              <label className='block text-sm text-gray-600 mb-2 ABeeZee'>Address</label>
               <input
                 type='text'
                 name='address'
                 value={formik.values.address}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
                   formik.touched.address && formik.errors.address ? 'border-red-500' : ''
                 }`}
                 placeholder='Enter your address'
@@ -264,7 +264,7 @@ const ProfileEdit = () => {
                   name='otp'
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
-                  className='w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee'
+                  className='w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee'
                   placeholder='Enter OTP'
                 />
                 <button
@@ -279,7 +279,7 @@ const ProfileEdit = () => {
 
             {otpVerified && (
               <div className='mb-6'>
-                <label className='block text-sm text-gray-600 mb-2 font-ABeeZee'>Password Changes</label>
+                <label className='block text-sm text-gray-600 mb-2 ABeeZee'>Password Changes</label>
                 <div className='space-y-4'>
                   {['currentPassword', 'newPassword', 'confirmPassword'].map((field) => (
                     <div key={field}>
@@ -296,7 +296,7 @@ const ProfileEdit = () => {
                         value={formik.values[field]}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
+                        className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
                           formik.touched[field] && formik.errors[field] ? 'border-red-500' : ''
                         }`}
                       />

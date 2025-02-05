@@ -3,7 +3,7 @@ export default function Header() {
     <>
       <div className="w-full h-[38px] bg-black flex items-center justify-center relative">
         <div className="w-[372px] h-[17px] flex justify-between">
-          <header className="text-white font-abeezee text-[14px] font-normal leading-[16.55px]">
+          <header className="text-white ABeeZee text-[14px] font-normal leading-[16.55px]">
             Sign up and get 20% off your first order.{" "}
             <span className="underline decoration-solid">Sign Up Now</span>
           </header>

@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    currentSession(); // Check for existing session on page load
+    currentSession(); 
   }, []);
 
   const handleNavigate = (path: string) => {
@@ -56,7 +56,6 @@ const Navbar = () => {
   };
 
   const handleSearchSubmit = () => {
-    // Redirect to categoriesPage with search query as a URL parameter
     if (searchQuery) {
       router.push(`/catergiesPage?search=${searchQuery}`);
     }
@@ -87,9 +86,7 @@ const Navbar = () => {
               <Link href='/catergiesPage' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
                 Catergies Page
               </Link>
-              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
-                New Arrivals
-              </Link>
+              
               <button
                 onClick={() => handleNavigate('/addDataForm')}
                 className='abeezee text-[16px] leading-[18.91px] cursor-pointer text-black decoration-black'
@@ -98,7 +95,7 @@ const Navbar = () => {
               </button>
             </div>
 
-            <div className='hidden lg:flex items-center px-1 py-1 max-w-[558px] h-[48px] border-[1px] rounded-full bg-[#F0F0F0] '>
+            <div className='hidden lg:flex items-center px-1 py-1 lg:w-[350px]   h-[48px] border-[1px] rounded-full bg-[#F0F0F0] '>
               <img src='/svgs/navbar/search.svg' className='w-[20.27px] h-[20.27px]' />
               <input
                 type='text'

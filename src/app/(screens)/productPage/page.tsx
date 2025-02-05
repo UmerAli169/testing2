@@ -19,7 +19,6 @@ const ProductDetails = () => {
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const productId = searchParams.get('productId') || '';
 
-  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -32,14 +31,16 @@ const ProductDetails = () => {
     };
     fetchProducts();
   }, []);
-  const getAverageRating = (product:any) => {
+  const getAverageRating = (product: any) => {
     if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
   
-    const total = product.Reviews.items.reduce((sum:any, review:any) => sum + review.rating, 0);
-    return total / product.Reviews.items.length;
+    const total = product.Reviews.items.reduce((sum: any, review: any) => sum + review.rating, 0);
+    const average = total / product.Reviews.items.length;
+  
+    return parseFloat(average.toFixed(1));
   };
+  
   const ProductCard = ({ product, onClick, onDelete }: any) => (
-    
     <div
       className='  max-w-[296px] max-height-[444px] mt-[30px] rounded-lg p-4 cursor-pointer relative'
       onClick={onClick}
@@ -47,7 +48,7 @@ const ProductDetails = () => {
       <button
         className='absolute top-2 right-4 text-gray-600 p-2 rounded-full z-10'
         onClick={(e) => {
-          e.stopPropagation(); 
+          e.stopPropagation();
           setMenuOpen(menuOpen === product.id ? null : product.id);
         }}
       >
@@ -80,16 +81,18 @@ const ProductDetails = () => {
       <h3 className='text-sm font-medium mb-2'>{product.productName}</h3>
 
       <div className='flex items-center gap-1'>
-      {[...Array(5)].map((_, i) => (
-  <Star
-    key={i} 
-    className='h-4 w-4'
-    color={i < (product?.rating ?? 0) ? '#FACC15' : '#D1D5DB'} 
-    fill={i < (product?.rating ?? 0) ? '#FACC15' : 'none'}
-  />
-))}
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            className='h-4 w-4'
+            color={i < (product?.rating ?? 0) ? '#FACC15' : '#D1D5DB'}
+            fill={i < (product?.rating ?? 0) ? '#FACC15' : 'none'}
+          />
+        ))}
 
-        <span className='ABeeZee lg:text-[14px] sm:text-[12px] text-gray-600 ml-1'>{getAverageRating(product) ?? 0}/5</span>
+        <span className='ABeeZee lg:text-[14px] sm:text-[12px] text-gray-600 ml-1'>
+          {getAverageRating(product) ?? 0}/5
+        </span>
       </div>
 
       <div className='flex items-center gap-2 mb-2'>
@@ -132,7 +135,7 @@ const ProductDetails = () => {
       console.error('Error deleting product:', error);
     }
   };
- 
+
   return (
     <div className=' mx-[100px]'>
       <div className='w-full border-t border-gray-300'></div>
@@ -155,7 +158,7 @@ const ProductDetails = () => {
       {productId && <NameDetails productId={productId} />}
       {productId && <Reviewss productId={productId} />}
 
-      <h2 className='flex justify-center text-[48px] pt-[25px] w-full font-ABeeZee'>You might also like</h2>
+      <h2 className='flex justify-center text-[48px] pt-[25px] w-full ABeeZee'>You might also like</h2>
       <div className='grid grid-cols-2  md:grid-cols-4   lg:mx-[100px] sm:mx-[20px] '>
         {topSelling.slice(0, 4).map((product: any) => (
           <ProductCard
