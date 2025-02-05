@@ -7,23 +7,19 @@ import { listAddProducts } from '@/graphql/queries';
 import { setNewArrivals, setTopSelling } from '../../app/Redux/features/products/productsSlice';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 import { Star } from 'lucide-react';
-const ProductCard = ({ product, onClick, onDelete }: any) => {
+const ProductCard = ({ product, onClick }: any) => {
   const getAverageRating = () => {
     if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
-  
-    const total = product.Reviews.items.reduce((sum:any, review:any) => sum + review.rating, 0);
+    const total = product.Reviews.items.reduce((sum: any, review: any) => sum + review.rating, 0);
     return total / product.Reviews.items.length;
   };
   return (
-    <div
-      className='max-w-[296px] min-height-[444px] gap-1 cursor-pointer relative'
-      onClick={() => onClick(product.id)} 
-    >
+    <div className='max-w-[296px] min-height-[444px] cursor-pointer relative  ' onClick={() => onClick(product.id)}>
       <div className='relative aspect-square bg-[#F0EEED] mb-4 rounded-2xl'>
         <StorageImage
           path={`public/${product.imageKeys?.[0]}`}
           alt={product.productName}
-          className='w-full h-full object-cover rounded-md mix-blend-multiply'
+          className='w-full h-full object-cover rounded-md '
           accessLevel={'guest' as any}
         />
       </div>
@@ -34,7 +30,9 @@ const ProductCard = ({ product, onClick, onDelete }: any) => {
           <Star
             key={i}
             size={18}
-            className={i < (getAverageRating() ?? 0) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-300 text-gray-300'}
+            className={
+              i < (getAverageRating() ?? 0) ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-300 text-gray-300'
+            }
           />
         ))}
       </div>
@@ -86,14 +84,14 @@ function NewArrivals() {
   return (
     <>
       <h2 className='flex justify-center text-[48px] py-[35px] w-full font-ABeeZee'>New Arrivals</h2>
-      <div className='grid grid-cols-2 md:grid-cols-4 mx-[20px] lg:mx-[100px] sm:mx-[20px] gap-6'>
+      <div className='grid grid-cols-2 md:grid-cols-4 lg:px-[100px] px-[10px] gap-4 '>
         {newArrivals.map((product: any) => (
           <ProductCard key={product.id} product={product} onClick={handleClick} />
         ))}
       </div>
 
       <h2 className='flex justify-center text-[48px] py-[35px] w-full font-ABeeZee'>top selling</h2>
-      <div className='grid grid-cols-2 md:grid-cols-4 mx-[20px] lg:mx-[100px] sm:mx-[20px] gap-6'>
+      <div className='grid grid-cols-2 md:grid-cols-4 lg:px-[100px] px-[10px] gap-4 '>
         {topSelling.map((product: any) => (
           <ProductCard key={product.id} product={product} onClick={handleClick} />
         ))}

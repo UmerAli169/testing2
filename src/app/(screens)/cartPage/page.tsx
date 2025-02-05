@@ -95,7 +95,7 @@ const CartPage = () => {
                   path={`public/${item.imageKeys || ''}`}
                   alt={item.productName || 'Product'}
                   accessLevel={accessLevel as any | undefined} // Type assertion
-                  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover mix-blend-multiply rounded-md'
+                  className='lg:w-[124px] lg:h-[124px] sm:w-[120px] sm:h-[120px] w-[99px] h-[99px] object-cover  rounded-md'
                 />
 
                 <div className='flex-grow'>
