@@ -6,7 +6,7 @@ function FrontPage() {
     <div className=' flex flex-col px-[100px] bg-[#F2F0F1] lg:flex-row justify-center items-start w-full lg:max-h-[663px] max-h-[853px]  '>
       <div className='w-full lg:pt-[103px] pt-[10px]   '>
         <p
-          className=' ABeeZee font-normal 
+          className=' font-ABeeZee font-normal 
     lg:text-[64px] lg:w-[577px] lg:leading-[64px]  
    
 text-[36px] w-[315px] leading-[34px]'
@@ -15,7 +15,7 @@ text-[36px] w-[315px] leading-[34px]'
         </p>
 
         <p
-          className='ABeeZee text-black text-opacity-60 py-[10px] 
+          className='font-ABeeZee text-black text-opacity-60 py-[10px] 
     lg:text-[16px] text-[14px] 
     lg:w-[545px] w-[358px] 
     lg:leading-[22px] leading-[20px]'
@@ -25,7 +25,7 @@ text-[36px] w-[315px] leading-[34px]'
         </p>
 
         <button
-          className='bg-black text-white ABeeZee 
+          className='bg-black text-white font-ABeeZee 
     rounded-full flex justify-center items-center 
   w-[368px] h-[52px] lg:w-[210px]
 mt-[10px]'
@@ -35,7 +35,7 @@ mt-[10px]'
 
         <div className='  items-start lg:w-[611px] w-[400px] lg:h-[67px] my-[30px]'>
           <div className='flex justify-around '>
-            <div className=' ABeeZee flex flex-col items-center  '>
+            <div className=' font-ABeeZee flex flex-col items-center  '>
               <p className='lg:text-[40px] text-[24px] leading-[28.37px] lg;leading-[47.28px] font-normal'>200+</p>
 
               <p className='lg:text-[16px] text-[12px]    text-black text-opacity-60       leading-[22px] font-normal mt-2'>International Brands</p>
@@ -43,14 +43,14 @@ mt-[10px]'
             <div className="border-l-[1px] border-gray-300 h-[50px] mx-4" />
 
 
-            <div className='  ABeeZee flex flex-col items-center '>
+            <div className='  font-ABeeZee flex flex-col items-center '>
               <p className='lg:text-[40px] text-[24px] leading-[28.37px] lg;leading-[47.28px] font-normal'>2,000+</p>
               <p className='lg:text-[16px] text-[12px]      text-black text-opacity-60     leading-[22px] font-normal mt-2'>High-Quality Products</p>
             </div>
             <div className="border-l-[1px] border-gray-300 h-[50px] mx-4" />
 
 
-            <div className=' ABeeZee flex flex-col items-center '>
+            <div className=' font-ABeeZee flex flex-col items-center '>
               <p className='lg:text-[40px] text-[24px] leading-[28.37px] lg;leading-[47.28px] font-normal'>30,000+</p>
               <p className='lg:text-[16px] text-[12px]      text-black text-opacity-60     leading-[22px] font-normal mt-2'>Happy Customers</p>
             </div>

@@ -13,7 +13,7 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        abeezee: ['ABeeZee', 'sans-serif'], // Adding the ABeeZee font
+        abeezee: ['ABeeZee', 'sans-serif'], // Adding the font-ABeeZee font
       },
     },
   },

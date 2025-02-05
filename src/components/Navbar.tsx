@@ -71,25 +71,25 @@ const Navbar = () => {
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className='lg:hidden'>
                 {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
               </button>
-              <div className='abeezee text-[32px] font-normal leading-[37.82px]  text-left w-[160px] h-[39px] text-black'>
+              <div className='font-ABeeZee text-[32px] font-normal leading-[37.82px]  text-left w-[160px] h-[39px] text-black'>
                 SHOP.CO
               </div>
             </div>
 
             <div className='hidden lg:flex gap-[14px]'>
-              <button className='abeezee text-[16px] leading-[18.91px] text-black flex items-center gap-1'>
+              <button className='font-ABeeZee text-[16px] leading-[18.91px] text-black flex items-center gap-1'>
                 Shop <ChevronDown className='w-4 h-4' />
               </button>
-              <Link href='/' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              <Link href='/' className='font-ABeeZee text-[16px] leading-[18.91px] text-black decoration-black'>
                 On Sale
               </Link>
-              <Link href='/catergiesPage' className='abeezee text-[16px] leading-[18.91px] text-black decoration-black'>
+              <Link href='/catergiesPage' className='font-ABeeZee text-[16px] leading-[18.91px] text-black decoration-black'>
                 Catergies Page
               </Link>
               
               <button
                 onClick={() => handleNavigate('/addDataForm')}
-                className='abeezee text-[16px] leading-[18.91px] cursor-pointer text-black decoration-black'
+                className='font-ABeeZee text-[16px] leading-[18.91px] cursor-pointer text-black decoration-black'
               >
                 Add Product
               </button>

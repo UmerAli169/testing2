@@ -25,7 +25,7 @@ const ProductCard = ({ product, onClick }: any) => {
         />
       </div>
 
-      <h3 className='ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2'>{product.productName}</h3>
+      <h3 className='font-ABeeZee text-[18px] lg:text-[20px] sm:text-[16px] mb-2'>{product.productName}</h3>
       <div className='flex gap-1 mb-2'>
         {[...Array(5)].map((_, i) => (
           <Star
@@ -38,15 +38,15 @@ const ProductCard = ({ product, onClick }: any) => {
         ))}
       </div>
 
-      <div className='flex ABeeZee items-center gap-2 mb-2'>
+      <div className='flex font-ABeeZee items-center gap-2 mb-2'>
         {product.discountedPrice ? (
           <>
-            <span className='text-[22px] lg:text-[24px] sm:text-[20px] ABeeZee '>${product.discountedPrice}</span>
+            <span className='text-[22px] lg:text-[24px] sm:text-[20px] font-ABeeZee '>${product.discountedPrice}</span>
             <span className='text-gray-400 lg:text-[24px] sm:text-[20px] line-through ABeeZee'>${product.price}</span>
-            <p className='bg-red-300/20 ABeeZee rounded-2xl'>{product.discountValue}%</p>
+            <p className='bg-red-300/20 font-ABeeZee rounded-2xl'>{product.discountValue}%</p>
           </>
         ) : (
-          <span className=' ABeeZee text-[22px] lg:text-[24px] sm:text-[20px]'>${product.price}</span>
+          <span className=' font-ABeeZee text-[22px] lg:text-[24px] sm:text-[20px]'>${product.price}</span>
         )}
       </div>
     </div>
@@ -91,7 +91,7 @@ function NewArrivals() {
         ))}
       </div>
       <div className='flex justify-center items-center  bg-white mt-12 '>
-        <button className='ABeeZee border border-gray-300 w-[218px] h-[52px] text-black bg-white px-6 py-2 rounded-full text-[16px] leading-[18.91px] font-normal hover:bg-gray-200'>
+        <button className='font-ABeeZee border border-gray-300 w-[218px] h-[52px] text-black bg-white px-6 py-2 rounded-full text-[16px] leading-[18.91px] font-normal hover:bg-gray-200'>
           View All
         </button>
       </div>
@@ -103,7 +103,7 @@ function NewArrivals() {
         ))}
       </div>
       <div className='flex justify-center items-center  bg-white mt-12 '>
-        <button className='ABeeZee border border-gray-300 w-[218px] h-[52px] text-black bg-white px-6 py-2 rounded-full text-[16px] leading-[18.91px] font-normal hover:bg-gray-200'>
+        <button className='font-ABeeZee border border-gray-300 w-[218px] h-[52px] text-black bg-white px-6 py-2 rounded-full text-[16px] leading-[18.91px] font-normal hover:bg-gray-200'>
           View All
         </button>
       </div>

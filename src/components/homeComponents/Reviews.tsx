@@ -50,7 +50,7 @@ function Reviews() {
   return (
     <div className="m-10">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="font-normal mb-4 max-w-[660px] ABeeZee text-sm sm:text-[48px]  leading-[56.74px] py-[44px]">
+        <h2 className="font-normal mb-4 max-w-[660px] font-ABeeZee text-sm sm:text-[48px]  leading-[56.74px] py-[44px]">
           OUR HAPPY CUSTOMERS
         </h2>
         <div className="flex gap-2">

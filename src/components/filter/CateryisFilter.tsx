@@ -106,7 +106,7 @@ const CategoryFilter = ({ applyFilters }: Props) => {
         }`}
       >
         <div className='flex justify-between items-center p-4 border-b'>
-          <h2 className='ABeeZee font-medium'>Filters</h2>
+          <h2 className='font-ABeeZee font-medium'>Filters</h2>
           {isMobile && (
             <button onClick={() => setIsFilterOpen(false)} className='text-gray-600'>
               <X className='w-6 h-6' />

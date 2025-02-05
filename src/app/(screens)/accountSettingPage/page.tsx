@@ -144,7 +144,7 @@ const ProfileEdit = () => {
       </div>
 
       <div className='grid grid-cols-[250px,1fr] gap-8'>
-        <div className='space-y-4 ABeeZee text-gray-600 text-[16px] mt-12'>
+        <div className='space-y-4 font-ABeeZee text-gray-600 text-[16px] mt-12'>
           <h2 className='text-[24px] sm:text-[22px] lg:text-[20px] text-gray-800'>Manage My Account</h2>
           <div className='space-y-2'>
             <div className='text-black'>My Profile</div>
@@ -164,7 +164,7 @@ const ProfileEdit = () => {
         </div>
 
         <div className='m-8'>
-          <h2 className='text-[24px] sm:text-[28px] text-black ABeeZee my-6'>Edit Your Profile</h2>
+          <h2 className='text-[24px] sm:text-[28px] text-black font-ABeeZee my-6'>Edit Your Profile</h2>
 
           <form onSubmit={formik.handleSubmit} className='max-w-2xl mt-10'>
             <div className='grid grid-cols-2 gap-6 mb-6'>
@@ -179,7 +179,7 @@ const ProfileEdit = () => {
                     value={formik.values[field]}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
+                    className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
                       formik.touched[field] && formik.errors[field] ? 'border-red-500' : ''
                     }`}
                     placeholder={`Enter ${field}`}
@@ -201,7 +201,7 @@ const ProfileEdit = () => {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
                   formik.touched.email && formik.errors.email ? 'border-red-500' : ''
                 }`}
               />
@@ -220,7 +220,7 @@ const ProfileEdit = () => {
                 value={formik.values.newEmail}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
                   formik.touched.newEmail && formik.errors.newEmail ? 'border-red-500' : ''
                 }`}
                 placeholder='Enter new email'
@@ -238,7 +238,7 @@ const ProfileEdit = () => {
                 value={formik.values.address}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
+                className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
                   formik.touched.address && formik.errors.address ? 'border-red-500' : ''
                 }`}
                 placeholder='Enter your address'
@@ -296,7 +296,7 @@ const ProfileEdit = () => {
                         value={formik.values[field]}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md ABeeZee ${
+                        className={`w-full px-4 py-2 border bg-[#F5F5F5] rounded-md font-ABeeZee ${
                           formik.touched[field] && formik.errors[field] ? 'border-red-500' : ''
                         }`}
                       />

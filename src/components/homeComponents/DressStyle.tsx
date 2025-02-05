@@ -8,7 +8,7 @@ function DressStyle() {
           className='
         w-full h-full  max-h-[866px]    md:p-[64px] rounded-lg '
         >
-          <h2 className='flex justify-center text-center ABeeZee mb-[65px] ABeeZee text-[32px] lg:text-[48px] leading-[56.74px] mt-[40px]  '>
+          <h2 className='flex justify-center text-center font-ABeeZee mb-[65px] font-ABeeZee text-[32px] lg:text-[48px] leading-[56.74px] mt-[40px]  '>
             BROWSE BY dress STYLE
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 overflow-hidden '>

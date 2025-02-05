@@ -96,7 +96,7 @@ const ProductListing = () => {
             fill={index < Math.floor(rating) ? '#FACC15' : 'none'}
           />
         ))}
-        <span className='ABeeZee text-gray-600 ml-1'>{rating}</span>
+        <span className='font-ABeeZee text-gray-600 ml-1'>{rating}</span>
       </div>
     );
   };
@@ -105,7 +105,7 @@ const ProductListing = () => {
     <>
       <div className='flex justify-between items-center mb-6'>
         <div className='flex items-center gap-2'>
-          <span className='ABeeZee text-gray-500'>Home</span>
+          <span className='font-ABeeZee text-gray-500'>Home</span>
           <img src='/svgs/productTopBar/replaceOFSlash.svg' alt='Close' className='w-[6px]' />
           <span className='ABeeZee'>Casual</span>
         </div>
@@ -116,7 +116,7 @@ const ProductListing = () => {
 
         <div className='flex-1 p-6'>
           <div className='flex justify-end mb-4'>
-            <span className='ABeeZee text-gray-500'>
+            <span className='font-ABeeZee text-gray-500'>
               Showing {startIndex + 1} to {Math.min(endIndex, productsToDisplay.length)} of {productsToDisplay.length}{' '}
               Products | Sort by: Most Popular
             </span>
@@ -137,7 +137,7 @@ const ProductListing = () => {
                     accessLevel={'guest' as any}
                   />
                 </div>
-                <h3 className='ABeeZee lg:text-[18px] sm:text-[14px] text-[16px] text-gray-800 mb-1'>
+                <h3 className='font-ABeeZee lg:text-[18px] sm:text-[14px] text-[16px] text-gray-800 mb-1'>
                   {product.productName}
                 </h3>
                 {renderRatingStars(product)}
@@ -145,19 +145,19 @@ const ProductListing = () => {
                 {/* Discounted Price Display */}
                 {product.discountedPrice ? (
                   <div className='flex items-center gap-1 mb-2'>
-                    <span className='ABeeZee lg:text-[16px] sm:text-[14px] text-[14px]'>
+                    <span className='font-ABeeZee lg:text-[16px] sm:text-[14px] text-[14px]'>
                       ${product.discountedPrice}
                     </span>
                     <span className='line-through text-gray-500 lg:text-[16px] sm:text-[14px] text-[14px]'>
                       ${product.price}
                     </span>
-                    <span className='bg-red-300/20 ABeeZee rounded-2xl lg:text-[16px] sm:text-[14px] text-[14px]'>
+                    <span className='bg-red-300/20 font-ABeeZee rounded-2xl lg:text-[16px] sm:text-[14px] text-[14px]'>
                       -{product.discountValue}%
                     </span>
                   </div>
                 ) : (
                   <div className='flex items-center gap-1 mb-2'>
-                    <span className='ABeeZee lg:text-[16px] sm:text-[14px] text-[14px]'>${product.price}</span>
+                    <span className='font-ABeeZee lg:text-[16px] sm:text-[14px] text-[14px]'>${product.price}</span>
                   </div>
                 )}
               </div>

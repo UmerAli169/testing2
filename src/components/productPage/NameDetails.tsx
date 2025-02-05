@@ -128,13 +128,13 @@ function NameDetails({ productId }: { productId: string })  {
           <h1 className='text-2xl font-bold mb-2'>{product?.productName || 'Product Name'}</h1>
           {renderRatingStars(getAverageRating()|| 0)}
           <div className='flex items-center gap-2 my-6'>
-            <span className='lg:text-[24px] text-[20px] ABeeZee '>${(product?.discountedPrice || 0) * quantity}</span>
+            <span className='lg:text-[24px] text-[20px] font-ABeeZee '>${(product?.discountedPrice || 0) * quantity}</span>
             <span className='text-gray-400 lg:text-[24px] text-[20px] line-through ABeeZee'>
               ${product?.price || 0}
             </span>
-            <p className='bg-red-300/20 ABeeZee rounded-2xl'>{product?.discountValue}%</p>
+            <p className='bg-red-300/20 font-ABeeZee rounded-2xl'>{product?.discountValue}%</p>
           </div>
-          <span className='ABeeZee line-clamp-4 overflow-hidden text-ellipsis mt-4'>{product?.description}</span>
+          <span className='font-ABeeZee line-clamp-4 overflow-hidden text-ellipsis mt-4'>{product?.description}</span>
 
           <div className='w-full border-t border-gray-300'></div>
 

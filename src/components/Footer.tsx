@@ -48,7 +48,7 @@ const footerImages = [
       <div className='bg-black rounded-xl max-w-[1300px] text-white mt-20  py-[22px]  pl-[80px] '>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full '>
           <div className='flex items-center w-full'>
-            <h2 className='  mb-4 w-max-[551px]   left-164px] ABeeZee text-[40px] leading-[56.74px] '>
+            <h2 className='  mb-4 w-max-[551px]   left-164px] font-ABeeZee text-[40px] leading-[56.74px] '>
               STAY UPTO DATE ABOUT OUR LATEST OFFERS
             </h2>
           </div>
@@ -139,7 +139,7 @@ const footerImages = [
             <div className='w-full border-t border-gray-300 mt-12'></div>
 
             {/* Bottom Section */}
-            <div className='ABeeZee border-t border-gray-200'>
+            <div className='font-ABeeZee border-t border-gray-200'>
               <div className='flex flex-col md:flex-row justify-between items-center'>
                 <p className='text-sm text-gray-600'>Shop.co © 2000-2023. All Rights Reserved</p>
                 <div className='flex items-center space-x-4 mt-4 md:mt-0'>

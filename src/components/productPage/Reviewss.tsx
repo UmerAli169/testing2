@@ -102,7 +102,7 @@ const Reviewss =({ productId }: { productId: string }) => {
             <button
               key={tab}
               className={`pb-2 ${
-                activeTab === tab ? 'max-w-[145px] ABeeZee border-b-2 border-black' : 'text-gray-500'
+                activeTab === tab ? 'max-w-[145px] font-ABeeZee border-b-2 border-black' : 'text-gray-500'
               }`}
               onClick={() => setActiveTab(tab)}
             >
@@ -135,14 +135,14 @@ const Reviewss =({ productId }: { productId: string }) => {
                 <div className='flex justify-between items-start mb-2'>
                   <div>
                     {renderStars(review.rating)}
-                    <span className='ABeeZee flex items-center gap-1'>{review.userId}</span>
+                    <span className='font-ABeeZee flex items-center gap-1'>{review.userId}</span>
                   </div>
                   <button>
                     <MoreHorizontal className='w-6 h-6 text-gray-500' />
                   </button>
                 </div>
-                <p className='text-gray-600 ABeeZee mb-2 line-clamp-3'>{review.text}</p>
-                <p className='text-sm ABeeZee text-gray-500'>{formatDate(review.createdAt)}</p>
+                <p className='text-gray-600 font-ABeeZee mb-2 line-clamp-3'>{review.text}</p>
+                <p className='text-sm font-ABeeZee text-gray-500'>{formatDate(review.createdAt)}</p>
               </div>
             ))}
           </div>

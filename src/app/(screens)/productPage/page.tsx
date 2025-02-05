@@ -58,10 +58,10 @@ const ProductDetails = () => {
       {menuOpen === product.id && (
         <div className='absolute top-10 right-2 bg-white border border-gray-300 rounded-lg shadow-md w-36 z-10'>
           <ul>
-            <li className='ABeeZee px-2 py-2 cursor-pointer hover:bg-gray-100' onClick={() => onDelete(product.id)}>
+            <li className='font-ABeeZee px-2 py-2 cursor-pointer hover:bg-gray-100' onClick={() => onDelete(product.id)}>
               Delete
             </li>
-            <li className='ABeeZee px-2 py-2 cursor-pointer hover:bg-gray-100' onClick={() => setMenuOpen(null)}>
+            <li className='font-ABeeZee px-2 py-2 cursor-pointer hover:bg-gray-100' onClick={() => setMenuOpen(null)}>
               Cancel
             </li>
           </ul>
@@ -90,7 +90,7 @@ const ProductDetails = () => {
           />
         ))}
 
-        <span className='ABeeZee lg:text-[14px] sm:text-[12px] text-gray-600 ml-1'>
+        <span className='font-ABeeZee lg:text-[14px] sm:text-[12px] text-gray-600 ml-1'>
           {getAverageRating(product) ?? 0}/5
         </span>
       </div>
