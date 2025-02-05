@@ -38,7 +38,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
-  // Detect screen size for responsive behavior
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -87,27 +86,25 @@ const CategoryFilter = ({ applyFilters }: Props) => {
       
     };
     applyFilters(filters);
-    setIsFilterOpen(false); // Close modal on apply
+    setIsFilterOpen(false); 
   };
 
   return (
     <>
-      {isMobile && (
+      {isMobile && !isFilterOpen && (
         <button
           onClick={() => setIsFilterOpen(true)}
-          className='p-2 bg-gray-800 text-white rounded-md fixed top-7 left-3 z-50'
+          className='p-2 bg-gray-800 text-white rounded-md fixed top-[57px] left-3 z-50'
         >
           <Menu className='w-5 h-5' />
         </button>
       )}
 
-      {/* Filter Panel */}
       <div
         className={`fixed inset-0 z-40 bg-white transition-transform duration-300 ${
           isMobile ? (isFilterOpen ? 'translate-x-0' : '-translate-x-full') : 'relative w-64 border-r'
         }`}
       >
-        {/* Header */}
         <div className='flex justify-between items-center p-4 border-b'>
           <h2 className='ABeeZee font-medium'>Filters</h2>
           {isMobile && (
@@ -117,7 +114,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           )}
         </div>
 
-        {/* Categories */}
         <div className='p-4'>
           <h3 className='font-medium mb-2'>Category</h3>
           {categories.map((category) => (
@@ -134,11 +130,9 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           ))}
         </div>
 
-        {/* Price Range */}
         <div className='p-4'>
           <h3 className='font-medium mb-2'>Price</h3>
           <div className='relative'>
-            {/* Min Price Slider */}
             <input
               type='range'
               min='50'
@@ -148,7 +142,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
               onChange={handleRangeChange}
               className='absolute w-full z-10'
             />
-            {/* Max Price Slider */}
             <input
               type='range'
               min='50'
@@ -165,7 +158,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           </div>
         </div>
 
-        {/* Colors */}
         <div className='p-4'>
           <h3 className='font-medium mb-2'>Colors</h3>
           <div className='flex flex-wrap gap-2'>
@@ -183,7 +175,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           </div>
         </div>
 
-        {/* Sizes */}
         <div className='p-4'>
           <h3 className='font-medium mb-2'>Size</h3>
           <div className='flex flex-wrap gap-2'>
@@ -201,7 +192,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           </div>
         </div>
 
-        {/* Styles */}
         <div className='p-4'>
           <h3 className='font-medium mb-2'>Style</h3>
           <div className='flex flex-wrap gap-2'>
@@ -219,7 +209,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
           </div>
         </div>
 
-        {/* Apply Filters Button */}
         <div className='p-4'>
           <button onClick={handleApplyFilters} className='w-full bg-black text-white py-2 rounded-full'>
             Apply Filters
@@ -227,7 +216,6 @@ const CategoryFilter = ({ applyFilters }: Props) => {
         </div>
       </div>
 
-      {/* Overlay for Mobile */}
       {isMobile && isFilterOpen && (
         <div className='fixed inset-0 bg-black opacity-50 z-30' onClick={() => setIsFilterOpen(false)} />
       )}

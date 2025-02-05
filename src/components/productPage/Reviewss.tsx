@@ -7,11 +7,11 @@ import { generateClient } from 'aws-amplify/api';
 import { useSearchParams } from 'next/navigation';
 import { getCurrentUser } from 'aws-amplify/auth';
 
-const Reviewss = () => {
+const Reviewss =({ productId }: { productId: string }) => {
   const [product, setProduct] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
   const searchParams = useSearchParams();
-  const productId = searchParams.get('productId');
+  // const productId = searchParams.get('productId');
 
   const [activeTab, setActiveTab] = useState('Rating & Reviews');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,22 +33,21 @@ const Reviewss = () => {
       const currentUser = await getCurrentUser();
       const userId = currentUser.userId;
 
-      // Submit review to backend
       const reviewResult = await client.graphql({
         query: createReview,
         variables: {
           input: {
             rating: newReview.rating,
             text: newReview.text,
+            userReviewsId: userId,
             userId: userId,
             productId: product.id,
+            addProductReviewsId:product.id,
           },
         },
       });
 
       const newReviewData = reviewResult.data.createReview;
-
-      // Add review to local state
       setReviews([...reviews, newReviewData]);
 
       setIsModalOpen(false);
@@ -59,25 +58,25 @@ const Reviewss = () => {
   };
 
   useEffect(() => {
+    if (!productId) return;
     const fetchData = async () => {
       try {
         const productResult = await client.graphql({
           query: getAddProduct,
-          variables: { id: productId  as any},
+          variables: { id: productId as any },
         });
 
-
-        console.log(productResult,'productResultproductResultproductResultproductResultproductResult')
         setProduct(productResult.data.getAddProduct);
-
         const reviewsResult = await client.graphql({
           query: listReviews,
           variables: {
             filter: { productId: { eq: productId } },
           },
         });
+        
 
-        setReviews(reviewsResult.data.listReviews.items);
+        const sortedReviews = reviewsResult.data.listReviews.items.sort((a: any, b: any) => b.rating - a.rating);
+        setReviews(sortedReviews);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

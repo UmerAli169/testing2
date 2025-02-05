@@ -4,35 +4,40 @@ import { Star } from 'lucide-react';
 import { getAddProduct } from '@/graphql/queries';
 import { createCartItem } from '@/graphql/mutations';
 import { generateClient } from 'aws-amplify/api';
-import { useSearchParams } from 'next/navigation';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 
-function NameDetails() {
+function NameDetails({ productId }: { productId: string })  {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [showMessage, setShowMessage] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState<any>(null);
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('productId');
+  // const productId = searchParams.get('productId');
   const client = generateClient();
 
   useEffect(() => {
+    if (!productId) return;
     const fetchData = async () => {
       try {
         const productResult = await client.graphql({
           query: getAddProduct,
-          variables: { id: productId as any }, // Type assertion
+          variables: { id: productId as any },
         });
         setProduct(productResult.data.getAddProduct);
+        
       } catch (error) {
         console.error('Error fetching product details:', error);
       }
     };
     fetchData();
   }, [productId]);
-
+  const getAverageRating = () => {
+    if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
+  
+    const total = product.Reviews.items.reduce((sum:any, review:any) => sum + review.rating, 0);
+    return total / product.Reviews.items.length;
+  };
   const handleAddToCart = async () => {
     try {
       setShowMessage(true);
@@ -73,10 +78,12 @@ function NameDetails() {
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
-          className={`h-4 w-4 ${index < rating ? 'text-yellow-400' : 'text-gray-300'}`}
-          fill={index < rating ? 'currentColor' : 'none'}
+          className='h-4 w-4'
+          color={index < rating ? '#FACC15' : '#D1D5DB'} // Yellow for filled, gray for empty
+          fill={index < rating ? '#FACC15' : 'none'}
         />
       ))}
+
       <span className='text-sm text-gray-600 ml-1'>{rating}/5</span>
     </div>
   );
@@ -117,10 +124,12 @@ function NameDetails() {
 
         <div className='px-[16px]'>
           <h1 className='text-2xl font-bold mb-2'>{product?.productName || 'Product Name'}</h1>
-          {renderRatingStars(product?.rating ?? 4)}
+          {renderRatingStars(getAverageRating()|| 0)}
           <div className='flex items-center gap-2 my-6'>
             <span className='lg:text-[24px] text-[20px] ABeeZee '>${(product?.discountedPrice || 0) * quantity}</span>
-            <span className='text-gray-400 lg:text-[24px] text-[20px] line-through ABeeZee'>${product?.price || 0}</span>
+            <span className='text-gray-400 lg:text-[24px] text-[20px] line-through ABeeZee'>
+              ${product?.price || 0}
+            </span>
             <p className='bg-red-300/20 ABeeZee rounded-2xl'>{product?.discountValue}%</p>
           </div>
           <span className='ABeeZee line-clamp-4 overflow-hidden text-ellipsis mt-4'>{product?.description}</span>

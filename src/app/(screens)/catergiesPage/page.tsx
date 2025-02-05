@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { listAddProducts } from '@/graphql/queries';
-import { StarIcon } from 'lucide-react';
+import { Star, StarIcon } from 'lucide-react';
 import { StorageImage } from '@aws-amplify/ui-react-storage';
 import { useRouter } from 'next/navigation';
 import CategoryFilter from '../../../components/filter/CateryisFilter';
@@ -43,8 +43,7 @@ const ProductListing = () => {
   }, []);
 
   useEffect(() => {
-    // Re-fetch products if the filters or search query change
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset pagination on filter or search query change
   }, [filter, searchQuery]);
 
   const applyFilters = (filters: {
@@ -61,40 +60,44 @@ const ProductListing = () => {
     router.push(`/productPage/?productId=${productId}`);
   };
 
-  const renderRatingStars = (rating: number) => (
-    <div className='flex items-center gap-1'>
-      {[...Array(5)].map((_, index) => (
-        <StarIcon
-          key={index}
-          className={`h-4 w-4 ${index < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-        />
-      ))}
-      <span className='ABeeZee text-gray-600 ml-1'>{rating}</span>
-    </div>
-  );
-
   const filteredProducts = products.filter((product) => {
     const isCategoryMatch = filter.category ? product.category === filter.category : true;
     const isPriceMatch = product.discountedPrice >= filter.minPrice && product.discountedPrice <= filter.maxPrice;
     const isColorMatch = filter.colors.length > 0 ? filter.colors.includes(product.color) : true;
     const isSizeMatch = filter.sizes.length > 0 ? filter.sizes.includes(product.size) : true;
-
-    // Check if product matches the search query
     const isSearchMatch = product.productName.toLowerCase().includes(searchQuery.toLowerCase());
 
-    // Show product if any of the filter or search conditions match
-    return (isCategoryMatch || isPriceMatch || isColorMatch || isSizeMatch) && isSearchMatch;
+    return isCategoryMatch && isPriceMatch && isColorMatch && isSizeMatch && isSearchMatch;
   });
 
-  const productsToDisplay =
-    filter.category || filter.colors.length || filter.sizes.length || searchQuery
-      ? filteredProducts
-      : products;
-
+  const productsToDisplay = filteredProducts.length ? filteredProducts : products;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedProducts = productsToDisplay.slice(startIndex, endIndex);
   const totalPages = Math.ceil(productsToDisplay.length / ITEMS_PER_PAGE);
+
+  const getAverageRating = (product: any) => {
+    if (!product?.Reviews?.items || product.Reviews.items.length === 0) return 0;
+    const total = product.Reviews.items.reduce((sum: number, review: any) => sum + review.rating, 0);
+    return total / product.Reviews.items.length;
+  };
+
+  const renderRatingStars = (product: any) => {
+    const rating = getAverageRating(product);
+    return (
+      <div className='flex items-center gap-1'>
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            className='h-4 w-4'
+            color={index < Math.floor(rating) ? '#FACC15' : '#D1D5DB'}
+            fill={index < Math.floor(rating) ? '#FACC15' : 'none'}
+          />
+        ))}
+        <span className='ABeeZee text-gray-600 ml-1'>{rating}</span>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -135,7 +138,7 @@ const ProductListing = () => {
                 <h3 className='ABeeZee lg:text-[18px] sm:text-[14px] text-[16px] text-gray-800 mb-1'>
                   {product.productName}
                 </h3>
-                {renderRatingStars(product.rating)}
+                {renderRatingStars(product)}
 
                 {/* Discounted Price Display */}
                 {product.discountedPrice ? (

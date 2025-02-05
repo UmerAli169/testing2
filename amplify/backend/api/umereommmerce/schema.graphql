@@ -30,7 +30,7 @@ type AddProduct @model {
   createdAt: String
   updatedAt: String
   user: User @belongsTo(fields: ["userId"])
-  userId: ID
+  userId: ID!
   CartItems: [CartItem] @hasMany
   Reviews: [Review] @hasMany
 }
@@ -46,9 +46,9 @@ type CartItem @model {
   createdAt: String
   updatedAt: String
   product: AddProduct @belongsTo(fields: ["productId"])
-  productId: ID
+  productId: ID!
   user: User @belongsTo(fields: ["userId"])
-  userId: ID
+  userId: ID!
 }
 
 type Review @model {
@@ -58,9 +58,9 @@ type Review @model {
   createdAt: String
   updatedAt: String
   product: AddProduct @belongsTo(fields: ["productId"])
-  productId: ID
+  productId: ID!
   user: User @belongsTo(fields: ["userId"])
-  userId: ID
+  userId: ID!
 }
 
 type EmailResponse {
@@ -71,7 +71,7 @@ type EmailResponse {
 type Mutation {
   customAddProduct(input: CreateAddProductInput): AddProduct @function(name: "calculateCartItemPriceLambda-dev")
 
-  sendEmail(name: String!, email: String!, phone: String, message: String!): EmailResponse
+  sendEmail(name: String, email: String, phone: String, message: String): EmailResponse
     @function(name: "umerSESecommmerce-dev")
 }
 
@@ -86,5 +86,5 @@ input CreateAddProductInput {
   price: Float
   productName: String
   size: [String]
-  userId: ID
+  userId: ID!
 }

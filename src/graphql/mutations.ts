@@ -599,10 +599,10 @@ export const customAddProduct = /* GraphQL */ `mutation CustomAddProduct($input:
   APITypes.CustomAddProductMutation
 >;
 export const sendEmail = /* GraphQL */ `mutation SendEmail(
-  $name: String!
-  $email: String!
+  $name: String
+  $email: String
   $phone: String
-  $message: String!
+  $message: String
 ) {
   sendEmail(name: $name, email: $email, phone: $phone, message: $message) {
     message
